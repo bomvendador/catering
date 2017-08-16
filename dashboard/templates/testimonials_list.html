@@ -1,0 +1,206 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'dashboard/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css' %}">
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Заказы
+{#                        <small>Add quick, dynamic tab functionality to transition through panes of local content</small>#}
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'dashboard:orders_total_info' %}" class=" waves-effect waves-block">Сводная</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+
+                            <div class="body table-responsive">
+{#                                <table class="table table-bordered table-striped table-hover dataTable">#}
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата поступления</th>
+                                            <th>Клиент</th>
+                                            <th>Одобрен</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Дата поступления</th>
+                                            <th>Клиент</th>
+                                            <th>Одобрен</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for testimonial in testimonials %}
+                                            <tr class="pointer-pure testimonial" id="{{ testimonial.id }}">
+                                                <td>{{ testimonial.id }} {% if testimonial.status.name == 'Новый' %}<i class="mdi mdi-circle font-size-15 color-red margin-left-10"></i>{% endif %}</td>
+                                                <td>{{ testimonial.added|date:"d.m.Y, H:i" }}</td>
+                                                <td>{{ testimonial.name }}</td>
+                                                <td><input type="checkbox" id="approved" {% if testimonial.approved %}checked="checked"{% endif %} disabled/>
+                                                    <label for="approved"></label>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="add_testimonial" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0">
+        <i class="mdi mdi-plus"></i>
+    </button>
+    <button id="add_ingredient" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 display-none" data-toggle="modal" data-target="#add_ingredient_modal">
+    </button>
+
+{#                модальное окно    #}
+                <div class="modal fade  margin-top-100" id="add_ingredient_modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="defaultModalLabel">Добавление ингредиента</h4>
+                        </div>
+                        <form action="" method="post" id="ingredient_form">{% csrf_token %}
+                            <div class="modal-body">
+
+                                <div class="row clearfix">
+
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="Название" id="ingredient_name" name="ingredient_name" value="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <div class="form-line">
+                                                <textarea rows="5" placeholder="Иконка" class="form-control" id="ingredient_icon" name="ingredient_icon" value=""></textarea>
+{#                                                <input type="text" class="form-control" placeholder="Иконка" id="ingredient_icon" name="ingredient_icon" value="">#}
+                                                <input type="text" class="form-control display-none" id="ingredient_id" name="ingredient_id" value="">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link waves-effect" id="save_ingredient">СОХРАНИТЬ</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ЗАКРЫТЬ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script src="{% static 'dashboard/plugins/jquery-datatable/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/jszip.min.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/pdfmake.min.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/vfs_fonts.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/jquery-datatable/extensions/export/buttons.print.min.js' %}"></script>
+    <script src="{% static 'js/dashboard/pages/tables/jquery-datatable.js' %}"></script>
+
+
+
+    <script>
+
+    $('#add_testimonial').on('click', function () {
+        window.location.href = '/dashboard/save_testimonial/';
+
+    });
+
+    $('.testimonial').on('click', function () {
+        window.location.href = '/dashboard/testimonial_details/' + $(this).attr('id')
+    });
+
+    $('#save_ingredient').on('click', function (e) {
+        e.preventDefault();
+        var data = new FormData($('#ingredient_form').get(0));
+
+        $.ajax({
+            url: '{% url 'dashboard:ingredients' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'warning'
+                });
+            },
+            success:function (data) {
+                swal({
+                    title: 'Информация сохранена',
+                    text: 'Блюдо успешно сохранено',
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ок',
+                    closeOnConfirm: false,
+                },
+                function (isConfirm) {
+                    if (isConfirm){
+                        window.location.href = '/dashboard/ingredients/';
+                    }
+
+                });
+
+            }
+        });
+
+
+
+    })
+
+
+
+
+
+
+    </script>
+
+
+{% endblock %}

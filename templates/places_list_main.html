@@ -1,0 +1,429 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% now "Y-m-d" as todays_date %}
+
+{% block title %}
+<title>Кейтеринг | Корзина</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- SUB BANNER -->
+    <section class="sub-banner text-center section margin-top-50">
+        <div class="awe-parallax bg-2"></div>
+        <div class="awe-title awe-title-3">
+            <h3 class="lg text-uppercase">Площадки</h3>
+        </div>
+    </section>
+    <!-- END / SUB BANNER -->
+
+    <!-- SECTION BLOG -->
+    <section class="section-blog section">
+
+        <div class="container">
+            <div class="blog-single padding-top-40 padding-bottom-0">
+                        <!-- BREADCRUMB -->
+                <ul class="breadcrumb margin-bottom-0">
+{#                            <li><a href="#">Blog</a></li>#}
+                    <li><a href="{% url 'places_list_main' %}">Список площадок</a></li>
+                    {% if tag %}
+                    <li><span>Результаты по тегу: {{ tag.name }}</span></li>
+                    {% endif %}
+                </ul>
+                <!-- END / BREADCRUMB -->
+
+            </div>
+
+            <div class="row">
+                <div id="places_list_content">
+                    <!-- BLOG LIST -->
+                    <div class="col-md-9">
+                        {% if tag %}
+                        <h4 class="text-uppercase margin-top-20">Результаты по тегу: {{ tag.name }}</h4>
+                        <hr class="_hr_dark">
+                        {% endif %}
+
+                        <div class="blog-list margin-top-0">
+                            {% for place in places %}
+                            <!-- POST -->
+                            <div class="post post-single place" id="place_{{ place.id }}">
+                                <div class="post-media">
+                                    <div class="image-wrap">
+                                        <img src="{% static 'images/places/' %}{{ place.main_image }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="post-body">
+                                    <div class="tags">
+                                        <div class="tagcloud">
+                                        </div>
+                                    </div>
+                                    <div class="post-title">
+                                        <h3 class="xmd"><a href="{% url 'place_details' place.id %}">{{ place.name }}</a></h3>
+                                    </div>
+                                    <div class="post-content">
+                                        <p>{{ place.description|truncatechars_html:115|safe }}</p>
+                                    </div>
+                                    <div class="post-footer">
+                                        <a href="{% url 'place_details' place.id %}" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">Далее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / POST -->
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="pagination">
+{#                            <span class="pagination-prev"><i class="fa fa-angle-left"></i></span>#}
+                            {% for page_num in pages_num %}
+                            <a id="{{ page_num }}" href="#" class="page {% if page_num == cur_page_number %}current not-clickable{% endif %}" >{{ page_num }}</a>
+                            {% endfor %}
+{#                            <a href="#" class="pagination-next"><i class="fa fa-angle-right"></i></a>#}
+                        </div>
+                    </div>
+                <!-- END / BLOG LIST -->
+
+                </div>
+
+                <div class="col-md-3">
+                    <aside class="sidebar margin-top-0">
+                        <!-- WIDGET TAG CLOUD -->
+                        <div class="widget widget_tag_cloud">
+                            <h4 class="sm text-uppercase">Теги</h4>
+                            <div class="tagcloud">
+                                {% for tag in tags %}
+                                <a id="{{ tag.id }}" href="{% url 'places_list_main_by_tag' tag.id %}" class="roboto-300 tag">{{ tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- END / WIDGET TAG CLOUD -->
+                    </aside>
+                </div>
+
+
+
+                <!-- SIDEBAR -->
+{#                <div class="col-md-3">#}
+{#                    <aside class="sidebar">#}
+{#                        <!-- WIDGET SEARCH -->#}
+{#                        <div class="widget widget_search">#}
+{#                            <h4 class="sm text-uppercase">Search</h4>#}
+{#                            <form>#}
+{#                                <input type="text" name="search" placeholder="Type keyword">#}
+{#                            </form>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET SEARCH -->#}
+{##}
+{#                        <!-- WIDGET RECENT POST -->#}
+{#                        <div class="widget widget_recent_post">#}
+{#                            <h4 class="sm text-uppercase">Recent posts</h4>#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#">Aliquam nibh sapien</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#">Nunc pellentesque dolor</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET RECENT POST -->#}
+{##}
+{#                        <!-- WIDGET EVENTS -->#}
+{#                        <div class="widget widget_events">#}
+{#                            <h4 class="sm text-uppercase">Events</h4>#}
+{#                            <ul class="events">#}
+{#                                <li>#}
+{#                                    <i class="fa fa-star"></i>#}
+{#                                    <div class="list-content">#}
+{#                                        <a href="#">Fair Trade & Organic</a>#}
+{#                                        <ul class="meta">#}
+{#                                            <li>20.October.2014</li>#}
+{#                                            <li>16:00</li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <i class="fa fa-star"></i>#}
+{#                                    <div class="list-content">#}
+{#                                        <a href="#">Fair Trade & Organic</a>#}
+{#                                        <ul class="meta">#}
+{#                                            <li>20.October.2014</li>#}
+{#                                            <li>16:00</li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <i class="fa fa-star"></i>#}
+{#                                    <div class="list-content">#}
+{#                                        <a href="#">Fair Trade & Organic</a>#}
+{#                                        <ul class="meta">#}
+{#                                            <li>20.October.2014</li>#}
+{#                                            <li>16:00</li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <i class="fa fa-star"></i>#}
+{#                                    <div class="list-content">#}
+{#                                        <a href="#">Fair Trade & Organic</a>#}
+{#                                        <ul class="meta">#}
+{#                                            <li>20.October.2014</li>#}
+{#                                            <li>16:00</li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET EVENTS -->#}
+{##}
+{#                        <!-- WIDGET INSTAGRAM -->#}
+{#                        <div class="widget widget_instagram">#}
+{#                            <h4 class="sm text-uppercase">Instagram</h4>#}
+{#                            <div class="instagram">#}
+{#                                <a href="#"><img src="images/blog/img-5.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET INSTAGRAM -->#}
+{##}
+{#                        <!-- LATEST COMMENTS -->#}
+{#                        <div class="widget widget_latest_comments">#}
+{#                            <h4 class="sm text-uppercase">Latest comments</h4>#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/blog/img-6.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="comment-info">#}
+{#                                        <span class="author">Danzo</span>#}
+{#                                        <a href="#">I think you should add more rosemary or other herb</a>#}
+{#                                        <div class="meta">#}
+{#                                            <span>sep 18,2014 at 9:00</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </li>#}
+{##}
+{#                                <li>#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/blog/img-6.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="comment-info">#}
+{#                                        <span class="author">Danzo</span>#}
+{#                                        <a href="#">I think you should add more rosemary or other herb</a>#}
+{#                                        <div class="meta">#}
+{#                                            <span>sep 18,2014 at 9:00</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </li>#}
+{##}
+{#                                <li>#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/blog/img-6.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="comment-info">#}
+{#                                        <span class="author">Danzo</span>#}
+{#                                        <a href="#">I think you should add more rosemary or other herb</a>#}
+{#                                        <div class="meta">#}
+{#                                            <span>sep 18,2014 at 9:00</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <!-- END / LATEST COMMENTS -->#}
+{##}
+{##}
+{#                        <!-- WIDGET CATEGORIES -->#}
+{#                        <div class="widget widget_categories">#}
+{#                            <h4 class="sm text-uppercase">Categories</h4>#}
+{#                            <ul>#}
+{#                                <li><a href="#">Cras condimentum</a></li>#}
+{#                                <li><a href="#">Nibh et pellentesque</a></li>#}
+{#                                <li><a href="#">Leo nibh gravida velit</a></li>#}
+{#                                <li><a href="#">Tortor augue a eros</a></li>#}
+{#                                <li><a href="#">Libero</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET CATEGORIES -->#}
+{##}
+{#                        <!-- WIDGET ARCHIVE -->#}
+{#                        <div class="widget widget_archive">#}
+{#                            <h4 class="sm text-uppercase">Archives</h4>#}
+{#                            <ul>#}
+{#                                <li><a href="#">June 2013</a></li>#}
+{#                                <li><a href="#">May 2013</a></li>#}
+{#                                <li><a href="#">April 2013</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET ARCHIVE -->#}
+{##}
+{#                        <!-- WIDGET TAG CLOUD -->#}
+{#                        <div class="widget widget_tag_cloud">#}
+{#                            <h4 class="sm text-uppercase">Tag cloud</h4>#}
+{#                            <div class="tagcloud">#}
+{#                                <a href="#">Recipe</a>#}
+{#                                <a href="#">Chicken</a>#}
+{#                                <a href="#">Fish</a>#}
+{#                                <a href="#">Recipe</a>#}
+{#                                <a href="#">Chicken</a>#}
+{#                                <a href="#">Fish</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <!-- END / WIDGET TAG CLOUD -->#}
+{##}
+{##}
+{#                    </aside>#}
+{#                </div>#}
+                <!-- END / SIDEBAR -->
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- END / SECTION BLOG -->
+
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    $('.pagination-prev').hide();
+    function get_place_tags() {
+        $('.place').each(function () {
+            var place_id = $(this).prop('id').split('_')[1];
+            var data = new FormData();
+            data.append('place_id', place_id);
+            $.ajax({
+                url: '{% url 'get_place_tags' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+
+                    var data_json = $.parseJSON(data);
+                    var place_tags_arr = data_json['place_tags_arr'];
+                    var place_id = data_json['id'];
+                    for (var k in place_tags_arr){
+                        if (k.includes('tag')){
+                            var tag_id = k.split('_')[1];
+                            $('#place_' + place_id).find('.tagcloud').append('<a class="roboto-300" href="/places_list_by_tag/' + tag_id + '">' + place_tags_arr[k] + '</a>')
+                            console.log('k = ' + k + ' v = ' + place_tags_arr[k]);
+
+                        }
+                    }
+
+    {#                $('#' + cur_item_id).prev().remove();#}
+    {#                $('#' + cur_item_id).remove();#}
+    {#                swal({#}
+    {#                    title: 'Информация обновлена',#}
+    {#                    text: 'Информация на сервере успешно обновлена',#}
+    {#                    type: 'success',#}
+    {#                    confirmButtonColor: '#3085d6',#}
+    {#                    confirmButtonText: 'Ок',#}
+    {#                    closeOnConfirm: true,#}
+    {#                });#}
+
+                }
+            });
+
+        });
+    }
+        get_place_tags();
+
+    $('.page').on('click', function (e) {
+        e.preventDefault();
+        var page_num = $(this).prop('id');
+        var data = new FormData();
+        data.append('page', page_num);
+        $.ajax({
+            url: '{% if tag %}{% url 'places_list_main_by_tag' tag.id %}{% else %}{% url 'places_list_main' %}{% endif %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'warning'
+                });
+            },
+            success:function (data) {
+                console.log(data);
+                $('.blog-list').fadeOut('fast', function () {
+                    $(this).html(data);
+                    get_place_tags();
+                    $(this).fadeIn('slow');
+
+
+                });
+                $('.page').each(function () {
+                    $(this).removeClass('current not-clickable');
+                });
+                $('#' + page_num).addClass('current not-clickable');
+                if (page_num == {{ places.paginator.num_pages }}){
+                    $('.pagination-next').hide();
+                }else {
+                    $('.pagination-next').show();
+
+                }
+                if (page_num == 1){
+                    $('.pagination-prev').hide();
+                }else {
+                    $('.pagination-prev').show();
+
+                }
+                $('html, body').animate({
+                    scrollTop: $('.blog-list').offset().top - 50}, 1000);
+
+
+{#                var data_json = $.parseJSON(data);#}
+{#                var place_tags_arr = data_json['place_tags_arr'];#}
+{#                var place_id = data_json['id'];#}
+{#                for (var k in place_tags_arr){#}
+{#                    if (k.includes('tag')){#}
+{#                        $('#place_' + place_id).find('.tagcloud').append('<a class="roboto-300" href="#">' + place_tags_arr[k] + '</a>')#}
+{#                        console.log('k = ' + k + ' v = ' + place_tags_arr[k]);#}
+{##}
+{#                    }#}
+{#                }#}
+
+{#                $('#' + cur_item_id).prev().remove();#}
+{#                $('#' + cur_item_id).remove();#}
+{#                swal({#}
+{#                    title: 'Информация обновлена',#}
+{#                    text: 'Информация на сервере успешно обновлена',#}
+{#                    type: 'success',#}
+{#                    confirmButtonColor: '#3085d6',#}
+{#                    confirmButtonText: 'Ок',#}
+{#                    closeOnConfirm: true,#}
+{#                });#}
+
+            }
+        });
+
+    });
+
+
+</script>
+
+{% endblock %}

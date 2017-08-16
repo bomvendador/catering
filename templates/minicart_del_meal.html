@@ -1,0 +1,65 @@
+{#удаление товара из корзины#}
+    $('.minicart-list').on('click', '.minicart_del_meal', function () {
+{#        var tempScrollTop = $(window).scrollTop();#}
+        var meal_to_delete = $(this).parent().parent().parent();
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+            console.log(cart_id);
+        }else {
+            cart_id = 'no_cart';
+        }
+        add_csrf();
+        $.ajax({
+            url: '{% url 'del_from_minicart' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': $(this).parent().parent().attr('id'),
+                        'cart_id': cart_id
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                var cart_meals_qnt = response['cart_meals_qnt'];
+                var min_sum = response['min_sum'];
+
+                if (!response['no_data']) {
+{#                    $(window).scrollTop(tempScrollTop);#}
+                    var meal_id = response['meal_id'];
+                    var total_amount = response['total_amount'];
+                    $('#cart_meal_id_' + meal_id).slideUp(1000, function () {
+                        $('#cart_meal_id_' + meal_id).remove();
+                    });
+                    $('#cart_sum').text(total_amount);
+                    $('#cart_label_amount').text(total_amount).animateCss('bounceIn');
+                    $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                    console.log('minicart-ul li = ' + $('#minicart-ul li').length);
+                    if ($('#minicart-ul li').length <= 3){
+                        console.log('meal <= 3');
+                        $('#minicart-ul').removeClass('height-210');
+                    }
+                    if (min_sum <= total_amount){
+                        $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                        $('.warn-amount').hide();
+
+                    }else {
+                        $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                        $('.warn-amount').slideDown(1000);
+
+                    }
+
+                }
+            }
+        });
+
+
+    });

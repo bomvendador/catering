@@ -1,0 +1,557 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block links %}
+
+{#    <link rel="stylesheet" href="css/lightgallery.css">#}
+    <link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- SECTION BLOG -->
+    <section class="section-blog section margin-top-20">
+
+        <div class="container">
+            <div class="row">
+                <!-- BLOG LIST -->
+                <div class="col-md-9">
+                    <div class="blog-single">
+                        <!-- BREADCRUMB -->
+                        <ul class="breadcrumb">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Recipes</a></li>
+                            <li><span>{{ place.name }}</span></li>
+                        </ul>
+                        <!-- END / BREADCRUMB -->
+
+                        <!-- POST -->
+                        <div class="post post-single">
+                            <div class="post-media">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/places/' %}{{ place.main_image }}" alt="">
+                                </div>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-title">
+                                    <h3 class="xmd">Коттедж в деревне Комаровка</h3>
+                                </div>
+                                <div class="meta-info">
+                                    <span><i class="icon mdi mdi-map-marker"></i>40 км от МКАД</span>
+                                    <span><i class="icon awe_clock_2"></i>15 mins cooking</span>
+                                    <span><i class="icon awe_user"></i>By <a href="#">Anna Molly</a></span>
+                                </div>
+                                <div class="post-content">
+
+                                    <div class="block-right fr">
+                                        <div class="ingredients item">
+                                            <div class="item-heading">
+                                                <h5>Характеристики</h5>
+                                            </div>
+                                            <table class="ingre-table">
+                                                <tr>
+                                                    <td class="roboto-500">Количество спальных мест</td>
+                                                    <td class="roboto-500">40</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="roboto-500">Площадь дома</td>
+                                                    <td class="roboto-500">650 кв.м</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Spinach</td>
+                                                    <td>300g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Egg</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Chopped toasted walnutssea saltfreshly ground black pepper </td>
+                                                    <td>40g</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div class="tips item">
+                                            <div class="item-heading">
+                                                <h5>Инфраструктура</h5>
+                                            </div>
+                                            <table class="ingre-table">
+                                                <tr>
+                                                    <td class="roboto-500 text-align-left" align="left">Количество спальных мест</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="roboto-500 text-align-left" align="left">Пейнтбол</td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <p><strong>Maecenas eu metus</strong> sit amet nunc <i>rhoncus</i> dictum <mark>color</mark> non <abbr>link</abbr>. Praesent consequat placerat velit <del>nec</del> vehicula. Aliquam !</p>
+                                    <h4 class="sm text-uppercase">HOW TO DO</h4>
+                                    <p class="roboto-300">
+                                        Дмитровское шоссе, Деревня Комаровка, 40 км от МКАД. 4-х - уровневый коттедж, 650 кв.м., на каждом этаже 2 апартамента. Во всех апартаментах камин. Бытовая техника - холодильник, плазменные панели, профессиональная аудиосистема с караоке, имеется проектор для проведения презентаций, семинаров, просмотра фильмов и спорт программ. Количество комфортных спальных мест 32, имеется возможность дополнительного размещения (до 15). В цокольном этаже (200м2) расположена сауна, комната отдыха с массажными креслами, бильярдный зал с 12-ти футовым столом, камином и барной стойкой. Бесплатный WIFI. На огороженной территории (30 соток) парковка на 20 машин и каркасный бассейн (только в летнее время). Большая всесезонная беседка, в которой поместится 60 человек, с русской камин-печью и мангалом, а так же шатер 200 кв.м. на 100 человек (в основном для проведения свадеб) и гриль зона (крытая) с большим мангалом и помпейской печью для приготовления пиццы. В шаговой доступности пруд, лес, спортивная площадка а так же знаменитая трасса "Габовская лыжня".
+
+В цену включено: Весь дом, вся территория со всеми строениями, профессиональное музыкальное оборудование, караоке, зимние и летние виды спорта.
+                                    </p>
+                                    <ol>
+                                        <li>Sed <mark>pellentesque</mark> commodo magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                        <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                        <li>Ut sit amet orci ac sapien porta porta. Mauris facilisis sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.
+                                            <ul>
+                                                <li>Sed pellentesque commodo magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                                <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                                <li>Ut sit amet orci ac sapien porta porta. Mauris facilisis sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.
+                                                    <ul>
+                                                        <li>Sed pellentesque commodo magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                                        <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                                        <li>Ut sit amet orci ac sapien porta porta. Mauris facilisis sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    <ul>
+                                        <li>Sed pellentesque commodo magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                        <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                        <li><strong>Ut sit amet</strong> orci ac sapien porta porta. <mark>Mauris facilisis</mark> sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.
+                                            <ul>
+                                                <li><b>Sed pellentesque commodo</b> magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                                <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                                <li>Ut sit amet orci ac sapien porta porta. Mauris facilisis sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.</li>
+                                            </ul>
+                                            <ol>
+                                                <li><b>Sed pellentesque commodo</b> magna, eget tincidunt magna condimentum lobortis. Integer facilisis ipsum sem, sit amet aliquet sem iaculis in. Vivamus at accumsan ante.</li>
+                                                <li>Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget <abbr title="">lobortis augue</abbr>, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</li>
+                                                <li>Ut sit amet orci ac sapien porta porta. Mauris facilisis sollicitudin pharetra. Phasellus rutrum nisi quam, quis congue nisi vehicula ac.</li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+
+                                    <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. <strong>Nulla interdum</strong> lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>
+
+                                    <div class="block-image" >
+                                        <div class="image-wrap fl" style="width: 100px" id="lightgallery">
+{#                                            <img src="images/blog/img-2.jpg" alt="">#}
+{#                                                <a href="{% static 'images/portfolio/IMG_1308.JPG' %}" data-srcset="{% static 'images/portfolio/IMG_1307.JPG' %} 375w, {% static 'images/portfolio/IMG_1309.JPG' %} 375w, {% static 'images/portfolio/IMG_1310.JPG' %} 375w" data-sizes="(min-width: 40em) 80vw, 100vw">#}
+{#                                                <a href="{% static 'images/portfolio/IMG_1310.JPG' %}">#}
+                                                    <img src="{% static 'images/portfolio/IMG_1310.JPG' %}">
+{#                                                </a>#}
+{#                                            <img src="{% static 'images/portfolio/IMG_1307.JPG' %}" alt="">#}
+
+{#                                                <ul id="lightgallery" class="list-unstyled row">#}
+{#                                                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="img/1-1600.jpg" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">#}
+{#                                                        <a href="">#}
+{#                                                            <img class="img-responsive" src="{% static 'images/portfolio/IMG_1308.JPG' %}" alt="Thumb-1">#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+                                        </div>
+                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo.<br><br>
+                                        Aenean sollicitudin elit ut egestas viverra.  Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra.</p>
+                                    </div>
+
+                                    <blockquote class="blockquote q-left">
+                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales.</p>
+                                        <span class="blockquote-footer">Anonymous</span>
+                                    </blockquote>
+
+                                    <div class="image-wrap">
+                                        <img src="images/background/img-5.jpg" alt="">
+                                    </div>
+
+                                    <div class="block-image">
+                                        <div class="image-wrap fr">
+                                            <img src="images/blog/img-3.jpg" alt="">
+                                        </div>
+                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo. <br><br>
+                                        Aenean sollicitudin elit ut egestas viverra.  Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra. </p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- SHARE AND TAG -->
+                            <div class="share-tags">
+                                <div class="share-box">
+                                    <h5 class="sm">Share</h5>
+                                    <div class="share">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="tag-box fr">
+                                    <h5 class="sm">Tag</h5>
+                                    <div class="tag">
+                                        <a href="#">Recipe</a>
+                                        <a href="#">Recipe</a>
+                                        <a href="#">Recipe</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / SHARE AND TAG -->
+
+                            <div class="about-author">
+                                <div class="image-thumb fl">
+                                    <img src="images/shop/img-4.jpg" alt="">
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        <h4 class="xmd text-capitalize">Maecenas Eu Metus</h4>
+                                    </div>
+                                    <div class="author-content">
+                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>
+                                    </div>
+                                </div>
+                                <div class="author-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- COMMENTS -->
+                            <div id="comments">
+                                <div class="comments-inner-wrap">
+                                    <h3 id="comments-title" class="xmd text-capitalize">4 Comments</h3>
+                                    <ul class="commentlist">
+                                        <li class="comment">
+                                            <div class="comment-box">
+                                                <div class="comment-author">
+                                                    <a href="#"><img src="images/blog/img-6.jpg" alt=""></a>
+                                                </div>
+                                                <div class="comment-body">
+                                                    <cite class="fn"><a href="#">David</a></cite>
+                                                    <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis.</p>
+                                                    <div class="comment-meta">
+                                                        <span>sep 18,2014 at 9:00</span>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-abs">
+                                                    <a href="#" class="comment-reply-link">Reply</a>
+                                                    <a href="#" class="comment-edit-link">Edit</a>
+                                                    <a href="#">Approve</a>
+                                                    <a href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="comment">
+                                            <div class="comment-box">
+                                                <div class="comment-author">
+                                                    <a href="#"><img src="images/blog/img-8.jpg" alt=""></a>
+                                                </div>
+                                                <div class="comment-body">
+                                                    <cite class="fn"><a href="#">Karrot</a></cite>
+                                                    <p>Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>
+                                                    <div class="comment-meta">
+                                                        <span>sep 18,2014 at 9:00</span>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-abs">
+                                                    <a href="#" class="comment-edit-link">Edit</a>
+                                                    <a href="#" class="comment-reply-link">Reply</a>
+                                                </div>
+                                            </div>
+                                            <ul class="children">
+                                                <li class="comment">
+                                                    <div class="comment-box">
+                                                        <div class="comment-author">
+                                                            <a href="#"><img src="images/blog/img-6.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="comment-body">
+                                                            <cite class="fn"><a href="#">Tanuki</a></cite>
+                                                            <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>
+                                                            <div class="comment-meta">
+                                                                <span>sep 18,2014 at 9:00</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment-abs">
+                                                            <a href="#" class="comment-edit-link">Edit</a>
+                                                            <a href="#" class="comment-reply-link">Reply</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- END / COMMENTS -->
+
+                            <!-- LEAVER YOUR COMMENT -->
+                            <div id="respond">
+                                <div class="reply-title">
+                                    <h3 class="xmd text-capitalize">Leaver your comment</h3>
+                                </div>
+                                <!-- COMMENT FORM -->
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-item form-textarea">
+                                                <textarea></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-item form-name">
+                                                <input type="text" placeholder="Your Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-item form-email">
+                                                <input type="text" placeholder="Your Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-actions">
+                                                <input type="submit" value="Post this comment" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END / COMMENT FORM -->
+
+                            </div>
+                            <!-- END / LEAVER YOUR COMMENT -->
+                        </div>
+                        <!-- END / POST -->
+
+                    </div>
+
+                </div>
+                <!-- END / BLOG LIST -->
+
+                <!-- SIDEBAR -->
+                <div class="col-md-3">
+                    <aside class="sidebar">
+                        <!-- WIDGET SEARCH -->
+                        <div class="widget widget_search">
+                            <h4 class="sm text-uppercase">Search</h4>
+                            <form>
+                                <input type="text" name="search" placeholder="Type keyword">
+                            </form>
+                        </div>
+                        <!-- END / WIDGET SEARCH -->
+
+                        <!-- WIDGET RECENT POST -->
+                        <div class="widget widget_recent_post">
+                            <h4 class="sm text-uppercase">Recent posts</h4>
+                            <ul>
+                                <li>
+                                    <a href="#">Aliquam nibh sapien</a>
+                                </li>
+                                <li>
+                                    <a href="#">Nunc pellentesque dolor</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END / WIDGET RECENT POST -->
+
+                        <!-- WIDGET EVENTS -->
+                        <div class="widget widget_events">
+                            <h4 class="sm text-uppercase">Events</h4>
+                            <ul class="events">
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <div class="list-content">
+                                        <a href="#">Fair Trade & Organic</a>
+                                        <ul class="meta">
+                                            <li>20.October.2014</li>
+                                            <li>16:00</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <div class="list-content">
+                                        <a href="#">Fair Trade & Organic</a>
+                                        <ul class="meta">
+                                            <li>20.October.2014</li>
+                                            <li>16:00</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <div class="list-content">
+                                        <a href="#">Fair Trade & Organic</a>
+                                        <ul class="meta">
+                                            <li>20.October.2014</li>
+                                            <li>16:00</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <div class="list-content">
+                                        <a href="#">Fair Trade & Organic</a>
+                                        <ul class="meta">
+                                            <li>20.October.2014</li>
+                                            <li>16:00</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END / WIDGET EVENTS -->
+
+                        <!-- WIDGET INSTAGRAM -->
+                        <div class="widget widget_instagram">
+                            <h4 class="sm text-uppercase">Instagram</h4>
+                            <div class="instagram">
+                                <a href="#"><img src="images/blog/img-5.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-5.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>
+                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <!-- END / WIDGET INSTAGRAM -->
+
+                        <!-- LATEST COMMENTS -->
+                        <div class="widget widget_latest_comments">
+                            <h4 class="sm text-uppercase">Latest comments</h4>
+                            <ul>
+                                <li>
+                                    <div class="image-wrap">
+                                        <img src="images/blog/img-6.jpg" alt="">
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="author">Danzo</span>
+                                        <a href="#">I think you should add more rosemary or other herb</a>
+                                        <div class="meta">
+                                            <span>sep 18,2014 at 9:00</span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="image-wrap">
+                                        <img src="images/blog/img-6.jpg" alt="">
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="author">Danzo</span>
+                                        <a href="#">I think you should add more rosemary or other herb</a>
+                                        <div class="meta">
+                                            <span>sep 18,2014 at 9:00</span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="image-wrap">
+                                        <img src="images/blog/img-6.jpg" alt="">
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="author">Danzo</span>
+                                        <a href="#">I think you should add more rosemary or other herb</a>
+                                        <div class="meta">
+                                            <span>sep 18,2014 at 9:00</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END / LATEST COMMENTS -->
+
+
+                        <!-- WIDGET CATEGORIES -->
+                        <div class="widget widget_categories">
+                            <h4 class="sm text-uppercase">Categories</h4>
+                            <ul>
+                                <li><a href="#">Cras condimentum</a></li>
+                                <li><a href="#">Nibh et pellentesque</a></li>
+                                <li><a href="#">Leo nibh gravida velit</a></li>
+                                <li><a href="#">Tortor augue a eros</a></li>
+                                <li><a href="#">Libero</a></li>
+                            </ul>
+                        </div>
+                        <!-- END / WIDGET CATEGORIES -->
+
+                        <!-- WIDGET ARCHIVE -->
+                        <div class="widget widget_archive">
+                            <h4 class="sm text-uppercase">Archives</h4>
+                            <ul>
+                                <li><a href="#">June 2013</a></li>
+                                <li><a href="#">May 2013</a></li>
+                                <li><a href="#">April 2013</a></li>
+                            </ul>
+                        </div>
+                        <!-- END / WIDGET ARCHIVE -->
+
+                        <!-- WIDGET TAG CLOUD -->
+                        <div class="widget widget_tag_cloud">
+                            <h4 class="sm text-uppercase">Tag cloud</h4>
+                            <div class="tagcloud">
+                                <a href="#">Recipe</a>
+                                <a href="#">Chicken</a>
+                                <a href="#">Fish</a>
+                                <a href="#">Wordpress</a>
+                                <a href="#">Photoshop</a>
+                                <a href="#">JQuery</a>
+                            </div>
+                        </div>
+                        <!-- END / WIDGET TAG CLOUD -->
+
+
+                    </aside>
+                </div>
+                <!-- END / SIDEBAR -->
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- END / SECTION BLOG -->
+
+
+{% endblock %}
+
+{% block script %}
+
+{#    <script src="js/lightgallery.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lightgallery.min.js' %}"></script>
+
+    <!-- lightgallery plugins -->
+{#    <script src="js/lg-thumbnail.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-thumbnail.min.js' %}"></script>
+{#    <script src="js/lg-fullscreen.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'lightgallery/js/picturefill.js' %}"></script>
+
+    <script>
+        $('#lightgallery').on('click', function () {
+            lightGallery(document.getElementById('lightgallery'),{
+                thumbnail: false,
+                dynamic: true,
+                dynamicEl: [{
+                    "src": "{% static 'images/portfolio/IMG_1307.JPG' %}",
+                    'thumb': "{% static 'images/portfolio/IMG_1307.JPG' %}",
+                    'subHtml': '<h4 class="color-white">Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>'
+                }, {
+                    "src": "{% static 'images/portfolio/IMG_1308.JPG' %}",
+                    'thumb': "{% static 'images/portfolio/IMG_1309.JPG' %}",
+                    'subHtml': "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>"
+                }, {
+                    "src": "{% static 'images/portfolio/IMG_1309.JPG' %}",
+                    'thumb': "{% static 'images/portfolio/IMG_1309.JPG' %}",
+                    'subHtml': "<h4>Coniston Calmness</h4><p>Beautiful morning</p>"
+                }]
+            })
+        });
+{#        lightGallery(document.getElementById('lightgallery'));#}
+    </script>
+
+{% endblock %}

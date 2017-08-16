@@ -1,0 +1,1779 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load watermark %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- HOME MEDIA -->
+    <section id="home-media" class="home-media section margin-top-50">
+        <div class="home-fullscreen tb">
+            <ul class="home-slider" data-background="awe-parallax">
+                <li>
+                    <div class="image-wrap">
+                        <img src="{% static 'images/slider/main_slider_1.jpg' %}" alt="">
+                    </div>
+                    <div class="slider-content text-center">
+                        <h5 class="sm text-uppercase">ОРГАНИЗАЦИЯ "ПОД КЛЮЧ"</h5>
+                        <h1 class="fittext sbig text-uppercase">КЕЙТЕРИНГ</h1>
+                        <a href="{% url 'events_index' %}" class="awe-btn awe-btn-6 awe-btn-default text-uppercase">ПОДРОБНЕЕ</a>
+                    </div>
+                </li>
+{##}
+                <li>
+                    <div class="image-wrap">
+                        <img src="{% static 'images/slider/main_slider_2.jpg' %}" alt="">
+                    </div>
+                    <div class="slider-content text-center">
+                        <h5 class="sm text-uppercase">ОТ 220 РУБ.</h5>
+                        <h1 class="fittext sbig text-uppercase">ДОСТАВКА ОБЕДОВ</h1>
+                        <a href="{% url 'lunches_index' %}" class="awe-btn awe-btn-6 awe-btn-default text-uppercase">ПОДРОБНЕЕ</a>
+                    </div>
+
+                </li>
+{##}
+                <li>
+                    <div class="image-wrap">
+                        <img src="{% static 'images/slider/main_slider3.jpg' %}" alt="">
+                    </div>
+                    <div class="slider-content text-center">
+                        <h5 class="sm text-uppercase">НАЙДИТЕ ПЛОЩАДКУ ПОД ЛЮБОЕ МЕРОПРИЯТИЕ</h5>
+                        <h1 class="fittext sbig text-uppercase">ПЛОЩАДКИ</h1>
+                        <a href="{% url 'places_list_main' %}" class="awe-btn awe-btn-6 awe-btn-default text-uppercase">ПОДРОБНЕЕ</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- END / HOME MEDIA -->
+{##}
+{#    <!-- GOOD FOOD -->#}
+    <section id="good-food" class="good-food section pd">
+        <div class="container">
+            <div class="good-food-heading text-center">
+                <div class="good-food-title style-1 wow fadeInUp" data-wow-delay=".2s">
+                    <i class="icon awe_quote_left"></i>
+                    <h2 class="lg text-uppercase font-marck">МЫ ГОТОВИМ РАДОСТЬ</h2>
+                    <i class="icon awe_quote_right"></i>
+                </div>
+                <p class=" wow fadeInUp roboto-400" data-wow-delay=".4s">Эти слова для нас не просто наш слоган, это наша философия, наша страсть и наша цель! Мы не просто готовим пищу, мы готовим для Вас только самые положительные эмоции, которые Вы будете помнить долго после знакомства с нами. Все, что мы делаем, подчинено одной миссии: нести своим мастерством радость нашим друзьям, нашим клиентам. </p>
+                <p class=" wow fadeInUp roboto-600 font-size-20" data-wow-delay=".4s">И это не пустые слова, попробуйте сами!</p>
+            </div>
+            <hr class="_hr_dark margin-top-40">
+            <div class="good-food-body wow fadeInUp" data-wow-delay=".6s">
+                <div class="row">
+                    <!-- GOOD ITEM -->
+                    <div class="col-md-4">
+                        <div class="good-item text-center">
+                             <div class="item-image-head">
+                                <img src="{% static 'images/index/i1.jpg' %}" alt="">
+                             </div>
+
+                             <div class="item-title">
+                                 <h4 class="text-uppercase">МЕРОПРИЯТИЯ</h4>
+                             </div>
+                             <div class="item-body">
+                                 <p>Мы проводим мероприятия любой численности и сложности "под ключ". Занимаемся организацией свадеб, дней рождений, корпоративов, выпускных вечеров, вечеринок, празднований Нового Года, семинаров для корпоративного сектора (проживание, питание, зал с проектором, флип-чартом, доской) и т.д. </p>
+                             </div>
+                             <div class="item-footer">
+                                 <a href="{% url 'events_index' %}" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">Подробнее</a>
+                             </div>
+                        </div>
+                    </div>
+                    <!-- END / GOOD ITEM -->
+
+                    <!-- GOOD ITEM -->
+                    <div class="col-md-4">
+                        <div class="good-item text-center">
+                             <div class="item-image-head">
+                                <img src="{% static 'images/index/i2.jpg' %}" alt="">
+
+                             </div>
+
+                             <div class="item-title">
+                                 <h4>ПЛОЩАДКИ</h4>
+                             </div>
+                             <div class="item-body">
+                                 <p>Мы располагаем площадками для проведения мероприятий со всей необходимой инфраструкторой и различным географическим расположением в пределах Московской области. Площадки имеют различные характеристики и инфраструктуру под любые задачи. Вы обязательно найдете необходимое для Вас место.</p>
+                             </div>
+                             <div class="item-footer">
+                                 <a href="{% url 'places_list_main' %}" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">Подробнее</a>
+
+                             </div>
+                        </div>
+                    </div>
+                    <!-- END / GOOD ITEM -->
+
+                    <!-- GOOD ITEM -->
+                    <div class="col-md-4">
+                        <div class="good-item text-center">
+                             <div class="item-image-head">
+
+                                <img src="{% static 'images/index/i3.jpg' %}" alt="">
+
+                             </div>
+
+                             <div class="item-title">
+                                 <h4>ДОСТАВКА ОБЕДОВ</h4>
+                             </div>
+                             <div class="item-body">
+                                 <p>Наша компания осуществляет доставку корпоративных обедов с использованием экологически чистых продуктов, специально поготовленной воды, очищенной способом <a href="https://goo.gl/7qZV3X" target="_blank">обратного осмоса</a>. Меню разнообразно и питательно и позволяет Вам не отвлекаться от действительно важных вещей. Удобно и дешево. Доверьте свой обед нам!</p>
+                             </div>
+                             <div class="item-footer">
+                                 <a href="{% url 'lunches_index' %}" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">Подробнее</a>
+                             </div>
+                        </div>
+                    </div>
+                    <!-- END / GOOD ITEM -->
+                </div>
+            </div>
+        </div>
+        <div class="divider divider-2"></div>
+    </section>
+{#    <!-- END / GOOD FOOD -->#}
+{##}
+{#    <!-- POPUP RESERVATION -->#}
+{#    <div id="popup-reservation" class="popup-reservation zoom-anim-dialog mfp-hide">#}
+{#        <div class="reservation-content">#}
+{#            <div class="pp-heading text-center">#}
+{#                <h4 class="xmd text-uppercase">Reservation</h4>#}
+{#                <div class="support">#}
+{#                    For further support, please call#}
+{#                    <span class="phone">3792 - 7384 - 8459</span>#}
+{#                </div>#}
+{#            </div>#}
+{#            <form>#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6">#}
+{#                        <table class="form-table table-first">#}
+{#                            <tbody>#}
+{#                                <tr class="t-date">#}
+{#                                    <td colspan="2">#}
+{#                                        <label for="date">Date</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="date" placeholder="dd/mm/yyyy">#}
+{#                                            <i class="icon awe_calendar"></i>#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                <tr class="t-time-pers">#}
+{#                                    <td class="t-time">#}
+{#                                        <label for="time">Time</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="time" placeholder="-- : --">#}
+{#                                            <i class="icon awe_clock_2"></i>#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                    <td class="t-pers">#}
+{#                                        <label for="pers">Pers</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="pers">#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                <tr class="t-note">#}
+{#                                    <td colspan="2">#}
+{#                                        <label for="note">Note</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="note">#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                            </tbody>#}
+{#                        </table>#}
+{#                    </div>#}
+{##}
+{#                    <div class="col-md-6">#}
+{#                        <table class="form-table">#}
+{#                            <tbody>#}
+{#                                <tr class="t-name">#}
+{#                                    <td>#}
+{#                                        <label for="name">Guest Name</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="name">#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                <tr class="t-telephone">#}
+{#                                    <td>#}
+{#                                        <label for="telephone">Telephone</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="telephone">#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                <tr class="t-email">#}
+{#                                    <td>#}
+{#                                        <label for="email">Email</label>#}
+{#                                        <div class="form-item">#}
+{#                                            <input type="text" id="email">#}
+{#                                        </div>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                            </tbody>#}
+{#                        </table>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="form-footer text-center">#}
+{#                    <div class="form-item">#}
+{#                        <input type="submit" value="CHECK AVAILABILITY" class="awe-btn awe-btn-3 awe-btn-default text-uppercase">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- END / POPUP RESERVATION -->#}
+{##}
+{##}
+{#    <!-- OUR STORY -->#}
+{#    <section id="our-story" class="our-story section">#}
+{##}
+{#        <div class="section-heading text-center">#}
+{#            <!-- BACKGROUND -->#}
+{#            <div class="awe-parallax bg-2"></div>#}
+{#            <!-- END / BACKGROUND -->#}
+{##}
+{#            <!-- OVERLAY -->#}
+{#            <div class="awe-overlay"></div>#}
+{#            <!-- END / OVERLAY -->#}
+{#            <div class="awe-title awe-title-1 wow fadeInUp" data-wow-delay=".3s">#}
+{#                <h3 class="lg text-uppercase">Our story</h3>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="section-content wow fadeInUp" data-wow-delay=".5s">#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-7 col-lg-offset-5">#}
+{#                        <div class="story-pager">#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="0" href="#">1800</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="1" href="#">1850</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="2" href="#">1880</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="3" href="#">1900</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="4" href="#">1920</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="5" href="#">1990</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="6" href="#">1992</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="7" href="#">2010</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{#                            <div class="item">#}
+{#                                <a data-slide-index="8" href="#">2014</a>#}
+{#                                <hr class="line">#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="story-slider-wrap">#}
+{#                    <ul class="story-slider">#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-1.jpg' %}" alt="">#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">1800 - The Story Began</h4>#}
+{#                                        <p>Venison spare ribs pork tail, beef meatloaf kielbasa turkey rump turducken beef ribs ground round sirloin kevin hamburger. Boudin ham hock chicken,. Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle. Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-2.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                               <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                       <h4 class="lg">1850 - The Story</h4>#}
+{#                                        <p>Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle. Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-3.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">1880 - The Story Began</h4>#}
+{#                                        <p>Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">1900 - The Story</h4>#}
+{#                                        <p>Venison spare ribs pork tail, beef meatloaf kielbasa turkey rump turducken beef ribs ground round sirloin kevin hamburger. Boudin ham hock chicken,. Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                       <h4 class="lg">1920 - The Story Began</h4>#}
+{#                                        <p>Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-6.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                       <h4 class="lg">1990 - The Story</h4>#}
+{#                                        <p>Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle. Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">1992 - The Story Began</h4>#}
+{#                                        <p>Venison spare ribs pork tail, beef meatloaf kielbasa turkey rump turducken beef ribs ground round sirloin kevin hamburger. Boudin ham hock chicken,. Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle. Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">2010 - The Story Began</h4>#}
+{#                                        <p>Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-4 col-sm-3 col-md-4">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/ourstory/img-6.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-7 col-md-offset-1 col-lg-6">#}
+{#                                    <div class="story-content">#}
+{#                                        <h4 class="lg">2014 - The Story Began</h4>#}
+{#                                        <p>Venison spare ribs pork tail, beef meatloaf kielbasa turkey rump turducken beef ribs ground round sirloin kevin hamburger. Boudin ham hock chicken,. Leberkas ham sausage doner pastrami porchetta tri-tip boudin shankle. Meatball shoulder rump spare ribs tongue venison short ribs. Flank landjaeger brisket leberkas bacon kielbasa shank meatball, fatback t-bone pork biltong boudin. Hamburger strip steak ribeye pastrami tenderloin.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="divider divider-2"></div>#}
+{#    </section>#}
+{#    <!-- END / OUR STORY -->#}
+{##}
+{#    <!-- THE MENU -->#}
+{#    <section id="the-menu" class="the-menu section">#}
+{#        <div class="section-heading text-center">#}
+{#            <!-- BACKGROUND -->#}
+{#            <div class="awe-parallax bg-3"></div>#}
+{#            <!-- END / BACKGROUND -->#}
+{##}
+{#            <!-- OVERLAY -->#}
+{#            <div class="awe-overlay"></div>#}
+{#            <!-- END / OVERLAY -->#}
+{#            <div class="awe-title awe-title-1 wow fadeInUp" data-wow-delay=".3s">#}
+{#                <h3 class="lg text-uppercase">The menu</h3>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="tabs-menu tabs-page">#}
+{#            <div class="container">#}
+{#                <ul class="nav-tabs text-center" role="tablist">#}
+{#                    <li class="active"><a href="#breakfast" role="tab" data-toggle="tab">Breakfast</a></li>#}
+{#                    <li><a href="#lunch" role="tab" data-toggle="tab">Lunch</a></li>#}
+{#                    <li><a href="#dinner" role="tab" data-toggle="tab">Dinner</a></li>#}
+{#                    <li><a href="#dessert" role="tab" data-toggle="tab">Dessert</a></li>#}
+{#                    <li><a href="#drink" role="tab" data-toggle="tab">Drink</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="section-content wow fadeInUp" data-wow-delay=".5s">#}
+{#            <div class="container">#}
+{#                <div class="tab-menu-content tab-content">#}
+{#                    <!-- BREAKFAST -->#}
+{#                    <div class="tab-pane fade in active" id="breakfast">#}
+{#                        <div class="row">#}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-1.jpg' %}" alt="">#}
+{##}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-2.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-3.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-1.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-2.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-3.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                    <!-- END / BREAKFAST -->#}
+{##}
+{#                    <!-- LUNCH -->#}
+{#                    <div class="tab-pane fade" id="lunch">#}
+{#                        <div class="row">#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-1.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-2.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-3.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / LUNCH -->#}
+{##}
+{#                    <!-- DINNER -->#}
+{#                    <div class="tab-pane fade" id="dinner">#}
+{#                        <div class="row">#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-1.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-2.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-3.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-4.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / DINNER -->#}
+{##}
+{#                    <!-- DESSERT -->#}
+{#                    <div class="tab-pane fade" id="dessert">#}
+{#                        <div class="row">#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-5.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="{% static 'images/themenu/img-1.jpg' %}" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-2.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-3.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-4.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-5.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / DESSERT -->#}
+{##}
+{#                    <!-- DRINK -->#}
+{#                    <div class="tab-pane fade" id="drink">#}
+{#                        <div class="row">#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-4.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-5.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-1.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-2.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-3.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-4.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                            <!-- THE MENU ITEM -->#}
+{#                            <div class="col-lg-6">#}
+{#                                <div class="the-menu-item">#}
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/themenu/img-5.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="the-menu-body">#}
+{#                                        <h4 class="xsm">Scrambled Eggs in Puff Pastry</h4>#}
+{#                                        <p>with “soldiers”</p>#}
+{#                                    </div>#}
+{#                                    <div class="prices">#}
+{#                                        <span class="price xsm">$16.00</span>#}
+{#                                    </div>#}
+{#                                    <div class="highlight">Signature</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / THE MENU ITEM -->#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / DRINK -->#}
+{##}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    <!-- END / THE MENU -->#}
+{##}
+{#    <!-- SECTION HIGHLIGHT -->#}
+{#    <section class="section-highlight section">#}
+{#        <div class="divider divider-1 divider-color"></div>#}
+{#        <div class="divider divider-2 divider-color"></div>#}
+{#        <div class="awe-color"></div>#}
+{#        <div class="container">#}
+{#            <div class="highlight-content tb wow fadeInUp" data-wow-delay=".3s">#}
+{#                <div class="tb-cell">#}
+{#                    <p>Why don’t find a table and save it now? Find a table and We have discount for you!</p>#}
+{#                </div>#}
+{#                <div class="links tb-cell">#}
+{#                    <div class="reservation-link open-popup-reservation">#}
+{#                        <a href="#popup-reservation" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">RESERVATION</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    <!-- END / SECTION HIGHLIGHT -->#}
+{##}
+{##}
+{#    <!-- THE STAFF -->#}
+    <section id="the-staff" class="the-staff section">
+        <div class="divider divider-2"></div>
+        <div class="section-heading text-center">
+            <!-- BACKGROUND -->
+            <div class="awe-parallax bg-4"></div>
+            <!-- END / BACKGROUND -->
+
+            <!-- OVERLAY -->
+            <div class="awe-overlay"></div>
+            <!-- END / OVERLAY -->
+            <div class="awe-title awe-title-1 wow fadeInUp" data-wow-delay=".3s">
+                <h3 class="lg text-uppercase">Наша команда</h3>
+            </div>
+        </div>
+        <div class="section-content wow fadeInUp" data-wow-delay=".5s">
+            <div class="container">
+                <div class="row">
+                    <div class="staff-slider">
+                        <!-- STAFF ITEM -->
+                        {% for staff in staffs %}
+                        <div class="staff-item">
+                            <div class="staff-heading">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/staff/' %}{{ staff.image_name }}" alt="">
+
+                                </div>
+
+{#                                <div class="staff-social">#}
+{#                                    <a href="#"><i class="fa fa-facebook"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-tumblr"></i></a>#}
+{#                                </div>#}
+                            </div>
+
+                            <div class="staff-info">
+                                <h4 class="staff-name sm">{{ staff.name }}</h4>
+                                <span class="staff-work">{{ staff.position }}</span>
+                            </div>
+
+{#                            <div class="staff-body">#}
+{#                                <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin brisket drumstick kielbasa ribeye boudin pancetta prosciutto.</p>#}
+{#                            </div>#}
+
+                        </div>
+                        {% endfor %}
+                        <!-- END / STAFF ITEM -->
+{##}
+{#                        <!-- STAFF ITEM -->#}
+{#                        <div class="staff-item">#}
+{#                            <div class="staff-heading">#}
+{#                                <div class="image-wrap">#}
+{#                                    <img src="{% static 'images/staff/img-2.jpg' %}" alt="">#}
+{#                                </div>#}
+{##}
+{#                                <div class="staff-social">#}
+{#                                    <a href="#"><i class="fa fa-facebook"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-tumblr"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-dribbble"></i></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-info">#}
+{#                                <h4 class="staff-name sm">DOE The John</h4>#}
+{#                                <span class="staff-work">the manager</span>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-body">#}
+{#                                <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin brisket drumstick kielbasa ribeye boudin pancetta prosciutto.</p>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                        <!-- END / STAFF ITEM -->#}
+{##}
+{#                        <!-- STAFF ITEM -->#}
+{#                        <div class="staff-item">#}
+{#                            <div class="staff-heading">#}
+{#                                <div class="image-wrap">#}
+{#                                    <img src="{% static 'images/staff/img-3.jpg' %}" alt="">#}
+{#                                </div>#}
+{##}
+{#                                <div class="staff-social">#}
+{#                                    <a href="#"><i class="fa fa-facebook"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-tumblr"></i></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-info">#}
+{#                                <h4 class="staff-name sm">Peter de Joane</h4>#}
+{#                                <span class="staff-work">the online manager</span>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-body">#}
+{#                                <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin brisket drumstick kielbasa ribeye boudin pancetta prosciutto.</p>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                        <!-- END / STAFF ITEM -->#}
+{##}
+{#                        <!-- STAFF ITEM -->#}
+{#                        <div class="staff-item">#}
+{#                            <div class="staff-heading">#}
+{#                                <div class="image-wrap">#}
+{#                                    <img src="{% static 'images/staff/img-3.jpg' %}" alt="">#}
+{#                                </div>#}
+{##}
+{#                                <div class="staff-social">#}
+{#                                    <a href="#"><i class="fa fa-facebook"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-tumblr"></i></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-info">#}
+{#                                <h4 class="staff-name sm">Peter de Joane</h4>#}
+{#                                <span class="staff-work">the online manager</span>#}
+{#                            </div>#}
+{##}
+{#                            <div class="staff-body">#}
+{#                                <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin brisket drumstick kielbasa ribeye boudin pancetta prosciutto.</p>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                        <!-- END / STAFF ITEM -->#}
+                    </div>
+                </div>
+
+                <!-- WE ARE HIRING -->
+{#                <div class="we-are-hiring wow fadeInUp" data-wow-delay=".3s">#}
+{#                    <div class="awe-color"></div>#}
+{#                    <div class="tb">#}
+{#                        <div class="hiring-title tb-cell">#}
+{#                            <h4 class="sm text-uppercase">We are hiring</h4>#}
+{#                        </div>#}
+{##}
+{#                        <div class="hiring-body tb-cell">#}
+{#                            <p>We need 01 Chef, 02 Waiter, 01 Event manager and many supporters, Join Us Today to have more fun !</p>#}
+{#                        </div>#}
+{##}
+{#                        <div class="hiring-link tb-cell">#}
+{#                            <a href="#" class="awe-btn awe-btn-1 awe-btn-default text-uppercase">MORE DETAIL</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <!-- END / WE ARE HIRING -->
+            </div>
+        </div>
+    </section>
+{#    <!-- END / THE STAFF -->#}
+{##}
+{##}
+{#    <!-- EVENTS -->#}
+    <section id="events" class="events section">
+        <div class="divider divider-2"></div>
+
+        <div class="section-heading text-center">
+            <!-- BACKGROUND -->
+            <div class="awe-parallax bg-5"></div>
+            <!-- END / BACKGROUND -->
+
+            <!-- OVERLAY -->
+            <div class="awe-overlay overlay-default"></div>
+            <!-- END / OVERLAY -->
+            <div class="awe-title awe-title-1 wow fadeInUp" data-wow-delay=".3s">
+                <h3 class="lg text-uppercase">Портфолио</h3>
+            </div>
+        </div>
+
+        <div class="section-content wow fadeInUp" data-wow-delay=".5s">
+            <div class="container">
+                <ul class="event-slider" style="border: none; box-shadow: none">
+                    {% for item in portfolio_items %}
+                    <!-- ITEM EVENT -->
+                    <li>
+                        <div class="item-event">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="image-wrap">
+                                        <img id="id_{{ item.id }}" data-item-id="id_{{ item.id }}" class="gallery pointer-pure" src="{% static 'images/portfolio/' %}{{ item.main_image }}" alt="">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="item-event-body">
+                                        <div class="item-event-title">
+                                            <h4><a href="#0" class="gallery pointer-pure" data-item-id="id_{{ item.id }}" >{{ item.name }}</a></h4>
+                                        </div>
+                                        <div class="item-event-content">
+                                            <p>{{ item.description|safe }}</p>
+                                        </div>
+                                        <div class="item-event-meta">
+                                            <div class="date">
+                                                <i class="icon awe_calendar"></i>
+                                                {{ item.date|date:"d.m.Y" }}
+                                            </div>
+{#                                            <div class="time">#}
+{#                                                <i class="icon awe_clock_1"></i>#}
+{#                                                Time : 10:00#}
+{#                                            </div>#}
+{#                                            <div class="website">#}
+{#                                                <i class="icon awe_link"></i>#}
+{#                                                <a href="#">Website</a>#}
+{#                                            </div>#}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- ITEM EVENT -->
+                    {% endfor %}
+
+                </ul>
+
+                <!-- EVENT PAGER -->
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-4">
+                        <div class="event-pager-scroll">
+                            <div class="event-pager">
+                                {% for item in portfolio_items %}
+                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'images/portfolio/' %}{{ item.main_image }}" alt=""></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END / EVENT PAGER -->
+            </div>
+        </div>
+    </section>
+{#    <!-- END / EVENTS -->#}
+{##}
+{##}
+{#    <!-- TESTIMONIAL -->#}
+{#    <section id="testimonial" class="testimonial testimonial-1 section">#}
+{#        <!-- BACKGROUND -->#}
+{#        <div class="awe-parallax bg-6"></div>#}
+{#        <!-- END / BACKGROUND -->#}
+{##}
+{#        <!-- OVERLAY -->#}
+{#        <div class="awe-overlay"></div>#}
+{#        <!-- END / OVERLAY -->#}
+{##}
+{#        <div class="container">#}
+{#            <div class="testimonial-content wow fadeInUp" data-wow-delay=".3s">#}
+{#                <div class="icon-head">#}
+{#                    <i class="icon awe_quote_left"></i>#}
+{#                </div>#}
+{##}
+{#                <blockquote>#}
+{#                    <p>It’s not about nutrients and calories.</p>#}
+{#                    <span>It’s about sharing. It’s about honesty.</span>#}
+{#                    <div class="test-footer text-right">#}
+{#                        <span class="sm">Robert Smith</span>#}
+{#                    </div>#}
+{#                </blockquote>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    <!-- END / TESTIMONIAL -->#}
+{##}
+{#    <!-- SECTION BLOG -->#}
+{#    <section id="section-blog" class="section-blog section">#}
+{#        <div class="divider divider-2"></div>#}
+{##}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="blog-grid">#}
+{#                    <div class="grid-sizer"></div>#}
+{#                    <!-- BLOG POST -->#}
+{#                    <div class="post post-single w2">#}
+{#                        <div class="post-media">#}
+{#                            <img src="{% static 'images/blog/img-1.jpg' %}" alt="">#}
+{##}
+{#                        </div>#}
+{#                        <div class="post-body">#}
+{#                            <div class="post-title">#}
+{#                                <h2 class="text-uppercase"><a href="blog-single.html">AWARD WINNING CHEF</a></h2>#}
+{#                            </div>#}
+{#                            <div class="post-content">#}
+{#                                <p>Macaroon croissant pudding sweet roll. Jelly candy tootsie</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / BLOG POST -->#}
+{##}
+{#                    <!-- BLOG POST -->#}
+{#                    <div class="post post-single">#}
+{#                        <div class="post-media">#}
+{#                            <img src="{% static 'images/blog/img-2.jpg' %}" alt="">#}
+{#                        </div>#}
+{#                        <div class="post-body">#}
+{#                            <div class="post-title">#}
+{#                                <h2 class="text-uppercase"><a href="blog-single.html">A MULTI-POST STORY</a></h2>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / BLOG POST -->#}
+{##}
+{#                    <!-- BLOG POST -->#}
+{#                    <div class="post post-single">#}
+{#                        <div class="post-media">#}
+{#                            <img src="{% static 'images/blog/img-3.jpg' %}" alt="">#}
+{#                        </div>#}
+{#                        <div class="post-body">#}
+{#                            <div class="post-title">#}
+{#                                <h2 class="text-uppercase"><a href="blog-single.html">HOW TO USE CHOPSTICKS</a></h2>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / BLOG POST -->#}
+{##}
+{#                    <!-- BLOG POST -->#}
+{#                    <div class="post post-single">#}
+{#                        <div class="post-media">#}
+{#                            <img src="{% static 'images/blog/img-4.jpg' %}" alt="">#}
+{#                        </div>#}
+{#                        <div class="post-body">#}
+{#                            <div class="post-title">#}
+{#                                <h2 class="text-uppercase"><a href="blog-single.html">PHASELLUS JUSTO MAURIS, TEMPUS EGET NISL SIT</a></h2>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- END / BLOG POST -->#}
+{##}
+{#                    <!-- BLOG POST -->#}
+{#                    <div class="post post-single">#}
+{#                        <div class="post-media">#}
+{#                            <img src="{% static 'images/blog/img-2.jpg' %}" alt="">#}
+{#                        </div>#}
+{#                        <div class="post-body">#}
+{#                            <div class="post-title">#}
+{#                                <h2 class="text-uppercase"><a href="blog-single.html">A MULTI-POST STORY</a></h2>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                    <!-- END / BLOG POST -->#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="loadmore text-center">#}
+{#                <a href="#" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">LOAD MORE POSTS</a>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </section>#}
+{#    <!-- END / SECTION BLOG -->#}
+{##}
+{#    <!-- CONTACT US -->#}
+    <section id="contact" class="contact section">
+
+        <div class="contact-first">
+
+            <!-- OVERLAY -->
+            <div class="awe-overlay overlay-default"></div>
+            <!-- END / OVERLAY -->
+
+            <div class="section-content wow fadeInUp" data-wow-delay=".3s">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="contact-body text-center">
+                                <h3 class="lg text-uppercase">КОНТАКТЫ</h3>
+                                <hr class="_hr">
+                                <address class="address-wrap">
+                                    <span class="address">{{ food_smile_email }}</span>
+                                    <span class="phone">{{ food_smile_phone }}</span>
+                                </address>
+                            </div>
+
+{#                            <div class="see-map text-center">#}
+{#                                <a href="#" data-see-contact="See contact info" data-see-map="See location on map" class="awe-btn awe-btn-5 awe-btn-default text-uppercase"></a>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MAP -->
+            <div id="map" data-map-zoom="14" data-map-latlng="45.738028, 21.224535" data-snazzy-map-theme="grayscale" data-map-marker="images/marker.png" data-map-marker-size="200*60"></div>
+            <!-- END / MAP -->
+        </div>
+
+        <div class="contact-second tb">
+            <!-- CONTACT FORM -->
+            <div class="tb-cell">
+                <div class="contact-form contact-form-1">
+                    <div class="inner wow fadeInUp" data-wow-delay=".3s">
+                        <div class="letter-heading">
+                            <h4 class="sm text-uppercase color-white text-align-center roboto-300">КОНТАКТНАЯ ФОРМА</h4>
+                            <p class="color-white text-align-center roboto-300">Если у Вас появились вопросы, напишите нам и мы обязательно ответим</p>
+                        </div>
+
+                        <form id="send-message-form" action="" method="post">
+                            <div class="form-item form-textarea ">
+                                <textarea class="roboto-300" placeholder="Сообщение..." name="message" id="contact_form_message"></textarea>
+                            </div>
+                            <div class="form-item form-type-name width-100-prct">
+                                <input  class="roboto-300" type="text" placeholder="Имя" name="name" id="contact_form_name">
+                            </div>
+                            <div class="form-item form-type-name">
+                                <input type="text" placeholder="Email" name="email" id="contact_form_email">
+                            </div>
+                            <div class="form-item form-type-name">
+                                <input  class="roboto-300" type="text" placeholder="Телефон" name="phone" id="contact_form_phone">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-actions text-center">
+                                <input id="footer_contact_form" type="submit" value="ОТПРАВИТЬ" class="contact-submit awe-btn awe-btn-6 awe-btn-default text-uppercase">
+                            </div>
+                            <div id="contact-content"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END / CONTACT FORM -->
+
+            <!-- NEWS LETTER -->
+            <div class="tb-cell">
+                <div class="news-letter text-center">
+                    <div class="inner wow fadeInUp" data-wow-delay=".6s">
+                        <div class="letter-heading">
+                            <h4 class="sm text-uppercase">РАССЫЛКА</h4>
+                            <p>Подпишитесь на рассылку и получайте информацию о наших акциях и новостях</p>
+                        </div>
+                        <form>
+                            <div class="form-item">
+                                <input type="text" placeholder="Ваш email" class="text-uppercase" name="email" id="email_sign_up">
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Подписаться" class="awe-btn awe-btn-2 awe-btn-default text-uppercase" id="email_sign_up_btn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END / NEWS LETTER -->
+        </div>
+
+    </section>
+<div id="aniimated-thumbnials" class="display-none">
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+    <!-- lightgallery plugins -->
+{#    <script src="js/lg-thumbnail.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lightgallery.min.js' %}"></script>
+
+    <script src="{% static 'lightgallery/js/lg-thumbnail.min.js' %}"></script>
+{#    <script src="js/lg-fullscreen.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'lightgallery/js/picturefill.js' %}"></script>
+
+<script>
+
+    $('#footer_contact_form').on('click', function (e) {
+        e.preventDefault();
+        var data = new FormData();
+        data.append('name', $('#contact_form_name').val());
+        data.append('phone', $('#contact_form_phone').val());
+        data.append('email', $('#contact_form_email').val());
+        data.append('message', $('#contact_form_message').val());
+            $.ajax({
+                url: '{% url 'place_client_request' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    swal({
+                        title: 'Информация отправлена',
+                        text: 'Спасибо за проявленный к нам интерес! В ближайшее время с Вами свяжется наш менеджер.',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true,
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            $('#name').val('');
+                            $('#phone').val('');
+                            $('#message').val('');
+                        }
+
+                    });
+
+                }
+            });
+
+    })
+
+    $('.gallery').on('click', function () {
+        var id = $(this).data('itemId');
+        var data = new FormData();
+        data.append('item_id', id);
+            $.ajax({
+                url: '{% url 'gallery_portfolio' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var response = data_json['response'];
+                    console.log(response);
+{#                    lg.addEventListener('lgOnBeforeOpen', function(e){#}
+                    $('#aniimated-thumbnials').html('');
+                      for (var img in response){
+                          $('#aniimated-thumbnials').append('<a href="static/images/portfolio/watermark/' + response[img] + '"><img id="slide_' + img + '"  src="static/images/portfolio/watermark/' + response[img] + '" /></a>');
+                      }
+{#                    }, false);#}
+{#                    $('#aniimated-thumbnials'))#}
+                        var lg = document.getElementById('aniimated-thumbnials');
+                        lightGallery(lg);
+{#                        lightGallery(document.getElementById('aniimated-thumbnials'),{#}
+{#                            thumbnail:true#}
+{##}
+{#                        });#}
+                        $('#slide_0').click();
+{#                    swal({#}
+{#                        title: 'Информация отправлена',#}
+{#                        text: 'Спасибо за проявленный к нам интерес! В ближайшее время с Вами свяжется наш менеджер.',#}
+{#                        type: 'success',#}
+{#                        confirmButtonColor: '#3085d6',#}
+{#                        confirmButtonText: 'Ок',#}
+{#                        closeOnConfirm: true,#}
+{#                    },#}
+{#                    function (isConfirm) {#}
+{#                        if (isConfirm){#}
+{#                            $('#name').val('');#}
+{#                            $('#phone').val('');#}
+{#                            $('#message').val('');#}
+{#                        }#}
+{##}
+{#                    });#}
+
+                }
+            });
+
+    })
+
+{#      $('.slider1').bxSlider({#}
+{#        slideWidth: 200,#}
+{#        minSlides: 2,#}
+{#        maxSlides: 6,#}
+{#        slideMargin: 10,#}
+{#        controls: true,#}
+{#        prevText: '<i class="mdi mdi-chevron-left hide-480"></i>',#}
+{#        nextText: '<i class="mdi mdi-chevron-right hide-480"></i>',#}
+{##}
+{#  });#}
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    }
+
+    if (isMobile.any()) {
+    } else {
+        new WOW().init();
+    }
+</script>
+{% endblock %}

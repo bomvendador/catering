@@ -1,0 +1,438 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <link href="{% static 'dashboard/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/dropzone/dropzone.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/multi-select/css/multi-select.css' %}" rel="stylesheet" />
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+{#    <script src="{% static 'js/tinymce.js' %}"></script>#}
+    <script>
+{#        tinymce.init({#}
+{#            selector: '#mytextarea'#}
+{#        });#}
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        {% if not item %}Добавление в портфолио{% else %}Редактирование портфолио: {{ item.name }} ID: {{ item.id }}{% endif %}
+                        <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="tab-content padding-top-30">
+                        <form action="" method="post" id="meal_form">{% csrf_token %}
+    {#                            <h2 class="card-inside-title">Клиент</h2>#}
+
+{#                            <div class="body">#}
+{#								<div class="row clearfix">#}
+{#									<div class="col-sm-6">#}
+{#										<select class="form-control show-tick" id="meal_type" name="meal_type">#}
+{#											<option value="">-- Вид блюда --</option>#}
+{#                                            {% for meal_type in meal_types %}#}
+{#											<option value="{{ meal_type.name }}" {% if meal_type == meal.meal_type %} selected {% endif %}>{{ meal_type.name }}</option>#}
+{#                                            {% endfor %}#}
+{#										</select>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+
+
+                                <div class="body padding-left-0" style="margin-bottom: 5px">
+                                    <div class="row clearfix">
+
+                                        <div class="col-md-4 col-xs-12">
+                                            <h3 class="card-inside-title mrg-bottom-33">Дата</h3>
+
+                                            <div class="form-line">
+
+                                                <input type='text' class="padding-5" data-position="right top" id="date" value="{{ item.date|date:"d.m.Y" }}"/>
+                                            </div>
+            {#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                                        </div>
+
+
+                                        <div class="col-md-4 col-xs-12">
+                                            <h2 class="card-inside-title">Слайдер</h2>
+
+                                            <select class="form-control show-tick" id="slider" name="slider">
+                                                <option value="choose" selected>-- Выберите слайдер --</option>
+                                                {% for slider in sliders %}
+{#                                                <option value="{{ slider }}">{{ slider }}</option>#}
+                                                <option value="{{ slider }}" {% if slider == item.slider %} selected {% endif %}>{{ slider }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 col-xs-12">
+                                            <div class="input-group">
+                                                <h2 class="card-inside-title">Отображать на главной странице</h2>
+                                                <input type="checkbox" id="index_show" {% if item.index %}checked="checked"{% endif %} name="index_show"/>
+                                                <label for="index_show"></label>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row clearfix padding-15">
+                                    <h2 class="card-inside-title">Основное изображение</h2>
+
+                                        <div class="col-md-3">
+
+                                                <input type="file" id="main_foto" name="main_foto" class="opacity-0"/>
+                                        </div>
+                                </div>
+                                {% if item %}
+                                <div>
+                                    <img class="max-height-100" src="{% static 'images/portfolio/' %}{{ item.main_image }}">
+                                    <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ main_image.id }}"></i>
+
+                                </div>
+                                {% endif %}
+                                <div class="row clearfix padding-15">
+                                    <h2 class="card-inside-title">Изображения для галереи (340х340)</h2>
+                                    <div id="drop_zone_img_files" class="dropzone dz-clickable border-2-dotted-grey col-xs-12">
+                                        <div class="dz-message">
+                                            <div class="drag-icon-cph">
+                                                <i class="material-icons">touch_app</i>
+                                            </div>
+                                            <h3 class="font-family-roboto font-weight-100">Загрузите файл(ы)</h3>
+                                            <em>Перетащите файлы в эту область или нажмите для <strong>загрузки</strong></em>
+                                        </div>
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="margin-bottom-25">
+                                    {% for image in images %}
+                                    <img class="max-height-100 margin-bottom-10" src="{% static 'images/portfolio/watermark/' %}{{ image.name_watermark }}">
+                                    <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ image.id }}"></i>
+                                    {% endfor %}
+                                </div>
+
+                            <div class="row clearfix">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Основное название</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Основное название" id="main_name" name="main_name" value="{{ item.name }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <h2 class="card-inside-title">Описание</h2>
+{#                                    <form method="post">#}
+                                        <textarea id="mytextarea" name="editor">{% if item %}{{ item.description|safe }}{% endif %}</textarea>
+{#                                    </form>#}
+
+                                </div>
+                            </div>
+<p>&nbsp;</p>
+{#                            <div class="row clearfix">#}
+{#                                <div class="col-sm-12 col-xs-12" id="btn_save_info">#}
+                                    <button type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0 z-index-100" id="save"><i class="mdi mdi-content-save"></i></button>
+
+{#                                </div>#}
+
+{#                            </div>#}
+{#                                </div>#}
+{#                            <input name="new_manager" value="yes" class="none"/>#}
+                            <input name="manager_id" value="{{ manager.id }}" class="none"/>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/dropzone/dropzone_ru.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+{#    <script src="{% static 'js/dashboard/pages/forms/advanced-form-elements.js' %}"></script>#}
+    <script src="{% static 'js/dashboard/demo.js' %}"></script>
+    <script src="{% static 'ckeditor/adapters/jquery.js' %}"></script>
+    <script>
+
+{#    CKEDITOR.replace( 'editor' );#}
+{#    var editor =#}
+
+        {% if place %}
+{#            CKEDITOR.instances[editor].setData('{{ place.description|safe }}');#}
+{#        editor.setData('{{ place.description|safe }}');#}
+
+        {% endif %}
+
+        var editor = CKEDITOR.replace( 'editor' );
+
+$(document).ready(function () {
+
+        var disabledDays = [0, 6];
+
+        $('#date').datepicker({
+{#            minDate: new Date(),#}
+{#            onRenderCell: function (date, cellType) {#}
+{#                if (cellType == 'day') {#}
+{#                    var day = date.getDay(),#}
+{#                        isDisabled = disabledDays.indexOf(day) != -1;#}
+{##}
+{#                    return {#}
+{#                        disabled: isDisabled#}
+{#                    }#}
+{#                }#}
+{#            },#}
+        });
+
+
+
+    $('.del-img-gal').on('click', function () {
+        var cur_item_id = $(this).prop('id');
+        var image_id = cur_item_id.split('_')[1];
+        swal({
+            title: 'Удалить изображение?',
+            text: 'Изображение будет удалено с сервера',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ок',
+            closeOnConfirm: true,
+        },
+        function (isConfirm) {
+            if (isConfirm){
+                var data = new FormData();
+                data.append('image_id', image_id);
+                $.ajax({
+                    url: '{% url 'dashboard:delete_image_from_gallery_portfolio' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        $('#' + cur_item_id).prev().remove();
+                        $('#' + cur_item_id).remove();
+                        swal({
+                            title: 'Информация обновлена',
+                            text: 'Информация на сервере успешно обновлена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        });
+
+                    }
+                });
+            }
+
+        });
+
+
+    });
+
+    function merge_data(data) {
+
+
+        data.append('main_name', $('#main_name').val());
+        data.append('index', $('#index_show').val());
+        data.append('slider', $('#slider').val());
+        data.append('description', editor.getData());
+        data.append('date', $('#date').val());
+
+        {% if item %}
+        data.append('item_id', {{ item.id }});
+        {% endif %}
+
+        if ($('#main_foto').get(0).files.length > 0){
+            data.append('main_foto', $('#main_foto')[0].files[0])
+        }
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        return data;
+
+    }
+
+
+        $('#save').on('click', function (e) {
+            if ($('#drop_zone_img_files .dz-preview').length == 0){
+
+                e.preventDefault();
+        {#        серое описание#}
+                var data = new FormData();
+                var final_data = merge_data(data);
+
+                $.ajax({
+                    url: '{% url 'dashboard:add_portfolio_item' %}',
+                    type: 'POST',
+                    data: final_data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Информация на сервере успешно сохранена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                window.location.href = '/dashboard/portfolio_items_list/';
+                            }
+
+                        });
+
+                    }
+                });
+            }
+        });
+
+    Dropzone.autoDiscover = false;
+        //сохранение изображения для галлереи
+        var drop_zone_img_files = new Dropzone('#drop_zone_img_files', {
+            url: "{% url 'dashboard:add_portfolio_item' %}",
+            autoProcessQueue: false,
+            addRemoveLinks: true,
+            uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 100,
+            init: function() {
+                $('#save').on('click', function () {
+                    drop_zone_img_files.processQueue();
+                })
+            },
+            sendingmultiple: function (file, xhr, formData) {
+                add_csrf();
+                merge_data(formData);
+
+
+
+            },
+            successmultiple: function (file, data) {
+                console.log(data.code);
+{#                window.location.href = '/dashboard/meals_menu/';#}
+
+
+                {#                var files_qnt = 0;#}
+{#                var data_json = $.parseJSON(data);#}
+{#                var files = data_json['files'];#}
+{#                var add_data = data_json['additional_data'];#}
+{#                var date_time = add_data['date_time'];#}
+{#                var name = add_data['name'];#}
+{#                var role = add_data['role'];#}
+{#                for (var key in files){#}
+{#                    if (files.hasOwnProperty(key)){#}
+{#                        files_qnt ++;#}
+{#                        var file_id = key;#}
+{#                        var file_name = files[key];#}
+{#                        $('#fileList').append('<div class="translation_file list-group-item row margin-left-0 margin-right-0 margin-top-10" id="file_' + file_id + '"><div class="col-xs-1 margin-bottom-0" data-toggle="tooltip" title="Удалить файл" data-placement="left"><i class="mdi mdi-close text_label prefix pointer-pure del_file"   style="width: 28px"></i></div><div class="col-xs-11 margin-bottom-0 padding-top-3"><p class="pointer-pure display-inline file_download">' + file_name + '</p></div></div>');#}
+{##}
+{#                    }#}
+{##}
+{#                }#}
+{#                add_timeline_item(date_time, name, role, 'Добавлены файлы заявки: ' + files_qnt +' шт.' );#}
+{#                drop_zone_order_files.removeAllFiles();#}
+            },
+            complete: function (data) {
+                if (data.status != 'error'){
+                    swal({
+                        title: 'Информация сохранена',
+                        text: 'Информация на сервере успешно сохранена',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            window.location.href = '/dashboard/portfolio_items_list/';
+                        }
+                    });
+
+                }else {
+                    swal({
+                        title: 'Ошибка',
+                        text: 'При сохранении произошла ошибка. Попробуйте позже.',
+                        type: 'error'
+                    });
+                drop_zone_img_files.removeAllFiles();
+
+                }
+            },
+            error: function () {
+                swal({
+                    title: 'Ошибка',
+                    text: 'При сохранении произошла ошибка. Попробуйте позже.',
+                    type: 'error'
+                });
+{#                drop_zone_img_files.removeAllFiles();#}
+
+            }
+{#            autoProcessQueue: false#}
+        });
+
+});
+    </script>
+
+
+{% endblock %}

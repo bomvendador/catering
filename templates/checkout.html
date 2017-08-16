@@ -1,0 +1,695 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% now "Y-m-d" as todays_date %}
+
+{% block title%}
+<title>Кейтеринг | Оформление заказа</title>
+{% endblock %}
+
+{% block content %}
+
+    <section id="shop-page" class="shop-page section margin-top-15">
+        <div class="container">
+            <div class="row">
+                <div class="checkout">
+                    <!-- YOUR ORDER -->
+                    <div class="col-md-3">
+                        <div class="your-order">
+                            <h4 class="xmd text-capitalize roboto-300 font-size-20 head-style">Заказ</h4>
+                            <ul class="list-product padding-bottom-10">
+{#                                <li>#}
+{#                                    <div class="product-image">#}
+{#                                        <img src="images/shop/img-2.jpg" alt="">#}
+{#                                    </div>#}
+{#                                    <div class="product-name">#}
+{#                                        <a href="#">Name of the Dish ( L )</a>#}
+{#                                    </div>#}
+{#                                    <div class="qty-wrap">#}
+{#                                        <span class="product-quantity">#}
+{#                                            <span class="quantity">2</span> serves.#}
+{#                                        </span>#}
+{#                                        <span class="amount">$48</span>#}
+{#                                    </div>#}
+{#                                    <div class="product-remove">#}
+{#                                        <a href="#"><i class="icon awe_close"></i></a>#}
+{#                                    </div>#}
+{#                                </li>#}
+
+                            </ul>
+                            <ul class="list-price">
+                                <li class="total">
+                                    <span class="font-size-16 font-weight-600">Итого</span>
+                                    <span id="total_amount" class="amount pull-right">$120</span>
+                                </li>
+                                <li class="coupon">
+                                    <span class="font-size-16 font-weight-600">Скидка</span>
+                                    <span class="amount pull-right">-0.00</span>
+                                </li>
+                                <li class="shipping">
+                                    <span class="font-size-16 font-weight-600">Доставка</span>
+                                    <span class="amount pull-right">0.00</span>
+
+                                </li>
+                            </ul>
+                            <div class="payment">
+                                <span class="font-size-16 font-weight-600">К оплате</span>
+                                <span id="amount_to_pay" class="amount pull-right">$100</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / YOUR ORDER -->
+
+
+                    <!-- CHECKOUT CONTENT -->
+                    <form id="order_form" method="POST">{% csrf_token %}
+                        <div class="col-md-9">
+                            <div class="checkout-content">
+
+                                <h4 class="xmd roboto-300 font-size-20 head-style">Контактная информация</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="billing_first_name">
+                                            <span class="roboto-500">Имя</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input type="text" id="billing_first_name" name="billing_first_name">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="billing_last_name">
+                                            <span class="roboto-500">Фамилия</span>
+                                        </label>
+                                        <input type="text" id="billing_last_name" name="billing_last_name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="billing_company">
+                                            <span class="roboto-500">Компания</span>
+                                        </label>
+                                        <input type="text" id="billing_company" name="billing_company">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="billing_email">
+                                            <span class="roboto-500">Email</span>
+                                        </label>
+                                        <input type="text" id="billing_email" name="billing_email">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="billing_phone">
+                                             <span class="roboto-500">Телефон</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input type="text" id="billing_phone" name="billing_phone">
+                                    </div>
+                                </div>
+
+                                <h4 class="xmd text-capitalize roboto-300 font-size-20 head-style">Доставка</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>
+                                            <span class="roboto-500">Город</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input type="text" id="billing_city" value="Москва" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="billing_address" class="">
+                                            <span class="roboto-500">Улица</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input type="text" id="billing_address" name="billing_address">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="billing_house" class="">
+                                            <span class="roboto-500">Дом/Корпус/Строение</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input class="roboto-600" type="text" id="billing_house" name="billing_house">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="billing_flat" class="">
+                                            <span class="roboto-500">Квартира/офис</span> <abbr class="required">*</abbr>
+                                        </label>
+                                        <input class="roboto-600" type="text" id="billing_flat" name="billing_flat">
+                                    </div>
+
+                                </div>
+
+                                <h4 class="xmd roboto-300 font-size-20 head-style">Оплата</h4>
+                                <div class="row padding-left-15 padding-right-15 margin-bottom-10">
+                                    <div class="options row clearfix border-bottom-0">
+                                        <div class="col-sm-10 col-xs-10">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-1 col-xs-1 hidden-xs">
+                                                    <i class="mdi mdi-wallet font-size-20 color-666"></i>
+                                                </div>
+                                                <div class="col-sm-11 col-xs-12">
+                                                    <p class="margin-bottom-0">Наличными курьеру</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">
+                                            <input name="group4" type="radio" id="radio" class="radio-col-orange radio_payment" checked/>
+
+                                        </div>
+                                    </div>
+                                    <div class="options row clearfix">
+                                        <div class="col-sm-10 col-xs-10">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-1 hidden-xs">
+                                                    <i class="mdi mdi-credit-card font-size-20 color-666"></i>
+                                                </div>
+                                                <div class="col-sm-11 col-xs-12">
+                                                    <p class="margin-bottom-0 disabled-label">Банковской картой <span class="color-black">СКОРО</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">
+                                            <input name="group4" type="radio" id="radio" class="radio-col-orange radio_payment" disabled/>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4 class="xmd roboto-300 font-size-20 head-style">Дополнительная информация</h4>
+                                <div class="row padding-left-15 padding-right-15 margin-bottom-10">
+
+                                    <textarea class="col-xs-12" name="additional_info"></textarea>
+                                </div>
+
+                                <div id="submit_order" >
+                                    <p value="подтвердить &amp; отправить" class="margin-bottom-10 padding-8 roboto-300 font-size-14 awe-btn-custom awe-btn-3-custom awe-btn-default text-uppercase col-xs-12 col-lg-5">подтвердить &amp; отправить</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END / CHECKOUT CONTENT -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+
+
+
+
+
+
+
+{#получение списка улиц#}
+    $('#billing_address').keyup(function () {
+
+{#        $.getJSON('http://kladr-api.ru/api.php?query=Угрешск&token=58f11a9e0a69de942f8b456e&cityId=4500000000000&contentType=street&limit=3', function (data) {#}
+{#            console.log(data)#}
+{#        });#}
+        var searchAddress = $('#billing_address').val();
+        console.log('addr = ' + searchAddress);
+
+        if (searchAddress.length >= 3){
+{#        var myExp = new RegExp(searchAddress, 'i');#}
+
+            $.ajax({
+                url: "http://kladr-api.ru/api.php?query=" + searchAddress + "&token=58f11a9e0a69de942f8b456e&cityId=7700000000000&contentType=street",
+                type: 'POST',
+    {#            data: data,#}
+                processData: false,
+                contentType: false,
+                error: function(data){
+                        swal({
+                            title: 'Ошибка',
+                            text: 'Ошибка сервера',
+                            type: 'error',
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: false
+                        });
+                },
+                success:function (data) {
+                    console.log(data);
+                    var searchAddress = $('#billing_address');
+
+                    var offset = searchAddress.offset();
+
+                    var top = offset.top;
+                    var left = offset.left;
+{#                    console.log(bottom + ' - ' + left);#}
+                    $('#search_result').remove();
+
+                    $('body').append('<div id="search_result" class="search_box"></div>');
+{#                    console.log(search_position);#}
+                    var search_result_val = '';
+                    var id = '';
+                    $.each(data, function (key, val) {
+                        if (key == 'result'){
+                            $('#search_result').html('');
+
+                            $.each(val, function (k, v) {
+                                search_result_val = v["name"] + ', ' + v["typeShort"];
+                                id = v["id"];
+                                $('#search_result').append('<p class="search_result_p search_result_p pointer-pure" id="' + id + '">' + search_result_val + '</p>').css({'position': 'absolute', 'left': left, 'top': top + searchAddress.outerHeight()});
+                                $('#search_result').slideDown('fast');
+
+
+                            });
+
+                        }
+
+                    });
+                }
+            });
+
+        }
+
+    });
+
+{#получение списка домов#}
+    $('#billing_house').keyup(function () {
+
+{#        $.getJSON('http://kladr-api.ru/api.php?query=Угрешск&token=58f11a9e0a69de942f8b456e&cityId=4500000000000&contentType=street&limit=3', function (data) {#}
+{#            console.log(data)#}
+{#        });#}
+        var address_id = $('#billing_address').attr('data-city-id');
+        var searchHouse = $('#billing_house').val();
+
+
+
+            $.ajax({
+                url: "http://kladr-api.ru/api.php?query=" + searchHouse + "&token=58f11a9e0a69de942f8b456e&streetId=" + address_id + "&contentType=building",
+                type: 'POST',
+    {#            data: data,#}
+                processData: false,
+                contentType: false,
+                error: function(data){
+                        swal({
+                            title: 'Ошибка',
+                            text: 'Ошибка сервера',
+                            type: 'error',
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: false
+                        });
+                },
+                success:function (data) {
+                    console.log(data);
+                    var searchHouse = $('#billing_house');
+
+                    var offset = searchHouse.offset();
+
+                    var top = offset.top;
+                    var left = offset.left;
+{#                    console.log(bottom + ' - ' + left);#}
+                    $('#search_result_house').remove();
+
+{#                    console.log(search_position);#}
+                    var search_result_val = '';
+                    var id = '';
+                    $.each(data, function (key, val) {
+                        if (key == 'result'){
+                            if (data['result'].length > 0){
+                                $('body').append('<div id="search_result_house" class="search_box"></div>');
+                                $('#search_result_house').html('');
+
+                                $.each(val, function (k, v) {
+                                    search_result_val = v["name"];
+                                    id = v["id"];
+                                    $('#search_result_house').append('<p class="search_result_p pointer-pure">' + search_result_val + '</p>').css({'position': 'absolute', 'left': left, 'top': top + searchHouse.outerHeight()});
+                                    $('#search_result_house').slideDown('fast');
+
+
+{#                                    $('#billing_house').focusout(function () {#}
+{#                                        $('#search_result_house').hide();#}
+{#                                    });#}
+
+    {#                                if ($("#search_result p:contains('" + search_result_val + "')").length == 0){#}
+    {#                                    $('#search_result').append('<p class="search_result_p search_result_p pointer-pure">' + search_result_val + '</p>').css({'position': 'absolute', 'left': left, 'top': top + searchAddress.outerHeight()});#}
+    {##}
+    {#                                }#}
+
+                                });
+
+                            }
+
+                        }
+
+                    });
+
+
+                }
+            });
+
+
+    });
+
+
+
+
+{#    заполнение адреса#}
+    $('#billing_address').focusout(function () {
+        if($('#search_result .search_result_p' + ':hover').length){
+            return
+        }
+        $('#search_result').hide();
+    });
+
+    $('body').on('click', '#search_result .search_result_p', function () {
+        $('#billing_address').val($(this).text());
+        $('#billing_address').attr('data-city-id', $(this).attr('id'));
+        $('#search_result').remove();
+    });
+
+{#    заполнение дома#}
+    $('#billing_house').focusout(function () {
+        if($('#search_result_house .search_result_p' + ':hover').length){
+            return
+        }
+        $('#search_result_house').hide();
+    });
+
+    $('body').on('click', '#search_result_house .search_result_p', function () {
+        $('#billing_house').val($(this).text());
+        $('#billing_house').attr('data-street-id', $(this).attr('id'));
+        $('#search_result_house').remove();
+        console.log('house clicked')
+    });
+
+{#    отправка заказа#}
+    $('#submit_order').on('click', function () {
+        console.log('pppp')
+        var cart_id = '';
+
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+        }else {
+            cart_id = 'no_cart';
+        }
+
+        var data = new FormData($('#order_form').get(0));
+        data.append('cart_id', cart_id);
+            $.ajax({
+                url: "{% url 'save_order' %}",
+                type: 'POST',
+
+                data: data,
+
+
+                processData: false,
+                contentType: false,
+                error: function(data){
+                        swal({
+                            title: 'Ошибка',
+                            text: 'Ошибка сервера',
+                            type: 'error',
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: false
+                        });
+                },
+                success:function (data) {
+    {#                console.log(''data);#}
+{#                    if (data == 'error'){#}
+
+                        swal({
+                            title: 'Спасибо',
+                            text: 'Ваш заказ принят. Номер заказа:' + data + '. В ближайшее время с Вами свяжется наш менджер.',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+{#                            cancelButtonText: 'Нет',#}
+                            closeOnConfirm: false,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                $.removeCookie('cart_id', {path: '/'});
+                                window.location.href = '/';
+                            }
+
+                        });
+
+{#                    }else {#}
+{#                        window.location.href = '/ru/dashbrd/' + data;#}
+{#                    }#}
+                }
+            });
+
+    });
+
+{#    проверка первоначального состояния корзины#}
+    function check_cart() {
+        if ($.cookie('cart_id')){
+            var cart_id = $.cookie('cart_id');
+            add_csrf();
+            $.ajax({
+                url: '{% url 'check_cart' %}',
+                type: 'POST',
+                data: JSON.stringify({
+                            'cart_id': cart_id
+                        }),
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'error'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var cart_meals = data_json['cart_meal'];
+
+                    var menu_date = data_json['menu_date'];
+                    var allowed_menu = data_json['allowed_menu'];
+                    var date_redirected = data_json['date_redirected'];
+                    var cutlery = data_json['cutlery'];
+
+                    $('.minicart-wrap').css('pointer-events', 'none');
+
+                    if (allowed_menu == 0){
+                        $.removeCookie('cart_id', {path: '/'});
+                    }
+{#                    var cart_meals = response['cart_meals'];#}
+                    if (cart_meals != 0){
+                        if (cart_meals.length > 0) {
+        {#                    $(window).scrollTop(tempScrollTop);#}
+    {#                        var meal_id = response['meal_id'];#}
+    {#                        var total_amount = response['total_amount'];#}
+                            console.log(cart_meals.length);
+                            for (var i=0; i < cart_meals.length; i++){
+                                var meal_price = cart_meals[i]['meal_price'];
+                                var meal_qnt = cart_meals[i]['meal_qnt'];
+                                var meal_sum = cart_meals[i]['meal_sum'];
+                                var meal_img = cart_meals[i]['meal_img'];
+                                var meal_name = cart_meals[i]['meal_name'];
+                                var meal_id = cart_meals[i]['meal_id'];
+                                var meal_img_url = cart_meals[i]['meal_img_url'];
+                                var item_type = cart_meals[i]['item_type'];
+                                var full_meal_name = cart_meals[i]['full_meal_name'];
+
+
+                                $('.list-product').append('<li><div class="product-image width-45"><img src="' + '/static/images/' + meal_img_url + '/' + meal_img + '" alt="' + full_meal_name + '"></div><div class="product-name"><p>' + full_meal_name + '</p></div><div class="qty-wrap"><span class="product-quantity"><span class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span><span class="amount float-right font-size-15">' + meal_price*meal_qnt + '.00</span></div></li>');
+
+    {#                            $.cookie('cart_id', cart_id, {path: '/'});#}
+    {#                            if ($('#cart_meal_id_' + meal_id).length == 0){#}
+{#                                $('.minicart-list').append('<li id="minicart_meal_id_' + meal_id + '"><div class="product-thumb"><img class="width-40" src="' + '/static/images/meals/' + meal_img + '" alt=""></div><div class="product-name">' + meal_name + '</div><div class="qty-wrap"><span class="product-quantity"><span id="cart_meal_qnt_' + meal_id + '" class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span></div><div class="product-remove"><i class="icon awe_close minicart_del_meal font-size-10 pointer-pure"></i></div></li>');#}
+    {#                            }#}
+    {#                            else {#}
+    {#                                $('#cart_meal_qnt_' + meal_id).text(meal_qnt);#}
+    {#                            }#}
+
+                            }
+                                $('.list-product').append('<li><div class="product-image width-100-prct"><span>Приборы </span><span class="amount float-right font-size-15 color-666 ">' + cutlery + ' шт.</span></div></li>');
+
+                                var total_amount = data_json['cart_amount'];
+                                var cart_meals_qnt = data_json['cart_meals_qnt'];
+
+
+
+                                $('#total_amount').text(total_amount);
+                                $('#cart_label_amount').text(total_amount);
+                                $('#amount_to_pay').text(total_amount);
+                                $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+
+                        }
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                    }
+                    if ($('#minicart-ul li').length > 3){
+                        $('#minicart-ul').addClass('height-210');
+                    }
+
+                }
+            });
+
+
+        }else {
+            cart_id = 'no_cart';
+        }
+
+    }
+
+    check_cart();
+
+
+
+    var qnt = 0;
+    var price = 0;
+    var subtotal_before = 0;
+    var subtotal_after = 0;
+    var subtotal_diff = 0;
+    var min_sum = parseInt({{ min_sum }});
+
+
+    $('#cart_tbody').on('click','.minus', function () {
+        if ($(this).next().val() > 1){
+            subtotal_before = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            qnt = parseInt($(this).next().val() - 1);
+            price = parseInt($(this).parent().parent().parent().find('.product-name .product-info span').text());
+            $(this).next().val(qnt);
+            $(this).parent().parent().parent().find('.product-subtotal .amount').text(qnt*price);
+            subtotal_after = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            subtotal_diff = subtotal_after - subtotal_before;
+
+            $('#total_amount').text(parseFloat($('#total_amount').text()) + subtotal_diff + '.00');
+
+            $('#cart_label_amount').text($('#total_amount').text());
+            $('#cart_label_qnt').text(parseInt($('#cart_label_qnt').text() - 1));
+
+            if (parseInt($('#total_amount').text()) < min_sum){
+                show_min_sum_warning();
+            }
+        }
+    });
+
+    $('#cart_tbody').on('click','.plus', function () {
+
+            subtotal_before = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            qnt = parseInt($(this).prev().val()) + 1;
+            price = parseInt($(this).parent().parent().parent().find('.product-name .product-info span').text());
+            $(this).prev().val(qnt);
+            $(this).parent().parent().parent().find('.product-subtotal .amount').text(qnt*price);
+            subtotal_after = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            subtotal_diff = subtotal_after - subtotal_before;
+
+            $('#total_amount').text(parseFloat($('#total_amount').text()) + subtotal_diff + '.00');
+
+            $('#cart_label_amount').text($('#total_amount').text());
+            $('#cart_label_qnt').text(parseInt($('#cart_label_qnt').text()) + 1);
+
+            if (parseInt($('#total_amount').text()) > min_sum){
+                hide_min_sum_warning();
+            }
+
+
+    });
+
+
+{#удаление товара из корзины#}
+
+    $('#cart_tbody').on('click', '.del-meal', function () {
+        var meal_id = $(this).parent().parent().attr('id');
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+            console.log(cart_id);
+        }else {
+            cart_id = 'no_cart';
+        }
+        add_csrf();
+        $.ajax({
+            url: '{% url 'del_from_minicart' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': meal_id,
+                        'cart_id': cart_id
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                var cart_meals_qnt = response['cart_meals_qnt'];
+                var min_sum = response['min_sum'];
+
+                if (!response['no_data']) {
+{#                    $(window).scrollTop(tempScrollTop);#}
+                    var meal_id = response['meal_id'];
+                    var total_amount = response['total_amount'];
+                    $('#cart_meal_id_' + meal_id).slideUp(1000, function () {
+                        $('#cart_meal_id_' + meal_id).remove();
+                    });
+                    $('#total_amount').text(total_amount);
+                    $('#cart_label_amount').text(total_amount).animateCss('bounceIn');
+                    $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                    console.log('minicart-ul li = ' + $('#minicart-ul li').length);
+                    if (min_sum <= total_amount){
+                        $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                        $('.warn-amount').hide();
+
+
+                    }else {
+
+
+                        $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                        show_min_sum_warning();
+
+                    }
+
+                }
+            }
+        });
+
+    });
+
+
+    $('.submit-div').on('click', function () {
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+            console.log(cart_id);
+        }else {
+            cart_id = 'no_cart';
+        }
+{#        add_csrf();#}
+
+        var data = new FormData($('#meal_form').get(0));
+
+        $('.qty').each(function () {
+            data.append($(this).attr('name'), $(this).val());
+        });
+
+        for (var i=0; data.length; i++){
+            console.log('data = ' + data.elements[i])
+        }
+
+        data.append('cart_id', cart_id);
+        $.ajax({
+            url: '{% url 'to_checkout' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                window.location.hr
+            }
+        });
+
+    })
+
+
+
+</script>
+
+{% endblock %}

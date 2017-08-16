@@ -1,0 +1,361 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <link href="{% static 'dashboard/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/dropzone/dropzone.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/multi-select/css/multi-select.css' %}" rel="stylesheet" />
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+
+    <link href="{% static 'css/croppie.css' %}" rel="stylesheet" />
+
+    {#    <script src="{% static 'js/tinymce.js' %}"></script>#}
+    <script>
+{#        tinymce.init({#}
+{#            selector: '#mytextarea'#}
+{#        });#}
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        {% if not item %}Добавление персонала{% else %}Редактирование персонала: {{ staff.name }} ID: {{ staff.id }}{% endif %}
+                        <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="tab-content padding-top-30">
+                        <form action="" method="post" id="staff_form">{% csrf_token %}
+    {#                            <h2 class="card-inside-title">Клиент</h2>#}
+
+{#                            <div class="body">#}
+{#								<div class="row clearfix">#}
+{#									<div class="col-sm-6">#}
+{#										<select class="form-control show-tick" id="meal_type" name="meal_type">#}
+{#											<option value="">-- Вид блюда --</option>#}
+{#                                            {% for meal_type in meal_types %}#}
+{#											<option value="{{ meal_type.name }}" {% if meal_type == meal.meal_type %} selected {% endif %}>{{ meal_type.name }}</option>#}
+{#                                            {% endfor %}#}
+{#										</select>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+
+
+                                <div class="row clearfix padding-15">
+                                    <h2 class="card-inside-title">Изображение</h2>
+
+                                        <div class="col-md-3 {% if staff.image_name %}display-none{% endif %}" id="image_div">
+                                            <div id="img_crop">
+
+                                            </div>
+                                                <input type="file" id="image" name="image" class="opacity-0"/>
+                                                <input type="hidden" id="crop_image" name="crop_image" class="opacity-0"/>
+                                                <img id="loaded_img" class="max-height-100 display-none" src="#">
+                                                <div id="save_img">save</div>
+
+                                        </div>
+                                </div>
+                                {% if staff.image_name %}
+                                <div class="margin-bottom-15">
+                                    <img class="max-height-100" src="{% static 'images/staff/' %}{{ staff.image_name }}">
+                                    <i class="mdi mdi-close del-img-gal pointer-pure" id="staff_{{ staff.id }}"></i>
+
+                                </div>
+                                {% endif %}
+                            <div class="row clearfix">
+
+                                <div class="col-md-3 col-xs-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Имя</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Имя" id="name" name="name" value="{{ staff.name }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Должность</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Должность" id="position" name="position" value="{{ staff.position }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Телефон</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Телефон" id="phone" name="phone" value="{{ staff.phone }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Email</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="{{ staff.email }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-md-3 col-xs-12">
+                                    <div class="input-group">
+                                        <h2 class="card-inside-title">Отображать на главной странице</h2>
+                                        <input type="checkbox" id="index" {% if staff.index %}checked="checked"{% endif %} name="index"/>
+                                        <label for="index"></label>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-xs-12">
+                                    <h2 class="card-inside-title">Дополнительная информация</h2>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <textarea id="add_info" rows="5" class="form-control no-resize auto-growth" placeholder="Текст" name="add_info">{{ staff.add_info }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<p>&nbsp;</p>
+{#                            <div class="row clearfix">#}
+{#                                <div class="col-sm-12 col-xs-12" id="btn_save_info">#}
+                                    <button type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0 z-index-100" id="save"><i class="mdi mdi-content-save"></i></button>
+
+{#                                </div>#}
+
+{#                            </div>#}
+{#                                </div>#}
+{#                            <input name="new_manager" value="yes" class="none"/>#}
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/dropzone/dropzone_ru.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+{#    <script src="{% static 'js/dashboard/pages/forms/advanced-form-elements.js' %}"></script>#}
+    <script src="{% static 'js/dashboard/demo.js' %}"></script>
+    <script src="{% static 'ckeditor/adapters/jquery.js' %}"></script>
+
+    <script src="{% static 'js/croppie.min.js' %}"></script>
+
+    <script>
+
+{#    CKEDITOR.replace( 'editor' );#}
+{#    var editor =#}
+
+        {% if place %}
+{#            CKEDITOR.instances[editor].setData('{{ place.description|safe }}');#}
+{#        editor.setData('{{ place.description|safe }}');#}
+
+        {% endif %}
+
+$(document).ready(function () {
+
+    var crop = $('#img_crop').croppie({
+        viewport: {
+        width: 230,
+        height: 230,
+
+        },
+        boundary: {
+        width: 300,
+        height: 300
+        }
+    });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#loaded_img').attr('src', e.target.result);
+                crop.croppie('bind', {
+                    url: $('#loaded_img').attr('src')
+
+                })
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+
+    $("#image").change(function(){
+        readURL(this);
+    });
+
+    $('#save_img').on('click', function () {
+    })
+
+
+    $('.del-img-gal').on('click', function () {
+        var staff_id = $(this).prop('id');
+        swal({
+            title: 'Удалить изображение?',
+            text: 'Изображение будет удалено с сервера',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ок',
+            closeOnConfirm: true,
+        },
+        function (isConfirm) {
+            if (isConfirm){
+                var data = new FormData();
+                {% if staff %}
+                data.append('staff_id', {{ staff.id }});
+                {% endif %}
+                $.ajax({
+                    url: '{% url 'dashboard:delete_image_from_staff' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        $('#' + staff_id).prev().remove();
+                        $('#' + staff_id).remove();
+                        $('#image_div').removeClass('display-none');
+
+                        swal({
+                            title: 'Информация обновлена',
+                            text: 'Информация на сервере успешно обновлена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        });
+
+                    }
+                });
+            }
+
+        });
+
+
+    });
+
+        $('#save').on('click', function (e) {
+
+                e.preventDefault();
+                crop.croppie('result', 'canvas').then(function (resp) {
+                    $('#loaded_img').removeClass('display-none').attr('src', resp);
+                    $('#crop_image').val(resp);
+                });
+
+        {#        серое описание#}
+                var data = new FormData($('#staff_form').get(0));
+                data.append('image_uri', $('#crop_image').val());
+
+
+                {% if staff %}
+                data.append('staff_id', {{ staff.id }});
+                {% endif %}
+                $.ajax({
+                    url: '{% url 'dashboard:add_staff' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Информация на сервере успешно сохранена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                window.location.href = '/dashboard/staff_list/';
+                            }
+
+                        });
+
+                    }
+                });
+        });
+
+
+});
+    </script>
+
+
+{% endblock %}

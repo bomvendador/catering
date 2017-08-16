@@ -1,0 +1,222 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+{% load mathfilters %}
+
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <link href="{% static 'dashboard/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/dropzone/dropzone.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/multi-select/css/multi-select.css' %}" rel="stylesheet" />
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="{% static 'js/jspdf.js' %}"></script>
+    <script src="{% static 'js/pdfmaker.js' %}"></script>
+    <script src="{% static 'js/vfs_fonts.js' %}"></script>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-cyan">
+                    <h2>
+                        {% if quote %}
+                        Добавление цитаты
+                        {% else %}
+                        Цитата № {{ quote.id }}
+                        <small>Дата отображения: {{ quote.date|date:"d.m.Y" }}</small>
+                        {% endif %}
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:order_to_pdf()" class=" waves-effect waves-block" target="_blank">Печать</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="body" style="margin-bottom: 10px">
+                        <h3 class="card-inside-title mrg-bottom-33">Выберите дату</h3>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+
+                                <div class="form-line">
+
+                                    <input type='text' class="padding-5" data-position="right top" id="quote_date" value="{{ date|date:"d.m.Y" }}"/>
+                                </div>
+{#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content padding-top-30">
+                        <form action="" method="post" id="meal_form">{% csrf_token %}
+    {#                            <h2 class="card-inside-title">Клиент</h2>#}
+
+{#                            <div class="body">#}
+{#								<div class="row clearfix">#}
+{#									<div class="col-sm-6">#}
+{#										<select class="form-control show-tick" id="meal_type" name="meal_type">#}
+{#											<option value="">-- Вид блюда --</option>#}
+{#                                            {% for meal_type in meal_types %}#}
+{#											<option value="{{ meal_type.name }}">{{ meal_type.name }}</option>#}
+{#                                            {% endfor %}#}
+{#										</select>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#                            <h2 class="card-inside-title font-size-20">Статус</h2>#}
+{##}
+{#                            <div class="row clearfix">#}
+{##}
+{#                                <div class="col-md-4">#}
+{##}
+{#                                    <select class="form-control show-tick" id="status-select" name="meal_type">#}
+{#                                        {% for status in order_status %}#}
+{#                                        <option value="{{ status.name }}" {% if status.name == order.status.name %} selected {% endif %}>{{ status.name }}</option>#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
+{#                                </div>#}
+{#                            </div>#}
+
+
+
+                            <div class="row clearfix">
+
+                                <div class="col-md-6">
+                                    <h2 class="card-inside-title">Автор</h2>
+
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Автор" id="author" name="author" value="{{ quote.author }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix margin-right-0 margin-left-0">
+                                 <h2 class="card-inside-title font-size-20">Текст</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <textarea id="text" rows="5" class="form-control no-resize auto-growth" placeholder="Текст">{{ quote.text }}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+    <button id="add_quote_btn" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15">
+        <i class="mdi mdi-plus top-3"></i>
+    </button>
+
+
+{% endblock %}
+
+{#                            <div class="row clearfix">#}
+{#                                <div class="col-sm-12 col-xs-12" id="btn_save_info">#}
+{#                                    <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="meal_save">СОХРАНИТЬ</button>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                                </div>#}
+{#                            <input name="new_manager" value="yes" class="none"/>#}
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/dropzone/dropzone_ru.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+{#    <script src="{% static 'js/dashboard/pages/forms/advanced-form-elements.js' %}"></script>#}
+    <script src="{% static 'js/dashboard/demo.js' %}"></script>
+    <script>
+
+
+$(document).ready(function () {
+{#        var disabledDays = [0, 6];#}
+
+        $('#quote_date').datepicker({
+{#            minDate: new Date(),#}
+{#            onRenderCell: function (date, cellType) {#}
+{#                if (cellType == 'day') {#}
+{#                    var day = date.getDay(),#}
+{#                        isDisabled = disabledDays.indexOf(day) != -1;#}
+{##}
+{#                    return {#}
+{#                        disabled: isDisabled#}
+{#                    }#}
+{#                }#}
+{#            },#}
+        });
+
+
+    $('#add_quote_btn').on('click', function () {
+        data = new FormData();
+        {% if quote %}
+        data.append('quote_id', {{ quote.id }});
+        {% endif %}
+        data.append('author', $('#author').val());
+        data.append('text', $('#text').val());
+        data.append('quote_date', $('#quote_date').val());
+{#        var place_id = $(this).parent().parent().attr('id');#}
+
+                $.ajax({
+                    url: '{% url 'dashboard:add_quote' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Удаление прошло успешно.',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                window.location.href = '/dashboard/quotes_list/';
+                            }
+
+                        });
+
+                    }
+                });
+
+
+    });
+});
+
+    </script>
+
+
+{% endblock %}

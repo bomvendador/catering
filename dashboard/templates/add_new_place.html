@@ -1,0 +1,1094 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <link href="{% static 'dashboard/plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/dropzone/dropzone.css' %}" rel="stylesheet" />
+    <link href="{% static 'dashboard/plugins/multi-select/css/multi-select.css' %}" rel="stylesheet" />
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+{#    <script src="{% static 'js/tinymce.js' %}"></script>#}
+    <script>
+{#        tinymce.init({#}
+{#            selector: '#mytextarea'#}
+{#        });#}
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        {% if not edit %}Добавление места проведения{% else %}Редактирование места проведения: {{ place.name }} ID: {{ place.id }}{% endif %}
+                        <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="tab-content padding-top-30">
+                        <form action="" method="post" id="meal_form">{% csrf_token %}
+    {#                            <h2 class="card-inside-title">Клиент</h2>#}
+
+{#                            <div class="body">#}
+{#								<div class="row clearfix">#}
+{#									<div class="col-sm-6">#}
+{#										<select class="form-control show-tick" id="meal_type" name="meal_type">#}
+{#											<option value="">-- Вид блюда --</option>#}
+{#                                            {% for meal_type in meal_types %}#}
+{#											<option value="{{ meal_type.name }}" {% if meal_type == meal.meal_type %} selected {% endif %}>{{ meal_type.name }}</option>#}
+{#                                            {% endfor %}#}
+{#										</select>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+
+
+
+                                <div class="row clearfix padding-15">
+                                    <h2 class="card-inside-title">Изображения для главной страницы (мин ширина 800 px)</h2>
+
+                                        <div class="col-md-3">
+                                            <div id="foto" class="foto" style="background-image: url('/static/photo/{{ manager.photo.name }}'); ">
+
+                                                <div class="foto" >
+
+{#                                                <div id="upload_foto" class="foto" style="background: rgba(0, 0, 0,0.3); {% if translator.photo.name %}display: none{% endif %}">#}
+                                                    <div>
+                                                        <i class="mdi mdi-cloud-upload font-30 centered pointer-pure" style="color: white" title="Загрузить фото (мин ширина 800 px)" id="upload_icon"></i>
+                                                        <input type="file" id="main_foto" name="main_foto" class="opacity-0"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                {% if place %}
+                                <div>
+                                    <img class="max-height-100" src="{% static 'images/places/' %}{{ place.main_image }}">
+                                    <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ main_image.id }}"></i>
+
+                                </div>
+                                {% endif %}
+                                <div class="row clearfix padding-15">
+                                    <h2 class="card-inside-title">Изображения для галереи (340х340)</h2>
+                                    <div id="drop_zone_img_files" class="dropzone dz-clickable border-2-dotted-grey col-xs-12">
+                                        <div class="dz-message">
+                                            <div class="drag-icon-cph">
+                                                <i class="material-icons">touch_app</i>
+                                            </div>
+                                            <h3 class="font-family-roboto font-weight-100">Загрузите файл(ы)</h3>
+                                            <em>Перетащите файлы в эту область или нажмите для <strong>загрузки</strong></em>
+                                        </div>
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="margin-bottom-25">
+                                    {% for image in images %}
+                                    <img class="max-height-100 margin-bottom-10" src="{% static 'images/places/' %}{{ image.name }}">
+                                    <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ image.id }}"></i>
+                                    {% endfor %}
+                                </div>
+
+                            <div class="row clearfix">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Основное название</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Основное название" id="place_main_name" name="place_main_name" value="{{ place.name }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+{#данные под названием#}
+                            <h2 class="card-inside-title">Данные под описанием (серым цветом)</h2>
+                            <div class="body table-responsive">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Иконка</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="grey_desc_tbody">
+                                    {% for grey_option in grey_options %}
+                                        <tr>
+                                            <td>{{ grey_option.name }}</td>
+                                            <td><i class="mdi {{ grey_option.icon.name }} font-size-26"></i></td>
+                                            <td><i class="mdi mdi-close"></i></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 col-xs-12" id="btn_save_info">
+                                        <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="add_grey_description">Добавить</button>
+                                    </div>
+                                </div>
+
+                            </div>
+{#характеристики#}
+                            <h2 class="card-inside-title">Характеристики</h2>
+                            <div class="body table-responsive">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Значение</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="option_tbody">
+                                    {% for option in options %}
+                                        <tr>
+                                            <td>{{ option.name }}</td>
+                                            <td>{{ option.value }}</td>
+                                            <td><i class="mdi mdi-close"></i></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="add_option">Добавить</button>
+                                    </div>
+                                </div>
+
+                            </div>
+{#инфраструктура#}
+                            <h2 class="card-inside-title">Инфраструктура</h2>
+                            <div class="body table-responsive">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="infrastructure_tbody">
+                                    {% for infrastructure in infrastructures %}
+                                        <tr>
+                                            <td>{{ infrastructure.name }}</td>
+                                            <td><i class="mdi mdi-close"></i></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 col-xs-12">
+                                        <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="add_infrastructure">Добавить</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <h2 class="card-inside-title">Описание</h2>
+{#                                    <form method="post">#}
+                                        <textarea id="mytextarea" name="editor">{% if place %}{{ place.description|safe }}{% endif %}</textarea>
+{#                                    </form>#}
+
+                                </div>
+                            </div>
+                            <div class="row clearfix padding-15">
+                                <h2 class="card-inside-title">Теги</h2>
+                                <div class="body">
+                                    <select id="optgroup" class="ms" multiple="multiple">
+                                        {% for tag in tags %}
+                                            <option value="{{ tag.name }}">{{ tag.name }}</option>
+
+                                        {% endfor %}
+                                        {% for place_tag in place_tags %}
+                                            <option value="{{ place_tag.tag.name }}" selected>100_{{ forloop.counter }}{{ place_tag.tag.name }}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+{#                            <div class="row clearfix">#}
+{#                                <div class="col-sm-12 col-xs-12" id="btn_save_info">#}
+                                    <button type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0" id="save"><i class="mdi mdi-content-save"></i></button>
+
+{#                                </div>#}
+
+{#                            </div>#}
+{#                                </div>#}
+{#                            <input name="new_manager" value="yes" class="none"/>#}
+
+{#контактные лица#}
+                            <h2 class="card-inside-title">Контактные лица</h2>
+                            <div class="body table-responsive">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Имя</th>
+                                            <th>Должность</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contact_persons_tbody">
+                                        {% for contact_person in contact_persons %}
+                                            <tr  id="person_{{ contact_person.id }}">
+                                                <td class="pointer-pure person-details">{{ contact_person.name }}</td>
+                                                <td class="pointer-pure person-details">{{ contact_person.position }}</td>
+                                                <td><i class="mdi mdi-close del-person pointer-pure"></i></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12 col-xs-12">
+                                        {% if place %}
+                                        <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="add_contact_person">Добавить</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <input name="manager_id" value="{{ manager.id }}" class="none"/>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{#                модальное окно список иконок   #}
+
+                <button id="icon_modal" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 display-none" data-toggle="modal" data-target="#add_icon_modal">
+                </button>
+
+                <div class="modal fade  margin-top-100" id="add_icon_modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="defaultModalLabel">Выберите иконку</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Tab panes -->
+                                <div class="tab-content" id="icons_list">
+                                    {% for icon in icons %}
+                                            <i id="{{ icon.id }}" class="mdi {{ icon.name }} font-size-26 icon_item pointer-pure"></i></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_btn">ЗАКРЫТЬ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{#                модальное окно контактные данные   #}
+
+                <div class="modal fade  margin-top-100" id="contact_data" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="defaultModalLabel">Данные контактного лица <span id="contact_person"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Tab panes -->
+                                <div class="row clearfix">
+
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+    {#                                        <span class="input-group-addon">#}
+    {#                                            <i class="mdi mdi-account f_s_20"></i>#}
+    {#                                        </span>#}
+                                            <h2 class="font-size-20 roboto-300">Имя</h2>
+
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="Имя" id="contact_person_name" name="contact_person_name" value="" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+    {#                                        <span class="input-group-addon">#}
+    {#                                            <i class="mdi mdi-account f_s_20"></i>#}
+    {#                                        </span>#}
+                                            <h2 class="font-size-20 roboto-300">Должность</h2>
+
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="Имя" id="contact_person_position" name="contact_person_position" value="" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+    {#                                        <span class="input-group-addon">#}
+    {#                                            <i class="mdi mdi-account f_s_20"></i>#}
+    {#                                        </span>#}
+                                            <h2 class="font-size-20 roboto-300">Телефон</h2>
+
+                                            <ul class="list-group margin-bottom-0 phone-list">
+{#                                                <li class="list-group-item phone"><span><input id="phone_{{ phone.id }}" type="text" placeholder="Телефон" value=""></span><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>#}
+                                            </ul>
+                                        </div>
+                                        <button type="button" class="btn btn-primary waves-effect" id="add_phone_btn">
+                                            <i class="mdi mdi-phone-plus top-0"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+    {#                                        <span class="input-group-addon">#}
+    {#                                            <i class="mdi mdi-account f_s_20"></i>#}
+    {#                                        </span>#}
+                                            <h2 class="font-size-20 roboto-300">Email</h2>
+
+                                            <ul class="list-group margin-bottom-0 email-list">
+{#                                                <li class="list-group-item phone"><span><input id="email_{{ phone.id }}" type="text" placeholder="Email" value=""></span><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>#}
+                                            </ul>
+                                        </div>
+                                        <button type="button" class="btn btn-primary waves-effect" id="add_email_btn">
+                                            <i class="mdi mdi-email-variant top-0"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <div class="row clearfix">
+
+
+                                    <div class="col-xs-12 form-group">
+                                        <h2 class="font-size-20 roboto-300">Дополнительная информация</h2>
+
+                                        <div class="form-line">
+                                            <textarea id="contact_person_add_info" rows="4" class="form-control no-resize" placeholder="Текст..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="body table-responsive">
+                                <h2 class="card-inside-title roboto-300 font-size-20">Платежные реквизиты</h2>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Название</th>
+                                                <th>Значение</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="payment_details_tbody">
+                                        </tbody>
+                                    </table>
+{#                                    <div class="row clearfix">#}
+                                        <div class="col-sm-12 col-xs-12">
+                                            <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect" id="add_payment_details">Добавить</button>
+                                        </div>
+{#                                    </div>#}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect"  id="save_contact_person">СОХРАНИТЬ</button>
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_btn_add_contact_person">ЗАКРЫТЬ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <input class="display-none" id="tr_num" value=""/>
+            </div>
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/dropzone/dropzone_ru.js' %}"></script>
+    <script src="{% static 'dashboard/plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+{#    <script src="{% static 'js/dashboard/pages/forms/advanced-form-elements.js' %}"></script>#}
+    <script src="{% static 'js/dashboard/demo.js' %}"></script>
+    <script src="{% static 'ckeditor/adapters/jquery.js' %}"></script>
+    <script>
+
+{#    CKEDITOR.replace( 'editor' );#}
+{#    var editor =#}
+
+        {% if place %}
+{#            CKEDITOR.instances[editor].setData('{{ place.description|safe }}');#}
+{#        editor.setData('{{ place.description|safe }}');#}
+
+        {% endif %}
+
+        var editor = CKEDITOR.replace( 'editor' );
+
+$(document).ready(function () {
+
+    function clear_contact_details_modal() {
+        $('#contact_person_name').val('');
+        $('#contact_person_position').val('');
+        $('#contact_person_add_info').val('');
+        $('.phone-list').html('');
+        $('.email-list').html('');
+        $('#payment_details_tbody').html('');
+
+    }
+
+    $('#add_contact_person').on('click', function () {
+        clear_contact_details_modal();
+        $('#contact_data').modal('show');
+
+    });
+
+    var person_id = '';
+    $('#save_contact_person').on('click', function () {
+        var data = new FormData();
+        var i = 0;
+        data.append('contact_person_name', $('#contact_person_name').val());
+        data.append('contact_person_position', $('#contact_person_position').val());
+        data.append('contact_person_add_info', $('#contact_person_add_info').val());
+        data.append('place_id', {{ place.id }});
+        if (person_id != ''){
+            data.append('person_id', person_id);
+        }
+
+
+        $('#payment_details_tbody .new_payment_details_tr').each(function () {
+            i++;
+            var payment_name = $(this).find('.payment_details_name').val();
+            var payment_val = $(this).find('.payment_details_val').val();
+            var merge_payment = payment_name + '_' + payment_val;
+            data.append('payment_' + i, merge_payment);
+        });
+
+        i = 0;
+        $('.phone-list .phone_new').each(function () {
+            i++;
+            data.append('phone_new_' + i, $(this).find('input').val());
+        });
+
+        i = 0;
+        $('.phone-list .phone').each(function () {
+            i++;
+            data.append('phone_' + $(this).attr('id'), $(this).find('input').val());
+        });
+
+        i = 0;
+        $('.email-list .email_new').each(function () {
+            i++;
+            data.append('email_new_' + i, $(this).find('input').val());
+        });
+
+        i = 0;
+        $('.email-list .email').each(function () {
+            i++;
+            data.append('email_' + $(this).attr('id'), $(this).find('input').val());
+        });
+
+        $.ajax({
+            url: '{% url 'dashboard:add_contact_person' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'warning'
+                });
+            },
+            success:function (data) {
+                swal({
+                    title: 'Информация сохранена',
+                    text: 'Информация на сервере успешно сохранена',
+                    type: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Ок',
+                    closeOnConfirm: true,
+                },
+                function (isConfirm) {
+                    if (isConfirm){
+                        if (person_id == ''){
+                            $('#contact_persons_tbody').append('<tr id="person_' + data + '"><td>' + $('#contact_person_name').val() + '</td><td>' + $('#contact_person_position').val() + '</td><td><i class="mdi mdi-close pointer-pure"></i></td></tr>');
+
+                        }
+
+                        $('#close_btn_add_contact_person').click();
+                        $('#contact_person_name').val('');
+                        $('#contact_person_position').val('');
+                        $('#contact_person_add_info').val('');
+                        $('.phone-list').html('');
+                        $('.email-list').html('');
+                        $('#payment_details_tbody').html('');
+                        person_id = '';
+
+                    }
+
+                });
+
+            }
+        });
+
+
+    });
+
+    $('#contact_persons_tbody').on('click', '.person-details', function () {
+        clear_contact_details_modal();
+        var data = new FormData();
+        person_id = $(this).parent().attr('id');
+        data.append('person_id', person_id);
+        $.ajax({
+            url: '{% url 'dashboard:contact_person_details' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'warning'
+                });
+            },
+            success:function (data) {
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                var name = response['name'];
+                var position = response['position'];
+                var add_info = response['add_info'];
+                var phones = response['phones'];
+                var emails = response['emails'];
+                var payment_details = response['payment_details'];
+                console.log(response)
+                $('#contact_person_name').val(name);
+                $('#contact_person_position').val(position);
+                $('#contact_person_add_info').val(add_info);
+                for (var key in phones){
+                    if (phones.hasOwnProperty(key)){
+                        $('.phone-list').append('<li class="list-group-item phone" id="phone_' + key + '"><input type="text" placeholder="Телефон" value="' + phones[key] + '"><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>');
+                    }
+
+                }
+                for (var key in emails){
+                    if (emails.hasOwnProperty(key)){
+                        $('.email-list').append('<li class="list-group-item email" id="email_' + key + '"><input type="text" placeholder="Email" value="' + emails[key] + '"><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>');
+                    }
+
+                }
+                for (var key in payment_details){
+                    if (payment_details.hasOwnProperty(key)){
+                        $('#payment_details_tbody').append('<tr class="new_payment_details_tr"><td><div class="form-line"><input type="text" class="form-control payment_details_name" value="' + key + '"/></div></td><td class=""><div class="form-line"><input type="text" class="form-control payment_details_val" value="' + payment_details[key] + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-payment-details"></i></td></tr>');
+                    }
+
+                }
+                $('#contact_data').modal('show');
+            }
+        });
+
+    })
+
+    $('#add_phone_btn').on('click', function () {
+        $('.phone-list').append('<li class="list-group-item phone_new"><input type="text" placeholder="Телефон" value=""><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>');
+        $('.phone-list li:last-child').find('input').focus();
+
+    });
+
+    $('#add_email_btn').on('click', function () {
+        $('.email-list').append('<li class="list-group-item email_new"><input type="text" placeholder="Email" value=""><span class="float-right"><i class="mdi mdi-close pointer-pure"></i></span></li>');
+        $('.email-list li:last-child').find('input').focus();
+
+    });
+
+    $('.phone-list').on('click', '.mdi-close', function () {
+        $(this).parent().fadeOut('fast', function () {
+            $(this).parent().remove();
+        })
+    });
+
+    $('#optgroup').multiSelect();
+    $('.ms-selection li').each(function () {
+        if($(this).text().includes('100')){
+            $(this).remove();
+        };
+    })
+
+    $('.del-img-gal').on('click', function () {
+        var cur_item_id = $(this).prop('id');
+        var image_id = cur_item_id.split('_')[1];
+        swal({
+            title: 'Удалить изображение?',
+            text: 'Изображение будет удалено с сервера',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ок',
+            closeOnConfirm: true,
+        },
+        function (isConfirm) {
+            if (isConfirm){
+                var data = new FormData();
+                data.append('image_id', image_id);
+                $.ajax({
+                    url: '{% url 'dashboard:delete_image_from_gallery' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        $('#' + cur_item_id).prev().remove();
+                        $('#' + cur_item_id).remove();
+                        swal({
+                            title: 'Информация обновлена',
+                            text: 'Информация на сервере успешно обновлена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        });
+
+                    }
+                });
+            }
+
+        });
+
+
+    })
+
+    function merge_data(data) {
+
+        $('.ms-selection .ms-selected').each(function (index) {
+            data.append('tag_' + index, $('span', this).text());
+
+        });
+
+        var i =0;
+        $('#grey_desc_tbody .new_grey_desc_tr').each(function () {
+            var name = $(this).find('.new_grey_desc_name').prop('name');
+            var val = $(this).find('.new_grey_desc_name').val();
+            data.append(name, val);
+            console.log(name + ' - ' + val);
+        });
+{#        характеристики#}
+        $('#option_tbody .new_option_tr').each(function () {
+            i++;
+            var name = $(this).find('.option_name').val();
+            var val = $(this).find('.option_val').val();
+            var merge_option = name + '_' + val;
+            data.append('option_' + i, merge_option);
+            console.log('option_' + i + ' - ' + merge_option);
+
+        });
+        {#инфраструктура#}
+        $('#infrastructure_tbody .new_infra').each(function () {
+            var name = $(this).find('.new_infra_name').prop('name');
+            var val = $(this).find('.new_infra_name').val();
+            data.append(name, val);
+            console.log(name + ' - ' + val);
+        });
+
+        data.append('main_name', $('#place_main_name').val());
+        data.append('description', editor.getData());
+
+        {% if place %}
+        data.append('place_id', {{ place.id }});
+        {% endif %}
+
+        console.log(editor.getData());
+
+        if ($('#main_foto').get(0).files.length > 0){
+            data.append('main_foto', $('#main_foto')[0].files[0])
+        }
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        return data;
+
+    }
+
+
+
+        $('#save').on('click', function (e) {
+            if ($('#drop_zone_img_files .dz-preview').length == 0){
+
+                e.preventDefault();
+        {#        серое описание#}
+                var data = new FormData();
+                var final_data = merge_data(data);
+    {#            var i =0;#}
+    {#            $('#grey_desc_tbody .new_grey_desc_tr').each(function () {#}
+    {#                var name = $(this).find('.new_grey_desc_name').prop('name');#}
+    {#                var val = $(this).find('.new_grey_desc_name').val();#}
+    {#                data.append(name, val);#}
+    {#                console.log(name + ' - ' + val);#}
+    {#            });#}
+        {#        характеристики#}
+    {#            $('#option_tbody .new_option_tr').each(function () {#}
+    {#                i++;#}
+    {#                var name = $(this).find('.option_name').val();#}
+    {#                var val = $(this).find('.option_val').val();#}
+    {#                var merge_option = name + '_' + val;#}
+    {#                data.append('option_' + i, merge_option);#}
+    {#                console.log('option_' + i + ' - ' + merge_option);#}
+    {##}
+    {#            });#}
+                {#инфраструктура#}
+    {#            $('#infrastructure_tbody .new_infra').each(function () {#}
+    {#                var name = $(this).find('.new_infra_name').prop('name');#}
+    {#                var val = $(this).find('.new_infra_name').val();#}
+    {#                data.append(name, val);#}
+    {#                console.log(name + ' - ' + val);#}
+    {#            });#}
+    {##}
+    {#            data.append('main_name', $('#place_main_name').val());#}
+    {#            data.append('description', $('#place_description').val());#}
+    {##}
+    {#            if ($('#main_foto').get(0).files.length > 0){#}
+    {#                data.append('main_foto', $('#main_foto')[0].files[0])#}
+    {#            }#}
+    {#            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');#}
+
+                $.ajax({
+                    url: '{% url 'dashboard:add_place' %}',
+                    type: 'POST',
+                    data: final_data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Информация на сервере успешно сохранена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                window.location.href = '/dashboard/places_list/';
+                            }
+
+                        });
+
+                    }
+                });
+            }
+        });
+
+
+
+
+    $('#add_grey_description').on('click', function () {
+        var tr_qnt = $('#grey_desc_tbody tr').length + 1;
+        $('#grey_desc_tbody').append('<tr class="tr_' + tr_qnt + ' new_grey_desc_tr"><td><div class="form-line"><input type="text" class="form-control new_grey_desc_name" name ="grey_desc_tr_' + tr_qnt + '"/></div></td><td class="td_tr_' + tr_qnt + '"><button type="button" class="btn bg-cyan btn-block btn-lg waves-effect add-icon">+</button></td><td><i class="mdi mdi-close pointer-pure del-icon"></i></td></tr>')
+    });
+
+{#    добавление иконки#}
+    $('#grey_desc_tbody').on('click', '.add-icon', function () {
+        $('#icon_modal').click();
+        var tr_num = $(this).parent().parent().prop('class').split(' ')[0];
+        $('#tr_num').val(tr_num);
+        console.log($(this).parent().parent().prop('class'));
+    });
+
+    $('.icon_item').on('click', function () {
+        console.log('wwww')
+        var icon_id = $(this).prop('id');
+        var tr_num_cur = $('#tr_num').val();
+        var icon_class = $(this).prop('class').split(' ')[1];
+        $('#grey_desc_tbody').find('tr td [name=grey_desc_' + tr_num_cur + ']').attr('name', 'grey_desc_' + tr_num_cur + '_' + icon_id).html($(this).html());
+{#        console.log($('#grey_desc_tbody').find('.' + tr_num_cur).html());#}
+        $('#grey_desc_tbody').find('.' + tr_num_cur + ' .td_' + tr_num_cur).html('<i class="mdi ' + icon_class + ' font-size-26 new_grey_desc_icon"></>');
+        $('#close_btn').click();
+    });
+
+
+    {#    удаление иконки#}
+    $('#grey_desc_tbody').on('click', '.del-icon', function () {
+        $(this).parent().parent().fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+
+
+    {#    добавление характеристики#}
+    $('#add_option').on('click', function () {
+        var tr_qnt_option = $('#option_tbody tr').length + 1;
+        $('#option_tbody').append('<tr class="tr_option_' + tr_qnt_option + ' new_option_tr"><td><div class="form-line"><input type="text" class="form-control option_name" name ="option_name_' + tr_qnt_option + '"/></div></td><td class=""><div class="form-line"><input type="text" class="form-control option_val" name ="option_val' + tr_qnt_option + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-option"></i></td></tr>')
+    });
+
+    {#    удаление характеристики#}
+    $('#option_tbody').on('click', '.del-option', function () {
+        $(this).parent().parent().fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+
+    {#    добавление инфраструктуры#}
+    $('#add_infrastructure').on('click', function () {
+        var tr_qnt_infrastructure = $('#infrastructure_tbody tr').length + 1;
+        $('#infrastructure_tbody').append('<tr class="tr_infrastucture_' + tr_qnt_infrastructure + ' new_infra"><td><div class="form-line"><input type="text" class="form-control new_infra_name" name ="infrastructure_name_' + tr_qnt_infrastructure + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-infrastructure"></i></td></tr>')
+    });
+
+    {#    удаление инфраструктуры#}
+    $('#infrastructure_tbody').on('click', '.del-infrastructure', function () {
+        $(this).parent().parent().fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+
+    {#    добавление платежной информации#}
+    $('#add_payment_details').on('click', function () {
+        var tr_qnt = $('#payment_details_tbody tr').length + 1;
+        $('#payment_details_tbody').append('<tr class="tr_payment_details_' + tr_qnt + ' new_payment_details_tr"><td><div class="form-line"><input type="text" class="form-control payment_details_name" name ="payment_details_name_' + tr_qnt + '"/></div></td><td class=""><div class="form-line"><input type="text" class="form-control payment_details_val" name ="payment_details_val' + tr_qnt + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-payment-details"></i></td></tr>')
+    });
+
+    {#    удаление платежной информации#}
+    $('#payment_details_tbody').on('click', '.del-payment-details', function () {
+        $(this).parent().parent().fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+
+
+{#    добавление контактного лица#}
+{#    $('#add_contact_person').on('click', function () {#}
+{#        $('#add_contact_person_modal').click();#}
+{#    });#}
+
+
+{#    $('#optgroup').multiSelect();#}
+{#    $('.ms-selection li').each(function () {#}
+{#        if($(this).text().includes('100')){#}
+{#            $(this).remove();#}
+{#        }#}
+{#    });#}
+
+    Dropzone.autoDiscover = false;
+        //сохранение изображения для галлереи
+        var drop_zone_img_files = new Dropzone('#drop_zone_img_files', {
+            url: "{% url 'dashboard:add_place' %}",
+            autoProcessQueue: false,
+            addRemoveLinks: true,
+            uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 100,
+            init: function() {
+                $('#save').on('click', function () {
+                    drop_zone_img_files.processQueue();
+                })
+            },
+            sendingmultiple: function (file, xhr, formData) {
+                add_csrf();
+                merge_data(formData);
+
+{#                formData.append('order_id', {{ order_details.id }});#}
+{#                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');#}
+{#                formData.append('meal_name', $('#meal_name').val());#}
+{#                formData.append('meal_description', $('#meal_description').val());#}
+{#                formData.append('meal_short_description', $('#meal_short_description').val());#}
+{#                formData.append('meal_price', $('#meal_price').val());#}
+{#                formData.append('meal_type', $('#meal_type').val());#}
+{#                formData.append('meal_weight', $('#meal_weight').val());#}
+{#                formData.append('place_fotos', $('#meal_foto')[0].files[0]);#}
+{#                $('.ms-selection .ms-selected').each(function (index) {#}
+{#                    formData.append('ingredient_' + index, $('span', this).text());#}
+{##}
+{#                });#}
+
+
+            },
+            successmultiple: function (file, data) {
+                console.log(data.code);
+{#                window.location.href = '/dashboard/meals_menu/';#}
+
+
+                {#                var files_qnt = 0;#}
+{#                var data_json = $.parseJSON(data);#}
+{#                var files = data_json['files'];#}
+{#                var add_data = data_json['additional_data'];#}
+{#                var date_time = add_data['date_time'];#}
+{#                var name = add_data['name'];#}
+{#                var role = add_data['role'];#}
+{#                for (var key in files){#}
+{#                    if (files.hasOwnProperty(key)){#}
+{#                        files_qnt ++;#}
+{#                        var file_id = key;#}
+{#                        var file_name = files[key];#}
+{#                        $('#fileList').append('<div class="translation_file list-group-item row margin-left-0 margin-right-0 margin-top-10" id="file_' + file_id + '"><div class="col-xs-1 margin-bottom-0" data-toggle="tooltip" title="Удалить файл" data-placement="left"><i class="mdi mdi-close text_label prefix pointer-pure del_file"   style="width: 28px"></i></div><div class="col-xs-11 margin-bottom-0 padding-top-3"><p class="pointer-pure display-inline file_download">' + file_name + '</p></div></div>');#}
+{##}
+{#                    }#}
+{##}
+{#                }#}
+{#                add_timeline_item(date_time, name, role, 'Добавлены файлы заявки: ' + files_qnt +' шт.' );#}
+{#                drop_zone_order_files.removeAllFiles();#}
+            },
+            complete: function (data) {
+                if (data.status != 'error'){
+                    swal({
+                        title: 'Информация сохранена',
+                        text: 'Информация на сервере успешно сохранена',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            window.location.href = '/dashboard/places_list/';
+                        }
+                    });
+
+                }else {
+                    swal({
+                        title: 'Ошибка',
+                        text: 'При сохранении произошла ошибка. Попробуйте позже.',
+                        type: 'error'
+                    });
+                drop_zone_img_files.removeAllFiles();
+
+                }
+            },
+            error: function () {
+                swal({
+                    title: 'Ошибка',
+                    text: 'При сохранении произошла ошибка. Попробуйте позже.',
+                    type: 'error'
+                });
+{#                drop_zone_img_files.removeAllFiles();#}
+
+            }
+{#            autoProcessQueue: false#}
+        });
+
+});
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                add_csrf();
+               $.ajax({
+                    url: '{% url 'dashboard:get_menu_items' %}',
+                    type: 'POST',
+                    data: JSON.stringify({
+                                'menu_date': $('#menu_date').val(),
+                                'menu_type': 'standart'
+                            }),
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'error'
+                        });
+                    },
+                    success:function (data) {
+                        var data_json = $.parseJSON(data);
+                        var response = data_json['response'];
+                        if (response == 'no_data'){
+                            swal({
+                                title: 'Данные отсутствуют',
+                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                                type: 'warning'
+                            });
+
+                        }
+
+                    }
+                });
+
+
+
+
+                console.log('дата изменена')
+            }
+        });
+
+
+
+
+    </script>
+
+
+{% endblock %}

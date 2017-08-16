@@ -1,0 +1,266 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap, myPlacemark;
+
+        function init(){
+            myMap = new ymaps.Map("map", {
+                center: [55.76, 37.64],
+                zoom: 9
+            });
+
+            myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+                hintContent: 'Москва!',
+                balloonContent: 'Столица России'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+
+            var myGeocoder = ymaps.geocode('Паперника, 15');
+            myGeocoder.then(
+                function (res) {
+                    var coords = res.geoObjects.get(0).geometry.getCoordinates();
+                    var myGeocoder = ymaps.geocode(coords, {kind: 'street'});
+                    myGeocoder.then(
+                        function (res) {
+                            var street = res.geoObjects.get(0);
+                            var name = street.properties.get('name');
+                            // Будет выведено «улица Большая Молчановка»,
+                            // несмотря на то, что обратно геокодируются
+                            // координаты дома 10 на ул. Новый Арбат.
+{#                            alert(name);#}
+                            var myPlacemark2 = new ymaps.Placemark(coords, {
+                                hintContent: 'Москва!',
+                                balloonContent: 'Столица России'
+                            });
+
+                            myMap.geoObjects.add(myPlacemark2);
+
+                        }
+                    );
+            });
+
+        }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+                    <form method="post" action="{% url 'dashboard:orders_total_info' %}" id="dates_form">{% csrf_token %}
+                        <div class="body" style="margin-bottom: 10px">
+                            <h3 class="card-inside-title mrg-bottom-33">Выберите дату</h3>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+
+                                    <div class="form-line">
+
+                                        <input name="dates" type='text' class="padding-5" data-position="right top" id="menu_date" value="{{ date }}"/>
+                                        <input type="checkbox" id="multiple_dates" class="date_active"/>
+                                        <label for="multiple_dates" class="margin-left-10">Период</label>
+
+                                    </div>
+{#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Сводная информация по заказам
+{#                                <small>В меню отображаются активные даты по формуле: СЕГОДНЯ + 1 ДЕНЬ</small>#}
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+
+                            <div id="map" style="width: 450px; height: 350px;"></div>
+
+                            <!-- Tab panes -->
+
+{#                                    <b>Home Content</b>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+
+
+
+    <script>
+
+
+
+
+{#    var dates_to_change = [];#}
+{#    $('.table_dates').on('click', '.date_active', function () {#}
+{#        console.log('cl');#}
+{#        $('#save_dates').fadeIn('slow');#}
+{#        dates_to_change.push($(this).parent().parent().attr('id') + '_' + $(this).is(':checked'));#}
+{#        console.log('length =' + dates_to_change.length);#}
+{#    });#}
+{##}
+{#    $('#save_dates').on('click', function () {#}
+{#        var data = new FormData();#}
+{#        data.append('operation', 'date_status');#}
+{#        for (var i=0; i <= (dates_to_change.length -1); i++){#}
+{#            data.append('dates_' + i,dates_to_change[i]);#}
+{#            console.log(i);#}
+{#        }#}
+{#        $.ajax({#}
+{#            url: '{% url 'dashboard:active_dates' %}',#}
+{#            type: 'POST',#}
+{#            data: data,#}
+{#            processData: false,#}
+{#            contentType: false,#}
+{#            error: function(data){#}
+{#                swal({#}
+{#                    title: 'Ошибка сервера',#}
+{#                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',#}
+{#                    type: 'error'#}
+{#                });#}
+{#            },#}
+{#            success:function (data) {#}
+{#                swal({#}
+{#                    title: 'Информация обнавлена',#}
+{#                    text: 'Информация на серевере удачно обнавлена. Операция: ' + data,#}
+{#                    type: 'success'#}
+{#                });#}
+{#                $('#save_dates').fadeOut('slow');#}
+{##}
+{#            }#}
+{#        });#}
+{##}
+{#    });#}
+
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            autoClose:true,
+            range: true,
+            minDate: new Date(),
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                    console.log($('#menu_date').val().length);
+                    console.log($('#multiple_dates').prop('checked'));
+
+                if ($('#menu_date').val().length >= 21){
+                    $('#dates_form').submit();
+{#                    add_csrf();#}
+{#                    $.ajax({#}
+{#                        url: "{% url 'dashboard:active_dates' %}",#}
+{#                        type: 'POST',#}
+{#                        data: JSON.stringify({#}
+{#                                    'dates': $('#menu_date').val(),#}
+{#                                    'operation': 'add'#}
+{#                                }),#}
+{#                        processData: false,#}
+{#                        contentType: false,#}
+{#                        error: function(data){#}
+{#                            swal({#}
+{#                                title: 'Ошибка сервера',#}
+{#                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',#}
+{#                                type: 'error'#}
+{#                            });#}
+{#                        },#}
+{#                        success:function (data) {#}
+{#                            swal({#}
+{#                                title: 'Информация обнавлена',#}
+{#                                text: 'Информация на серевере удачно обнавлена. Операция: ' + data,#}
+{#                                type: 'success'#}
+{#                            });#}
+{#                            $('#' + id).slideUp('fast');#}
+{##}
+{#                        }#}
+{#                    });#}
+                }else {
+                    if (!$('#multiple_dates').prop('checked')){
+                        $('#dates_form').submit();
+
+                    }
+                }
+
+                console.log($('#menu_date').val());
+            }
+        });
+
+{#    удаление даты из списка#}
+    $('.del-date').on('click', function () {
+        add_csrf();
+        var id = $(this).parent().parent().attr('id');
+        $.ajax({
+            url: '{% url 'dashboard:active_dates' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'date_id': id,
+                        'operation': 'del'
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                swal({
+                    title: 'Информация обнавлена',
+                    text: 'Информация на серевере удачно обнавлена. Операция: ' + data,
+                    type: 'success'
+                });
+                $('#' + id).slideUp('fast');
+
+            }
+        });
+
+    })
+    </script>
+
+
+{% endblock %}

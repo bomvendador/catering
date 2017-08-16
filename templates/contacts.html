@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load watermark %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- SUB BANNER -->
+    <section class="sub-banner text-center section">
+        <div class="awe-parallax bg-3"></div>
+        <div class="awe-title awe-title-3">
+            <h3 class="lg text-uppercase">контакты</h3>
+        </div>
+    </section>
+    <!-- END / SUB BANNER -->
+
+    <!-- CONTACT US -->
+    <section id="contact" class="contact section">
+
+        <div class="contact-form contact-form-2">
+            <div class="divider divider-2"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <address class="find-us">
+                            <span class="md">Свяжитесь с нами</span>
+                            <div class="location-1 font-size-20 padding-left-0">
+                                <i class="mdi mdi-phone"></i> <span>{{ food_smile_phone }}</span>
+                            </div>
+
+                            <div class="location-1 font-size-20 padding-left-0">
+                                <i class="mdi mdi-email"></i> {{ food_smile_email }}
+                            </div>
+
+                        </address>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-row">
+
+                            <form id="send-message-form">
+                                <div class="padding-left-15">
+                                    <span class="md">Или отправьте нам сообщение</span>
+
+                                </div>
+
+                                <div class="form-item form-textarea">
+                                    <textarea placeholder="Сообщение..." name="message" id="contact_form_message"></textarea>
+                                </div>
+                                <div class="form-item form-type-name">
+                                    <input type="text" placeholder="Имя" name="name" id="contact_form_name">
+                                </div>
+                                <div class="form-item form-type-name">
+                                    <input type="text" placeholder="Телефон" id="contact_form_phone">
+                                </div>
+                                <div class="form-item form-type-name">
+                                    <input type="text" placeholder="Email" id="contact_form_email">
+                                </div>
+                                <div class="form-actions">
+                                    <input id="footer_contact_form" type="submit" value="отправить" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">
+                                </div>
+                                <div id="contact-content"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{#        <div class="contact-first">#}
+{##}
+{#            <!-- OVERLAY -->#}
+{#            <div class="awe-overlay overlay-default"></div>#}
+{#            <!-- END / OVERLAY -->#}
+{##}
+{#            <div class="section-content">#}
+{#                <div class="container">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-6 col-md-offset-3">#}
+{#                            <div class="contact-body text-center">#}
+{#                                <h3 class="lg text-uppercase">CONTACT US</h3>#}
+{#                                <hr class="_hr">#}
+{#                                <address class="address-wrap">#}
+{#                                    <span class="address">{{ food_smile_email }}</span>#}
+{#                                    <span class="phone">{{ food_smile_phone }}</span>#}
+{#                                </address>#}
+{#                            </div>#}
+{##}
+{#                            <div class="see-map text-center">#}
+{#                                <a href="#" data-see-contact="See contact info" data-see-map="See location on map" class="awe-btn awe-btn-5 awe-btn-default text-uppercase"></a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- MAP -->#}
+{#            <div id="map" data-map-zoom="14" data-map-latlng="45.738028, 21.224535" data-snazzy-map-theme="grayscale" data-map-marker="images/marker.png" data-map-marker-size="200*60"></div>#}
+{#            <!-- END / MAP -->#}
+{#        </div>#}
+{##}
+{#        <div class="contact-second tb">#}
+{##}
+{#            <!-- NEWS LETTER -->#}
+{#            <div class="tb-cell">#}
+{#                <div class="news-letter text-center">#}
+{#                    <div class="inner wow fadeInUp" data-wow-delay=".6s">#}
+{#                        <div class="letter-heading">#}
+{#                            <h4 class="sm text-uppercase">GET NEWS LETTER FROM US</h4>#}
+{#                            <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin</p>#}
+{#                        </div>#}
+{#                        <form>#}
+{#                            <div class="form-item">#}
+{#                                <input type="text" placeholder="Your email" class="text-uppercase" name="email">#}
+{#                            </div>#}
+{#                            <div class="form-actions">#}
+{#                                <input id="footer_contact_form" type="submit" value="Subscribe" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- END / NEWS LETTER -->#}
+{#        </div>#}
+
+    </section>
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+    $('#footer_contact_form').on('click', function (e) {
+        e.preventDefault();
+        var data = new FormData();
+        data.append('name', $('#contact_form_name').val());
+        data.append('phone', $('#contact_form_phone').val());
+        data.append('email', $('#contact_form_email').val());
+        data.append('message', $('#contact_form_message').val());
+            $.ajax({
+                url: '{% url 'place_client_request' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    swal({
+                        title: 'Информация отправлена',
+                        text: 'Спасибо за проявленный к нам интерес! В ближайшее время с Вами свяжется наш менеджер.',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true,
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            $('#name').val('');
+                            $('#phone').val('');
+                            $('#message').val('');
+                        }
+
+                    });
+
+                }
+            });
+
+    })
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,709 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% now "Y-m-d" as todays_date %}
+{% load watermark %}
+
+{% block title %}
+<title>Кейтеринг | Мероприятия</title>
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- SUB BANNER -->
+    <section class="sub-banner text-center section  margin-top-50">
+        <div class="awe-parallax bg-7"></div>
+        <div class="awe-title awe-title-2">
+            <h3 class="lg text-uppercase font-size-26 font-size-767-18">Мероприятия<br><span class="font-size-18 font-size-767-13">Организация "под ключ"</span></h3>
+
+
+        </div>
+    </section>
+    <!-- END / SUB BANNER -->
+
+    <div class="container">
+            <div class="block-first margin-top-50">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="image-wrap">
+                            <img src="{% static 'images/background/event-design-colorado.jpg' %}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-md-offset-1">
+                        <h4 class="lg text-uppercase font-roboto font-weight-400 margin-top-0">ДОВЕРЬТЕ НАМ СВОИ ЗАБОТЫ</h4>
+                        <hr class="header-line">
+                        <p class="color-666 font-roboto font-weight-100">FOOD-SMILE  -  коллектив профессионалов и энутзиастов своего дела. Мы способны решить любые задачи, связанные с организацией мероприятий (банкеты, свадьбы, дни рождения, вечеринки, выпускные вечера, празднования Нового Года, корпоративы, семинары). За многолетнюю историю нашей работы в этой сфере был сформирован как собственный коллектив, так и наработана большая база данных контактов партнеров, что позволяет нам удовлетворить любые Ваши потребности:</p>
+                        <div class="row clearfix">
+                            <ul class="col-md-4 col-xs-12">
+                                <li class="color-666"><i class="mdi mdi-camera margin-right-10"></i>Фотосъемка</li>
+                                <li class="color-666"><i class="mdi mdi-camcorder margin-right-10"></i>Видеосъемка</li>
+                                <li class="color-666"><i class="mdi mdi-microphone-variant margin-right-10"></i>Ведущие</li>
+                                <li class="color-666"><i class="mdi mdi-gamepad-variant margin-right-10"></i>Развлечения</li>
+                            </ul>
+                            <ul class="col-md-4 col-xs-12">
+                                <li class="color-666"><i class="mdi mdi-music-circle margin-right-10"></i>Музыка</li>
+                                <li class="color-666"><i class="mdi mdi-bow-tie margin-right-10"></i>Официанты</li>
+                                <li class="color-666"><i class="mdi mdi-flower margin-right-10"></i>Оформление и декор</li>
+                                <li class="color-666"><i class="mdi mdi-silverware-variant margin-right-10"></i>Аренда посуды</li>
+                            </ul>
+                            <ul class="col-md-4 col-xs-12">
+                                <li class="color-666"><i class="mdi mdi-garage-open margin-right-10"></i>Аренда шатров</li>
+                                <li class="color-666"><i class="mdi mdi-stadium margin-right-10"></i><a href="{% url 'places_list_main' %}">Площадки</a></li>
+                                <li class="color-666"><i class="mdi mdi-beer margin-right-10"></i>Разливное пиво</li>
+                                <li class="color-666"><i class="mdi mdi-bus margin-right-10"></i>Трансфер</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+                    <hr class="_hr_dark">
+
+                    <div class="relative text-center">
+                        <div class="awe-parallax bg-1"></div>
+
+                        <div class="awe-title awe-title-1">
+                            <h3 class="lg text-uppercase">Примеры меню (банкет)</h3>
+                        </div>
+
+                    </div>
+
+                    <div class=" margin-top-20">
+
+                        <div class="relative text-center">
+                            <div class="awe-parallax bg-6"></div>
+                            <div class="ribbon ribbon-3">
+                                <h2 class="sm text-uppercase">3000 руб на персону</h2>
+                            </div>
+                        </div>
+                        <h3>WELCOME меню для встречи гостей</h3>
+                        <hr class="_hr_dark">
+
+                        <ol>
+                            <li>Мясное ассорти (канапе)</li>
+                            <li>Сырное Ассорти (канапе с виноградом и сыром)</li>
+                            <li>Фруктовое Ассорти (нарезка фруктов на этажерках или тарелках)</li>
+                            <li>Ассорти конфет</li>
+                        </ol>
+                        <h3>Банкет</h3>
+                        <hr class="_hr_dark">
+
+                        <h4 class="margin-top-5">Закуски</h4>
+                        <ol>
+                            <li>Мясное ассорти (буженина домашнего приготовления, салями, говядина сырокопченая) Подается  с горчицей</li>
+                            <li>Ассорти сыров (три вида сыра на выбор)</li>
+                            <li>Овощная поляна (ассорти свежих овощей на выбор: огурцы, помидоры, редис, болгарский перец)</li>
+                            <li>Грибочки маринованные (ассорти маринованных грибов)</li>
+                            <li>Маслины, оливки</li>
+                        </ol>
+                        <h4 class="margin-top-5">Салаты</h4>
+                        <ol>
+                            <li>Цезарь с курицей (листья салатов Романо заправленные соусом "Цезарь". Сверху выкладывается обжаренное  филе цыпленка и посыпается тертым сыром «Пармезан», салат украшается помидорами Черри и гренками.
+    )</li>
+                            <li>Салат от Шеф - повара, фирменный «Тайский» теплый салат (говяжья вырезка и овощи ВОК заправленные двумя соусами, посыпанные обжаренным  кунжутом)</li>
+                        </ol>
+                        <h4 class="margin-top-5">Горячее</h4>
+                        <ol>
+                            <li>Шашлык из Свинины (в авторском маринаде от Шеф - повара) с соусом Сальса</li>
+                            <li>Шашлык из куриных бёдер с соусом к мясу от Шеф - повара</li>
+                        </ol>
+                        <h4 class="margin-top-20">Гарнир</h4>
+                        <ol>
+                            <li>МИКС из запечённых овощей с мангала, отварной картофель сдобренный сливочным маслом и зеленью.</li>
+                        </ol>
+                        <h4 class="margin-top-20">Фруктовая нарезка на стол жениха и невесты</h4>
+                    </div>
+                    <div class=" margin-top-20">
+
+                        <div class="relative text-center">
+                            <div class="awe-parallax bg-6"></div>
+                            <div class="ribbon ribbon-3">
+                                <h2 class="sm text-uppercase">4000 руб на персону</h2>
+                            </div>
+                        </div>
+                        <h3>WELCOME меню для встречи гостей</h3>
+                        <hr class="_hr_dark">
+
+                        <ol>
+                            <li>Мясное ассорти (канапе)</li>
+                            <li>Сырное Ассорти (канапе с виноградом и сыром)</li>
+                            <li>Фруктовое Ассорти (канапе на шпажках)</li>
+                            <li>Шоколадный фонтан (шоколад на выбор)</li>
+                        </ol>
+                        <h3>Банкет</h3>
+                        <hr class="_hr_dark">
+
+                        <h4 class="margin-top-5">Холодные закуски</h4>
+                        <ol>
+                            <li>Мясное ассорти (ростбиф, отварной говяжий язык, буженина домашнего приготовления)</li>
+                            <li>Ассорти благородных сыров (камамбер, маасдам, дор-блю)</li>
+                            <li>«Зеленая поляна» (ассорти свежих овощей  с зеленью)</li>
+                            <li>Закуска элитная (лосось слабосоленый, икра красная, сельдь на тостах, маринованные черри и корнишоны, маслины, оливки)</li>
+                            <li>«Грибное лукошко» (ассорти маринованных грибов с оливковым маслом и красным луком)</li>
+                        </ol>
+                        <h4 class="margin-top-5">Салаты</h4>
+                        <ol>
+                            <li>Цезарь с курицей (листья салатов Романо заправленные соусом "Цезарь". Сверху выкладывается обжаренное филе цыпленка и посыпается тертым сыром «Пармезан», салат украшается помидорами Черри и гренками)</li>
+                            <li>Салат от Шеф - повара, фирменный «Тайский» теплый салат (говяжья вырезка и овощи ВОК заправленные двумя соусами, посыпанные обжаренным  кунжутом)</li>
+                        </ol>
+                        <h4 class="margin-top-5">Горячая закуска:</h4>
+                        <ol>
+                            <li>Жульен из белых грибов с соусом «Бешамель» и сыром Пармезан</li>
+                        </ol>
+                        <h4 class="margin-top-20">Горячие блюда:</h4>
+                        <ol>
+                            <li>Мясное плато с мангала (медальоны из свиной шеи, бедро цыпленка, баранья корейка). Подается с соусом «Сальса» от Шеф-повара</li>
+                        </ol>
+                        <h4 class="margin-top-20">Гарнир:</h4>
+                        <ol>
+                            <li>Отварной картофель сдобренный сливочным маслом и зеленью</li>
+                            <li>Микс запеченных овощей гриль</li>
+                        </ol>
+
+                        <h4 class="margin-top-20">Хлебный букет (Французский багет, хлеб Бородинский)</h4>
+                        <h4 class="margin-top-20">Чай, кофе</h4>
+
+                        <h4 class="margin-top-20">Фруктовая этажерка на стол жениха и невесты</h4>
+
+                        <h4 class="margin-top-20">В цену входит:</h4>
+                        <ol>
+                            <li>Закупка и доставка продуктов, зарплата поваров и официантов, хозяйственные товары</li>
+                        </ol>
+                        <h4 class="margin-top-20">Дополнительно помогаем закупить алкогольные и б/а напитки. Доставка оплачивается отдельно.</h4>
+
+                    </div>
+
+                    <hr class="_hr_dark">
+
+                    <div class="relative text-center">
+                        <div class="awe-parallax bg-1"></div>
+
+                        <div class="awe-title awe-title-1">
+                            <h3 class="lg text-uppercase">Примеры меню (фуршет)</h3>
+                        </div>
+
+                    </div>
+
+                    <div class=" margin-top-20">
+
+                        <div class="relative text-center">
+                            <div class="awe-parallax bg-6"></div>
+                            <div class="ribbon ribbon-3">
+                                <h2 class="sm text-uppercase">2000 руб на персону</h2>
+                            </div>
+                        </div>
+                        <h3>Фуршетный стол в граммах на персону</h3>
+                        <hr class="_hr_dark">
+
+                        <ol>
+                            <li>Канапе с огурцом и с/с лососем - 30 гр</li>
+                            <li>Канапе три вида сыра с виноградом - 30 гр</li>
+                            <li>Рулет Норвежский - 50 гр (Лаваш,лосось с/с,листья салата,соус цезарь)</li>
+                            <li>Салат столичный в тарталетках - 60 гр</li>
+                            <li>Клаб сендвич - 60 гр (грудка индейки,тостовый хлеб)</li>
+                            <li>Мини шашлычки из свинины с овощами - 100 гр</li>
+                            <li>Мини шашлычки из куриной грудки - 100 гр</li>
+                            <li>Соус к мясу - 20 гр</li>
+                            <li>Фруктовая нарезка с сахарной пудрой - 50 гр (5 видов фруктов)</li>
+                            <li>Сок в ассортименте - 150 мл</li>
+                        </ol>
+                    </div>
+                    <div class=" margin-top-20">
+
+                        <div class="relative text-center">
+                            <div class="awe-parallax bg-6"></div>
+                            <div class="ribbon ribbon-3">
+                                <h2 class="sm text-uppercase">2400 руб на персону</h2>
+                            </div>
+                        </div>
+                        <h3>Фуршетный стол в граммах на персону</h3>
+                        <hr class="_hr_dark">
+
+                        <ol>
+                            <li>Канапе с огурцом и с/с лососем - 50 гр</li>
+                            <li>Канапе три вида сыра с виноградом - 30 гр</li>
+                            <li>Закуска рыбная - 30 гр (лосось с/с, масляная)</li>
+                            <li>Ветчинные рулетики с сырной закуской - 50 гр</li>
+                            <li>Клаб сендвич - 60 гр (грудка индейки,тостовый хлеб)</li>
+                            <li>Салат Тайский в тарталетках - 60 гр</li>
+                            <li>Салат Столичный в тарталетках - 60 гр</li>
+                            <li>Мини шашлычки из свинины с овощами - 100 гр</li>
+                            <li>Мини шашлычки из куриной грудки - 100 гр</li>
+                            <li>Соус Сальса к мясу - 20 гр</li>
+                            <li>Фруктовая нарезка с сахарной пудрой - 50 гр (5 видов фруктов)</li>
+                            <li>Сок в ассортименте - 150 мл</li>
+                            <li>Вода газированная и без газа - 0.5 л</li>
+                        </ol>
+                    </div>
+                    <h3 class="margin-top-40">Часто задаваемые вопросы</h3>
+                    <hr class="_hr_dark">
+                    <div class="accordion-wrap">
+                        <div class="panel-group" id="id-accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-uppercase">
+                                        <a data-toggle="collapse" data-parent="#id-accordion" href="#collapse-2-1">
+                                            <i class="fa fa-plus"></i>
+                                            Какова минимальная сумма заказа на одну персону?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-2-1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                    Все зависит от Вашей фантазии и пожеланий. После индивидульного общения, мы подберем для Вас именно то меню, которое полностью удовлетворит Вас и по цене и по составу.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-uppercase">
+                                        <a data-toggle="collapse" data-parent="#id-accordion" href="#collapse-2-2">
+                                            <i class="fa fa-plus"></i>
+                                             Как долго компания находится на рынке?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-2-2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                    Наша компания имеет 5-летний опыт работы на рынке и более сотни обслуженных мероприятий.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title text-uppercase">
+                                        <a data-toggle="collapse" data-parent="#id-accordion" href="#collapse-2-3">
+                                            <i class="fa fa-plus"></i>
+                                            Какими разрешительными документами обладает персонал?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-2-3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                    Весь обслуживающий персонал имеет соответствующие медицинские книжки и проходит тщательный визуальный осморт перед допуском к обслуживанию клиентов.
+                                    </div>
+                                </div>
+                            </div>
+
+{#                            <div class="panel panel-default">#}
+{#                                <div class="panel-heading">#}
+{#                                    <h4 class="panel-title text-uppercase">#}
+{#                                        <a data-toggle="collapse" data-parent="#id-accordion" href="#collapse-2-4">#}
+{#                                            <i class="fa fa-plus"></i>#}
+{#                                            feugiat eleifend#}
+{#                                        </a>#}
+{#                                    </h4>#}
+{#                                </div>#}
+{#                                <div id="collapse-2-4" class="panel-collapse collapse">#}
+{#                                    <div class="panel-body">#}
+{#                                    Mauris tincidunt pharetra tempor. Proin lacinia dui augue, quis pellentesque nisi sodales ullamcorper. Proin tincidunt, magna non tincidunt congue, lacus lacus ullamcorper justo, ut tristique dolor erat nec ligula. Proin ac dui hendrerit, porttitor libero vel, convallis nisl. Maecenas in sem elit.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                    <hr class="_hr_dark">
+                    <div class="slider1" id>
+                        {% for slide in slides %}
+                        <div class="slide"><img id="slide_{{ slide.id }}" class="gallery" src="{% static 'images/portfolio/watermark/' %}{{ slide.name_watermark }}" style="height: 135px"></div>
+                        {% endfor %}
+                    </div>
+                        <!-- LEAVER YOUR COMMENT -->
+                    <div class="col-lg-8 col-sm-12 margin-bottom-25">
+                            <div id="respond">
+                                <div class="reply-title">
+                                    <h3 class="xmd">Хотите узнать больше?</h3>
+                                    <p class="roboto-300">
+                                        Отправьте свой вопрос и мы непременно Вам перезвоним и ответим на него
+                                    </p>
+                                </div>
+                                <!-- COMMENT FORM -->
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-item form-textarea">
+                                                <textarea id="message" placeholder="Сообщение..."  class="roboto-300"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-item form-name">
+                                                <input class="roboto-300" type="text" placeholder="Ваше имя" id="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-item form-email">
+                                                <input class="roboto-300" type="text" placeholder="Номер телефона" id="phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-actions">
+                                                <input type="submit" value="ОТПРАВИТЬ" class="awe-btn awe-btn-2 awe-btn-default text-uppercase" id="send_request">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END / COMMENT FORM -->
+
+                            </div>
+                    </div>
+                            <!-- END / LEAVER YOUR COMMENT -->
+
+
+
+            </div>
+
+    </div>
+{#    {% include 'product-detail-popup.html' %}#}
+
+<div id="aniimated-thumbnials" class="display-none">
+
+{% endblock %}
+
+{% block script %}
+        <!-- lightgallery plugins -->
+{#    <script src="js/lg-thumbnail.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lightgallery.min.js' %}"></script>
+
+    <script src="{% static 'lightgallery/js/lg-thumbnail.min.js' %}"></script>
+{#    <script src="js/lg-fullscreen.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'lightgallery/js/picturefill.js' %}"></script>
+    <script src="{% static 'js/jquery.watermark.min.js' %}"></script>
+
+    <script>
+
+    $('.gallery').on('click', function () {
+        var id = 'portfolio_{{ portfolio.id }}';
+        var data = new FormData();
+        data.append('item_id', id);
+        data.append('slide_id', $(this).attr('id'));
+
+            $.ajax({
+                url: '{% url 'gallery_portfolio' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var response = data_json['response'];
+                    console.log(response);
+{#                    lg.addEventListener('lgOnBeforeOpen', function(e){#}
+                    $('#aniimated-thumbnials').html('');
+                      for (var img in response){
+                          $('#aniimated-thumbnials').append('<a href="/static/images/portfolio/watermark/' + response[img] + '"><img id="slide_' + img + '"  src="/static/images/portfolio/watermark/' + response[img] + '" class="gallery1" /></a>');
+                      }
+                    var lg = document.getElementById('aniimated-thumbnials');
+                    lightGallery(lg);
+                    $('#slide_0').click();
+
+
+                }
+            });
+
+    })
+
+
+    $('#send_request').on('click', function (e) {
+        e.preventDefault();
+        var data = new FormData();
+        data.append('name', $('#name').val());
+        data.append('phone', $('#phone').val());
+        data.append('message', $('#message').val());
+            $.ajax({
+                url: '{% url 'place_client_request' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    swal({
+                        title: 'Информация отправлена',
+                        text: 'Спасибо за проявленный к нам интерес! В ближайшее время с Вами свяжется наш менеджер.',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true,
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            $('#name').val('');
+                            $('#phone').val('');
+                            $('#message').val('');
+                        }
+
+                    });
+
+                }
+            });
+
+    });
+
+
+$(document).ready(function() {
+
+    $('.slider1').bxSlider({
+        slideWidth: 200,
+        minSlides: 2,
+        maxSlides: 6,
+        slideMargin: 10,
+        speed: 500,
+        auto: true,
+        autoHover: true
+    });
+    $('.pp-product-detail').magnificPopup({
+        mainClass: 'mfp-fade',
+        type:'ajax'
+    });
+
+    $('.home').on('click', '.minus', function () {
+        if ($(this).next().val() > 1){
+            var qnt_before = parseInt($(this).next().val());
+            var qnt = qnt_before - 1;
+            $(this).next().val(qnt);
+        }
+    });
+    $('.home').on('click', '.plus', function () {
+        var qnt_before = parseInt($(this).prev().val());
+        var qnt = qnt_before + 1;
+        $(this).prev().val(qnt);
+    });
+
+    $('.home').on('click', '.add-to-cart', function () {
+        var meal_id_split = $(this).attr('id').split('_');
+        add_to_cart(meal_id_split[3], $(this).parent().find('.qty').val())
+    })
+
+
+});
+{#    $('.product-detail-page').magnificPopup({type:'image'});#}
+
+    $.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        this.addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+    }
+    });
+
+{#    проверка первоначального состояния корзины#}
+{#    проверка первоначального состояния корзины#}
+    function check_cart() {
+        if ($.cookie('cart_id')){
+            var cart_id = $.cookie('cart_id');
+            add_csrf();
+            $.ajax({
+                url: '{% url 'check_cart' %}',
+                type: 'POST',
+                data: JSON.stringify({
+                            'cart_id': cart_id
+                        }),
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'error'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var cart_meals = data_json['cart_meal'];
+                        console.log(data)
+
+                    var menu_date = data_json['menu_date'];
+                    var allowed_menu = data_json['allowed_menu'];
+                    var date_redirected = data_json['date_redirected'];
+                    if (allowed_menu == 1){
+                        {% if not date_redirected %}
+                            window.location.href = '/{{ url_redirect }}/' + menu_date;
+                        {% endif %}
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                        var redirect = data_json['redirect'];
+                        console.log(data)
+                        window.location.href = '/complex_standart_menu_by_date/' + redirect;
+                    }
+                    if (cart_meals != 0){
+                        if (cart_meals.length > 0) {
+                            for (var i=0; i < cart_meals.length; i++){
+                                var meal_price = cart_meals[i]['meal_price'];
+                                var meal_qnt = cart_meals[i]['meal_qnt'];
+                                var meal_sum = cart_meals[i]['meal_sum'];
+                                var meal_img = cart_meals[i]['meal_img'];
+                                var meal_name = cart_meals[i]['meal_name'];
+                                var meal_id = cart_meals[i]['meal_id'];
+                                var meal_img_url = cart_meals[i]['meal_img_url'];
+                                var item_type = cart_meals[i]['item_type'];
+
+
+
+                                    $('.minicart-list').append('<li id="minicart_' + item_type + '_id_' + meal_id + '"><div class="product-thumb"><img class="width-40" src="' + '/static/images/' + meal_img_url + '/' + meal_img + '" alt=""></div><div class="product-name">' + meal_name + '</div><div class="qty-wrap"><span class="product-quantity"><span id="minicart_' + item_type + '_qnt_' + meal_id + '" class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span></div><div class="product-remove"><i class="icon awe_close minicart_del_meal font-size-10 pointer-pure"></i></div></li>');
+
+                            }
+
+                                var total_amount = parseFloat(data_json['cart_amount']);
+                                var cart_meals_qnt = data_json['cart_meals_qnt'];
+                                var min_sum = parseFloat(data_json['min_sum']);
+
+                                $('#cart_label_amount').text(total_amount.toFixed(2));
+                                $('#cart_sum').text(total_amount.toFixed(2));
+                                $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                                if (min_sum <= total_amount){
+                                    $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                                    $('.warn-amount').hide();
+
+                                }else {
+                                    $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                                    $('.warn-amount').slideDown(1000);
+
+                                }
+
+                        }
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                    }
+                    if ($('#minicart-ul li').length > 3){
+                        $('#minicart-ul').addClass('height-210');
+                    }
+
+                }
+            });
+
+
+        }else {
+            cart_id = 'no_cart';
+            {% if redirect %}
+            window.location.href = '/complex_standart_menu_by_date/{{ redirect }}';
+            {% endif %}
+        }
+
+    }
+
+    check_cart();
+
+
+        $('#menu_date').on('change', function () {
+            $.removeCookie('cart_id', {path: '/'});
+            window.location.href = '/standart_menu/' + $(this).val();
+        });
+
+
+
+
+{#удаление товара из корзины#}
+    $('.minicart-list').on('click', '.minicart_del_meal', function () {
+{#        var tempScrollTop = $(window).scrollTop();#}
+        var meal_to_delete = $(this).parent().parent().parent();
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+{#            console.log(cart_id);#}
+        }else {
+            cart_id = 'no_cart';
+        }
+        add_csrf();
+        $.ajax({
+            url: '{% url 'del_from_minicart' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': $(this).parent().parent().attr('id'),
+                        'cart_id': cart_id
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                var cart_meals_qnt = response['cart_meals_qnt'];
+                var min_sum = response['min_sum'];
+
+                if (!response['no_data']) {
+{#                    $(window).scrollTop(tempScrollTop);#}
+                    var meal_id = response['meal_id'];
+                    var type = response['type'];
+                    var total_amount = response['total_amount'];
+                    $('#minicart_' + type + '_id_' + meal_id).slideUp(1000, function () {
+                        $('#minicart_' + type + '_id_' + meal_id).remove();
+                    });
+                    $('#cart_sum').text(total_amount);
+                    $('#cart_label_amount').text(total_amount).animateCss('bounceIn');
+                    $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+{#                    console.log('minicart-ul li = ' + $('#minicart-ul li').length);#}
+                    if ($('#minicart-ul li').length <= 3){
+{#                        console.log('meal <= 3');#}
+                        $('#minicart-ul').removeClass('height-210');
+                    }
+                    if (min_sum <= parseFloat(total_amount)){
+                        $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                        $('.warn-amount').hide();
+
+                    }else {
+                        $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                        $('.warn-amount').slideDown(1000);
+
+                    }
+
+                }
+            }
+        });
+
+
+    });
+
+
+
+
+{#добваление товара в корзину#}
+    $('.add-to-cart-btn').on('click', function () {
+{#       console.log($(this).find('i').attr('id'));#}
+        var meal_id_split = $(this).find('i').attr('id').split('_');
+        add_to_cart(meal_id_split[1], 1, '');
+
+    });
+
+    $('.menu_item').on('click', function () {
+{#        if ($(window).width() <= 992){#}
+            $('html, body').animate({
+                scrollTop: $('#standart_menu_div').offset().top}, 1000)
+{#        }#}
+    })
+    
+    </script>
+
+{% endblock %}

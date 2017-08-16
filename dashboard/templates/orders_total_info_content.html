@@ -1,0 +1,224 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+                        <div class="body" style="margin-bottom: 10px">
+                            <h3 class="card-inside-title mrg-bottom-33">Выберите дату</h3>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+
+                                    <div class="form-line">
+
+                                        <input type='text' class="padding-5" data-position="right top" id="menu_date" value="{{ date }}"/>
+                                    </div>
+{#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Активные даты
+                                <small>В меню отображаются активные даты по формуле: СЕГОДНЯ + 1 ДЕНЬ</small>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Tab panes -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Дата</th>
+                                                <th>Активна</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table_dates">
+                                        {% for date in dates %}
+                                            <tr class="" id="{{ date.id }}">
+                                                <td><i class="mdi mdi-close pointer-pure del-date font-size-20"></i></td>
+                                                <td>{{ date.date|date:"d.m.Y" }}</td>
+                                                <td>
+                                                    <input type="checkbox" id="md_checkbox_{{ date.id }}" class="date_active" {% if date.active %}checked{% endif %} />
+                                                    <label for="md_checkbox_{{ date.id }}"></label>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+
+    <button id="save_dates" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0 display-none">
+        <i class="mdi mdi-content-save"></i>
+    </button>
+
+{#                                    <b>Home Content</b>#}
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script>
+    var dates_to_change = [];
+    $('.table_dates').on('click', '.date_active', function () {
+        console.log('cl');
+        $('#save_dates').fadeIn('slow');
+        dates_to_change.push($(this).parent().parent().attr('id') + '_' + $(this).is(':checked'));
+        console.log('length =' + dates_to_change.length);
+    });
+
+    $('#save_dates').on('click', function () {
+        var data = new FormData();
+        data.append('operation', 'date_status');
+        for (var i=0; i <= (dates_to_change.length -1); i++){
+            data.append('dates_' + i,dates_to_change[i]);
+            console.log(i);
+        }
+        $.ajax({
+            url: '{% url 'dashboard:active_dates' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                swal({
+                    title: 'Информация обнавлена',
+                    text: 'Информация на серевере удачно обнавлена. Операция: ' + data,
+                    type: 'success'
+                });
+                $('#save_dates').fadeOut('slow');
+
+            }
+        });
+
+    });
+
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            autoClose:true,
+            range: true,
+            minDate: new Date(),
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                if ($('#menu_date').val().length >= 21){
+
+                    add_csrf();
+                    $.ajax({
+                        url: "{% url 'dashboard:active_dates' %}",
+                        type: 'POST',
+                        data: JSON.stringify({
+                                    'dates': $('#menu_date').val(),
+                                    'operation': 'add'
+                                }),
+                        processData: false,
+                        contentType: false,
+                        error: function(data){
+                            swal({
+                                title: 'Ошибка сервера',
+                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                                type: 'error'
+                            });
+                        },
+                        success:function (data) {
+                            swal({
+                                title: 'Информация обнавлена',
+                                text: 'Информация на серевере удачно обнавлена. Операция: ' + data,
+                                type: 'success'
+                            });
+{#                            $('#' + id).slideUp('fast');#}
+
+                        }
+                    });
+                }
+
+                console.log($('#menu_date').val());
+            }
+        });
+
+{#    удаление даты из списка#}
+    $('.del-date').on('click', function () {
+        add_csrf();
+        var id = $(this).parent().parent().attr('id');
+        $.ajax({
+            url: '{% url 'dashboard:active_dates' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'date_id': id,
+                        'operation': 'del'
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                swal({
+                    title: 'Информация обнавлена',
+                    text: 'Информация на серевере удачно обнавлена. Операция: ' + data,
+                    type: 'success'
+                });
+                $('#' + id).slideUp('fast');
+
+            }
+        });
+
+    })
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,279 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+                        <div class="body" style="margin-bottom: 10px">
+                            <h3 class="card-inside-title mrg-bottom-33">Выберите дату</h3>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+
+                                    <div class="form-line">
+
+                                        <input type='text' class="padding-5" data-position="right top" id="menu_date" value="{{ date }}"/>
+                                    </div>
+{#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                                </div>
+                            </div>
+                        </div>
+
+                                    <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading" role="tab" id="headingOne_1">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1">
+                                                       Активные даты
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_1">
+                                                <div class="panel-body">
+                                                    <div class="body">
+                                                        <ul class="list-group">
+                                                            {% for active_date in active_dates %}
+                                                            <li class="list-group-item">{{ active_date.date|date:"d.m.Y" }} {% if active_date.active %}<i class="mdi mdi-check"></i>{% endif %}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Комплексное меню
+                                <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="body table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Название</th>
+                                                <th>Дата</th>
+                                                <th>Добавлено</th>
+                                                <th>Вид</th>
+                                                <th>Изображение</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for menu in menus %}
+                                                <tr id="menu_{{ menu.id }}">
+                                                    <td class="pointer-pure ingredient"  scope="row" class="">{{ menu.id }}</td>
+                                                    <td class="pointer-pure ingredient" >{{ menu.name }}</td>
+                                                    <td class="pointer-pure ingredient" >{{ meny.date|date:"d.m.Y, H:i" }}</td>
+                                                    <td class="pointer-pure ingredient" >{{ meny.added|date:"d.m.Y, H:i" }}</td>
+                                                    <td class="pointer-pure ingredient" >{{ menu.menu_type.name }}</td>
+                                                    <td><img src="{% static 'images/menu' %}/{{ menu.image_246_246.name }}" alt=""></td>
+                                                    <td><i class="pointer-pure mdi mdi-close del"></i></td>
+
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script>
+
+
+
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            minDate: new Date(),
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                add_csrf();
+               $.ajax({
+                    url: "{% url 'dashboard:complex_menu' %}",
+                    type: 'POST',
+                    data: JSON.stringify({
+                                'menu_date': $('#menu_date').val(),
+{#                                'menu_type': 'standart'#}
+                            }),
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'error'
+                        });
+                    },
+                    success:function (data) {
+                        if (data != 'no'){
+                            window.location.href = '/dashboard/complex_menu_by_date/' + data;
+                        }else {
+                            swal({
+                                title: 'Данные отсутствуют',
+                                text: 'Уведомление клиенту о файлах перевода успешно отправлено.',
+                                type: 'warning',
+                                confirmButtonText: 'Ok',
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                $('.table_meal').html('');
+                            });
+
+                        }
+{#                        var data_json = $.parseJSON(data);#}
+{#                        var response = data_json['response'];#}
+{#                        if (response == 'no_data'){#}
+{#                            swal({#}
+{#                                title: 'Данные отсутствуют',#}
+{#                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',#}
+{#                                type: 'warning'#}
+{#                            });#}
+{##}
+{#                        }#}
+
+                    }
+                });
+                console.log($('#menu_date').val());
+            }
+        });
+
+{#выбор блюда#}
+    $('.meal_choice').on('click', function () {
+
+        add_csrf();
+       $.ajax({
+            url: '{% url 'dashboard:add_new_meal_by_date' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'menu_date': $('#menu_date').val(),
+                        'menu_type': 'standart',
+                        'meal_id': $(this).attr('id')
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                if (data == 'ok'){
+                    location.reload();
+                }
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                if (response == 'no_data'){
+                    swal({
+                        title: 'Данные отсутствуют',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+
+                }
+
+            }
+        });
+
+
+    })
+
+{#    удаление блюда из списка#}
+    $('.del-meal').on('click', function () {
+        add_csrf();
+        var cur = $(this);
+
+        $.ajax({
+            url: '{% url 'dashboard:del_meal_by_date' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': $(this).parents().attr('id')
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                if (data != 'error'){
+                    var m_id = data;
+                    $('#' + m_id).parent().fadeOut('slow');
+                    console.log('oki')
+                    console.log(cur.parent().attr('id'))
+                }else {
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении.',
+                        type: 'warning'
+                    });
+
+                }
+
+            }
+        });
+
+    })
+    </script>
+
+
+{% endblock %}

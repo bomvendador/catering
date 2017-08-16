@@ -1,0 +1,140 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Портфолио
+                        <small>Список событий, меню</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="{% url 'dashboard:add_place' %}" class=" waves-effect waves-block">Добавить</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+
+                        <div class="body table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Название</th>
+                                        <th>Дата добавления</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                        <tr id="{{ item.id }}">
+                                            <td class="pointer-pure ingredient item_details"  scope="row" class="">{{ item.id }}</td>
+                                            <td class="pointer-pure ingredient item_details" class="">{{ item.name }}</td>
+                                            <td class="pointer-pure ingredient item_details">{{ item.date|date:"d.m.Y" }}</td>
+                                            <td><i class="pointer-pure mdi mdi-close del_item"></i></td>
+
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'dashboard:add_portfolio_item' %}" id="add_quote_btn" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15">
+        <i class="mdi mdi-plus top-3"></i>
+    </a>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script>
+
+    $('.item_details').on('click', function () {
+        window.location.href = '/dashboard/portfolio_item_details/' + $(this).parent().prop('id');
+    });
+
+    $('.del_item').on('click', function () {
+        var item_id = $(this).parent().parent().prop('id');
+        swal({
+            title: 'Удалить элемент?',
+            text: 'Будет проведено удаление элемента',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ок',
+            closeOnConfirm: false,
+        },
+        function (isConfirm) {
+            if (isConfirm){
+                var data = new FormData();
+                data.append('item_id', item_id);
+                $.ajax({
+                    url: '{% url 'dashboard:delete_portfolio_item' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Удвление прошло успешно.',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                $('#' + item_id).remove();
+                            }
+
+                        });
+
+                    }
+                });
+            }
+
+        });
+    });
+
+
+
+
+    </script>
+
+
+{% endblock %}

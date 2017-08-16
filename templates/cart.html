@@ -1,0 +1,517 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% now "Y-m-d" as todays_date %}
+
+{% block title %}
+<title>Кейтеринг | Корзина</title>
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="sub-banner text-center section">
+        <div class="awe-parallax bg-4"></div>
+        <div class="awe-title awe-title-3">
+            <h3 class="lg text-uppercase">Корзина</h3>
+        </div>
+    </section>
+    <!-- END / SUB BANNER -->
+
+    <!-- SHOP PAGE -->
+    <section id="shop-page" class="shop-page section">
+        <div class="container">
+            <div id="min_sum_warning_div">
+                <div class="awe-error display-none warn-amount" id="min_sum_warning">
+                    <p>Уважаемый покупатель, минимальная сумма заказа - {{ min_sum }} руб. Добавьте товар в корзину!</p>
+                </div>
+
+            </div>
+
+            <form id="meals_form" name="meals_form">{% csrf_token %}
+                <table class="shop-table shop-cart">
+                    <thead>
+                        <tr>
+                            <th class="product-remove"></th>
+                            <th class="product-name">Наименование</th>
+                            <th class="product-quantity"></th>
+                            <th class="product-subtotal">Сумма</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cart_tbody">
+                        <!-- CART ITEM -->
+    {#                    <tr class="cart-item">#}
+    {#                        <td class="product-remove">#}
+    {#                            <a href="#" title="remove"><i class="icon awe_close"></i></a>#}
+    {#                        </td>#}
+    {#                        <td class="product-name">#}
+    {#                            <div class="product-thumbnail">#}
+    {#                                <a href="#"><img src="images/shop/img-3.jpg" alt=""></a>#}
+    {#                            </div>#}
+    {#                            <div class="product-info">#}
+    {#                                <a href="#">Cereal Strawbery & Milk (L)</a>#}
+    {#                                <span>$12 per serve</span>#}
+    {#                            </div>#}
+    {#                        </td>#}
+    {#                        <td class="product-quantity">#}
+    {#                            <div class="quantity">#}
+    {#                                <input type="button" value="-" class="minus">#}
+    {#                                <input type="number" value="1" class="qty">#}
+    {#                                <input type="button" value="+" class="plus">#}
+    {#                            </div>#}
+    {#                        </td>#}
+    {#                        <td class="product-subtotal">#}
+    {#                            <span class="amount">$48</span>#}
+    {#                        </td>#}
+    {#                    </tr>#}
+                        <!-- END / CART ITEM -->
+                    </tbody>
+                </table>
+            </form>
+
+                <div class="cart-footer">
+                    <div class="coupon-code">
+                        <label for="coupon">Промокод</label>
+                        <input type="text" id="coupon">
+                    </div>
+                    <div class="total">
+                        <span>ИТОГО:</span>
+                        <span id="total_amount" class="amount"></span>
+                    </div>
+                </div>
+
+                <div class="cart-submit text-center font-size-15 margin-top-15 margin-bottom-15">
+                    <div class="form-actions">
+                            <p class="submit-div pointer-pure margin-bottom-25 col-lg-4 col-lg-offset-4 col-xs-12 awe-btn awe-btn-3 awe-btn-default text-uppercase">ОФОРМИТЬ ЗАКАЗ</p>
+
+                    </div>
+                </div>
+
+        </div>
+
+    </section>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+    function show_min_sum_warning() {
+{#        $('html, body').animate({scrollTop: $('#min_sum_warning').offset().top}, 500);#}
+        $('.warn-amount').slideDown(500, function () {
+            $('html, body').animate({scrollTop: $('#min_sum_warning_div').offset().top - $('#header').outerHeight() - 10}, 500);
+            $('.cart-submit').slideUp(500)
+        });
+
+    }
+
+    function hide_min_sum_warning() {
+{#        $('html, body').animate({scrollTop: $('#min_sum_warning').offset().top - $('#header').outerHeight(true)}, 500);#}
+        $('.warn-amount').slideUp(500);
+        $('.cart-submit').slideDown(500)
+
+    }
+
+    function check_cart() {
+        if ($.cookie('cart_id')){
+            var cart_id = $.cookie('cart_id');
+            add_csrf();
+            $.ajax({
+                url: '{% url 'check_cart' %}',
+                type: 'POST',
+                data: JSON.stringify({
+                            'cart_id': cart_id
+                        }),
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'error'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var cart_meals = data_json['cart_meal'];
+                        console.log(data)
+
+                    var menu_date = data_json['menu_date'];
+                    var allowed_menu = data_json['allowed_menu'];
+                    var date_redirected = data_json['date_redirected'];
+                    if (allowed_menu == 1){
+{#                        {% if not date_redirected %}#}
+{#                            window.location.href = '/{{ url_redirect }}/' + menu_date;#}
+{#                        {% endif %}#}
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                        var redirect = data_json['redirect'];
+                        console.log(data)
+                        window.location.href = '/complex_standart_menu_by_date/' + redirect;
+                    }
+                    if (cart_meals != 0){
+                        if (cart_meals.length > 0) {
+                            for (var i=0; i < cart_meals.length; i++){
+                                var meal_price = cart_meals[i]['meal_price'];
+                                var meal_qnt = cart_meals[i]['meal_qnt'];
+                                var meal_sum = cart_meals[i]['meal_sum'];
+                                var meal_img = cart_meals[i]['meal_img'];
+                                var meal_name = cart_meals[i]['meal_name'];
+                                var meal_id = cart_meals[i]['meal_id'];
+                                var meal_img_url = cart_meals[i]['meal_img_url'];
+                                var item_type = cart_meals[i]['item_type'];
+                                var full_meal_name = cart_meals[i]['full_meal_name'];
+{#<a class="pp-product-detail" href="{% url 'product_details' meal.meal.id %}">#}
+
+                                $('#cart_tbody').append('<tr id="cart_' + item_type + '_id_' + meal_id + '"class="cart-item"><td class="product-remove"><i class="icon awe_close del-meal"></i></td><td class="product-name"><div class="product-thumbnail"><a href="#"><img src="/static/images/' + meal_img_url + '/' + meal_img + '" alt="' + full_meal_name + '"></a></div><div class="product-info"><a class="pp-product-detail"  href="/complex_menu_details/' + meal_id + '/">' + full_meal_name + '</a><span>' + meal_price + ' руб.</span></div></td><td class="product-quantity"><div class="quantity"><input type="button" value="-" class="minus"><input type="number" value="' + meal_qnt + '" class="qty" id="' + item_type + '_qnt_' + meal_id + '" name="' + item_type + '_qnt_' + meal_id + '" disabled><input type="button" value="+" class="plus"></div></td><td class="product-subtotal"><span class="amount">' + meal_price * meal_qnt + '</span></td></tr>');
+
+
+
+                                    $('.minicart-list').append('<li id="minicart_' + item_type + '_id_' + meal_id + '"><div class="product-thumb"><img class="width-40" src="' + '/static/images/' + meal_img_url + '/' + meal_img + '" alt=""></div><div class="product-name">' + meal_name + '</div><div class="qty-wrap"><span class="product-quantity"><span id="minicart_' + item_type + '_qnt_' + meal_id + '" class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span></div><div class="product-remove"><i class="icon awe_close minicart_del_meal font-size-10 pointer-pure"></i></div></li>');
+
+                            }
+                                $('#cart_tbody').append('<tr class="cart-item"><td class="product-remove  padding-left-30 padding-bottom-15"><input type="checkbox" id="box-1"><label for="box-1"></label></td><td class="product-name padding-15-0"><i class="mdi mdi-silverware-variant"></i> Мне необходимы столовые приборы</td><td class="product-quantity"><div id="cutlery_qnt" class="quantity display-none-important"><input type="button" value="-" class="minus_cal"><input type="number" value="1" class="qty" name="cutlery" id="cutlery"><input type="button" value="+" class="plus_cal"></div></td><td></td></tr>');
+
+                                var total_amount = parseFloat(data_json['cart_amount']);
+                                var cart_meals_qnt = data_json['cart_meals_qnt'];
+                                var min_sum = parseFloat(data_json['min_sum']);
+
+                                $('#cart_label_amount').text(total_amount.toFixed(2));
+                                $('#cart_sum').text(total_amount.toFixed(2));
+                                $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                                $('#total_amount').text(total_amount.toFixed(2));
+
+                                if (min_sum <= total_amount){
+                                    $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                                    $('.warn-amount').hide();
+
+                                }else {
+                                    $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                                    $('.warn-amount').slideDown(1000);
+
+                                }
+
+                        }
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                    }
+                    if ($('#minicart-ul li').length > 3){
+                        $('#minicart-ul').addClass('height-210');
+                    }
+
+                }
+            });
+
+
+        }else {
+            cart_id = 'no_cart';
+            {% if redirect %}
+            window.location.href = '/complex_standart_menu_by_date/{{ redirect }}';
+            {% endif %}
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    проверка первоначального состояния корзины#}
+{#    function check_cart() {#}
+{#        if ($.cookie('cart_id')){#}
+{#            var cart_id = $.cookie('cart_id');#}
+{#            add_csrf();#}
+{#            $.ajax({#}
+{#                url: '{% url 'check_cart' %}',#}
+{#                type: 'POST',#}
+{#                data: JSON.stringify({#}
+{#                            'cart_id': cart_id#}
+{#                        }),#}
+{#                processData: false,#}
+{#                contentType: false,#}
+{#                error: function(data){#}
+{#                    swal({#}
+{#                        title: 'Ошибка сервера',#}
+{#                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',#}
+{#                        type: 'error'#}
+{#                    });#}
+{#                },#}
+{#                success:function (data) {#}
+{#                    var data_json = $.parseJSON(data);#}
+{#                    var cart_meals = data_json['cart_meal'];#}
+{##}
+{#                    var menu_date = data_json['menu_date'];#}
+{#                    var allowed_menu = data_json['allowed_menu'];#}
+{#                    var date_redirected = data_json['date_redirected'];#}
+{#                            console.log('redir = ' + date_redirected)#}
+{##}
+{#                    $('.minicart-wrap').css('pointer-events', 'none');#}
+{##}
+{#                    if (allowed_menu == 0){#}
+{#                        $.removeCookie('cart_id', {path: '/'});#}
+{#                    }#}
+{#                    var cart_meals = response['cart_meals'];#}
+{#                    if (cart_meals != 0){#}
+{#                        if (cart_meals.length > 0) {#}
+        {#                    $(window).scrollTop(tempScrollTop);#}
+    {#                        var meal_id = response['meal_id'];#}
+    {#                        var total_amount = response['total_amount'];#}
+{#                            console.log(cart_meals.length);#}
+{#                            for (var i=0; i < cart_meals.length; i++){#}
+{#                                var meal_price = cart_meals[i]['meal_price'];#}
+{#                                var meal_qnt = cart_meals[i]['meal_qnt'];#}
+{#                                var meal_sum = cart_meals[i]['meal_sum'];#}
+{#                                var meal_img = cart_meals[i]['meal_img'];#}
+{#                                var meal_name = cart_meals[i]['meal_name'];#}
+{#                                var meal_id = cart_meals[i]['meal_id'];#}
+{#                                var full_meal_name = cart_meals[i]['full_meal_name'];#}
+{##}
+{##}
+{##}
+{#                                $('#cart_tbody').append('<tr id="cart_meal_id_' + meal_id + '"class="cart-item"><td class="product-remove"><i class="icon awe_close del-meal"></i></td><td class="product-name"><div class="product-thumbnail"><a href="#"><img src="/static/images/meals/' + meal_img + '" alt="' + full_meal_name + '"></a></div><div class="product-info"><a href="#">' + full_meal_name + '</a><span>' + meal_price + ' руб.</span></div></td><td class="product-quantity"><div class="quantity"><input type="button" value="-" class="minus"><input type="number" value="' + meal_qnt + '" class="qty" id="qnt_' + meal_id + '" name="qnt_' + meal_id + '" disabled><input type="button" value="+" class="plus"></div></td><td class="product-subtotal"><span class="amount">' + meal_price * meal_qnt + '</span></td></tr>');#}
+{##}
+    {#                            $.cookie('cart_id', cart_id, {path: '/'});#}
+    {#                            if ($('#cart_meal_id_' + meal_id).length == 0){#}
+{#                                $('.minicart-list').append('<li id="minicart_meal_id_' + meal_id + '"><div class="product-thumb"><img class="width-40" src="' + '/static/images/meals/' + meal_img + '" alt=""></div><div class="product-name">' + meal_name + '</div><div class="qty-wrap"><span class="product-quantity"><span id="cart_meal_qnt_' + meal_id + '" class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span></div><div class="product-remove"><i class="icon awe_close minicart_del_meal font-size-10 pointer-pure"></i></div></li>');#}
+    {#                            }#}
+    {#                            else {#}
+    {#                                $('#cart_meal_qnt_' + meal_id).text(meal_qnt);#}
+    {#                            }#}
+{##}
+{#                            }#}
+{##}
+{#                                var total_amount = data_json['cart_amount'];#}
+{#                                var cart_meals_qnt = data_json['cart_meals_qnt'];#}
+{##}
+{##}
+{##}
+{#                                $('#total_amount').text(total_amount);#}
+{#                                $('#cart_label_amount').text(total_amount);#}
+{#                                $('#cart_sum').text(total_amount);#}
+{#                                $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');#}
+{##}
+{#                        }#}
+{#                    }else {#}
+{#                        $.removeCookie('cart_id', {path: '/'});#}
+{#                    }#}
+{#                    if ($('#minicart-ul li').length > 3){#}
+{#                        $('#minicart-ul').addClass('height-210');#}
+{#                    }#}
+{##}
+{#                }#}
+{#            });#}
+{##}
+{##}
+{#        }else {#}
+{#            cart_id = 'no_cart';#}
+{#        }#}
+{##}
+{#    }#}
+
+    check_cart();
+
+
+
+    var qnt = 0;
+    var price = 0;
+    var subtotal_before = 0;
+    var subtotal_after = 0;
+    var subtotal_diff = 0;
+    var min_sum = parseInt({{ min_sum }});
+
+    $('#cart_tbody').on('click','.minus_cal', function () {
+        if (parseInt($(this).next().val()) > 1){
+            qnt = parseInt($(this).next().val() - 1);
+            $(this).next().val(qnt);
+
+        }
+
+    });
+    $('#cart_tbody').on('click','.plus_cal', function () {
+        qnt = parseInt($(this).prev().val()) + 1;
+        $(this).prev().val(qnt);
+
+    });
+
+    $('#cart_tbody').on('change','#box-1', function () {
+        console.log('werwerew')
+        if ($(this).prop('checked')){
+            $('#cutlery_qnt').removeClass('display-none-important').fadeIn('fast');
+            $('#cutlery').val('1');
+
+        }else{
+            $('#cutlery_qnt').fadeOut('fast');
+            $('#cutlery').val('');
+
+        }
+{#        $('#cutlery_qnt').removeClass('display-none-important').fadeIn('fast');#}
+    })
+
+
+    $('#cart_tbody').on('click','.minus', function () {
+        if ($(this).next().val() > 1){
+            subtotal_before = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            qnt = parseInt($(this).next().val() - 1);
+            price = parseInt($(this).parent().parent().parent().find('.product-name .product-info span').text());
+            $(this).next().val(qnt);
+            $(this).parent().parent().parent().find('.product-subtotal .amount').text(qnt*price);
+            subtotal_after = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            subtotal_diff = subtotal_after - subtotal_before;
+
+            $('#total_amount').text(parseFloat($('#total_amount').text()) + subtotal_diff + '.00');
+
+            $('#cart_label_amount').text($('#total_amount').text());
+            $('#cart_label_qnt').text(parseInt($('#cart_label_qnt').text() - 1));
+
+            if (parseInt($('#total_amount').text()) < min_sum){
+                show_min_sum_warning();
+            }
+        }
+    });
+
+    $('#cart_tbody').on('click','.plus', function () {
+
+            subtotal_before = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            qnt = parseInt($(this).prev().val()) + 1;
+            price = parseInt($(this).parent().parent().parent().find('.product-name .product-info span').text());
+            $(this).prev().val(qnt);
+            $(this).parent().parent().parent().find('.product-subtotal .amount').text(qnt*price);
+            subtotal_after = parseInt($(this).parent().parent().parent().find('.product-subtotal .amount').text());
+            subtotal_diff = subtotal_after - subtotal_before;
+
+            $('#total_amount').text(parseFloat($('#total_amount').text()) + subtotal_diff + '.00');
+
+            $('#cart_label_amount').text($('#total_amount').text());
+            $('#cart_label_qnt').text(parseInt($('#cart_label_qnt').text()) + 1);
+
+            if (parseInt($('#total_amount').text()) >= min_sum){
+                hide_min_sum_warning();
+            }
+
+
+    });
+
+
+{#удаление товара из корзины#}
+
+    $('#cart_tbody').on('click', '.del-meal', function () {
+        var meal_id = $(this).parent().parent().attr('id');
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+            console.log(cart_id);
+        }else {
+            cart_id = 'no_cart';
+        }
+        add_csrf();
+        $.ajax({
+            url: '{% url 'del_from_minicart' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': meal_id,
+                        'cart_id': cart_id
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                var cart_meals_qnt = response['cart_meals_qnt'];
+                var min_sum = response['min_sum'];
+                var type = response['type'];
+
+                if (!response['no_data']) {
+{#                    $(window).scrollTop(tempScrollTop);#}
+                    var meal_id = response['meal_id'];
+                    var total_amount = response['total_amount'];
+                    $('#cart_' + type + '_id_' + meal_id).slideUp(1000, function () {
+                        $('#cart_' + type + '_id_' + meal_id).remove();
+                    });
+                    $('#total_amount').text(total_amount);
+                    $('#cart_label_amount').text(total_amount).animateCss('bounceIn');
+                    $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                    console.log('minicart-ul li = ' + $('#minicart-ul li').length);
+                    if (min_sum <= parseFloat(total_amount)){
+                        $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                        $('.warn-amount').hide();
+
+
+                    }else {
+
+
+                        $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                        show_min_sum_warning();
+
+                    }
+
+                }
+            }
+        });
+
+    });
+
+
+    $('.submit-div').on('click', function () {
+        var cart_id = '';
+        if ($.cookie('cart_id')){
+            cart_id = $.cookie('cart_id');
+            console.log(cart_id);
+        }else {
+            cart_id = 'no_cart';
+        }
+{#        add_csrf();#}
+
+        var data = new FormData($('#meal_form').get(0));
+
+        $('.qty').each(function () {
+            data.append($(this).attr('name'), $(this).val());
+        });
+
+        for (var i=0; data.length; i++){
+            console.log('data = ' + data.elements[i])
+        }
+
+        data.append('cart_id', cart_id);
+        $.ajax({
+            url: '{% url 'to_checkout' %}',
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                window.location.href = '/checkout/' + data;
+            }
+        });
+
+    })
+
+
+
+</script>
+
+{% endblock %}

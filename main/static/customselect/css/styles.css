@@ -1,0 +1,25 @@
+/* some general style */
+body { color: #333333; font-family: Arial, Helvetica, Verdana, sans-serif; font-size: 12px;}
+hr {border: 1px dotted #999999;width: 300px;text-align: left;margin-left: 0px;margin-top: 20px;margin-bottom: 20px;}
+
+
+/*styles for custom select */
+.customselect_selectedoption { width:254px; height: auto; padding: 10px; border: 1px solid #efefef; font-size: 12px; font-weight: bold; color: #666666;margin: 5px}
+.customselect_arrow { background: url('../img/arrow.png') no-repeat; background-position:96% 70%; cursor: pointer; }
+.customselect_selectwrapper { margin-top: 0px;  margin-left: 0px; padding-right: 2px; display:none; position:absolute;width: 249px;background-color: #ffffff;}
+.customselect_selectwrapper .selectitems {  padding:3px; z-index: 10000; margin-left: 2px; border-bottom: solid 1px #ddd;background-color: #ffffff; }
+.customselect_selectwrapper .last { border: none; }
+.customselect_selectwrapper .selectitems span { padding-left: 5px; } 
+.customselect_selectwrapper .hoverclass { background-color:#efefef; cursor:pointer; } 
+.customselect_selectwrapper .selectedclass { background-color:#cccccc; }
+
+
+.customselect_selectfooter {border: 1px solid #efefef;}
+.customselect_optionswrapper { height: 180px; overflow-y: scroll; width: 280px;padding 10px;}
+/* end styles for custom select */
+
+
+/* styles for images inside first select */
+
+img.selectphoto {float: left; margin-right: 5px;border: 1px solid #999999;}
+.selectphotolabel {vertical-align: top;padding-bottom: 30px;margin-bottom: 10px;}

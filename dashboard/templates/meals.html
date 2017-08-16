@@ -1,0 +1,283 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Блюда
+                        <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                        <li role="presentation" class="active"><a href="#first_meals" data-toggle="tab">Первые блюда</a></li>
+                        <li role="presentation"><a href="#second_meals" data-toggle="tab">Вторые блюда</a></li>
+                        <li role="presentation"><a href="#salads" data-toggle="tab">Салаты</a></li>
+                        <li role="presentation"><a href="#drinks" data-toggle="tab">Напитки</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="first_meals">
+
+
+                            <div class="body table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Название</th>
+                                            <th>Добавлено</th>
+                                            <th>Цена</th>
+                                            <th>Изображение</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for meal in meals %}
+                                            <tr class="meal-details pointer-pure">
+                                            {% if meal.meal_type.name == 'Первые блюда' %}
+                                                <th scope="row">{{ meal.id }}</th>
+                                                <td>{{ meal.name }}</td>
+                                                <td>{{ meal.added|date:"d.m.Y, H:i" }}</td>
+                                                <td>{{ meal.price }}</td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.image_name }}" alt=""></td>
+{#                                                <td><div id="foto" class="foto" style="background-image: url('/static/meal/{{ meal.image_name }}'); "></div></td>#}
+                                            {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+        {#                                    <b>Home Content</b>#}
+{#                            <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_meal">ДОБАВИТЬ</button>#}
+                        </div>
+
+
+
+                        <div role="tabpanel" class="tab-pane fade" id="second_meals">
+
+
+                            <div class="body table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Название</th>
+                                            <th>Добавлено</th>
+                                            <th>Цена</th>
+                                            <th>Изображение</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for meal in meals %}
+                                            <tr class="meal-details pointer-pure">
+                                            {% if meal.meal_type.name == 'Вторые блюда' %}
+                                                <th scope="row">{{ meal.id }}</th>
+                                                <td>{{ meal.name }}</td>
+                                                <td>{{ meal.added|date:"d.m.Y, H:i" }}</td>
+                                                <td>{{ meal.price }}</td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.image_name }}" alt=""></td>
+                                            {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane fade" id="salads">
+
+
+                            <div class="body table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Название</th>
+                                            <th>Добавлено</th>
+                                            <th>Цена</th>
+                                            <th>Изображение</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for meal in meals %}
+                                            <tr class="meal-details pointer-pure">
+                                            {% if meal.meal_type.name == 'Салаты' %}
+                                                <th scope="row">{{ meal.id }}</th>
+                                                <td>{{ meal.name }}</td>
+                                                <td>{{ meal.added|date:"d.m.Y, H:i" }}</td>
+                                                <td>{{ meal.price }}</td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.image_name }}" alt=""></td>
+                                            {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane fade" id="drinks">
+
+
+                            <div class="body table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Название</th>
+                                            <th>Добавлено</th>
+                                            <th>Цена</th>
+                                            <th>Изображение</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for meal in meals %}
+                                            <tr class="meal-details pointer-pure">
+                                            {% if meal.meal_type.name == 'Напитки' %}
+                                                <th scope="row">{{ meal.id }}</th>
+                                                <td>{{ meal.name }}</td>
+                                                <td>{{ meal.added|date:"d.m.Y, H:i" }}</td>
+                                                <td>{{ meal.price }}</td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.image_name }}" alt=""></td>
+                                            {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="add_meal" type="button" class="btn btn-warning btn-circle-lg waves-effect waves-circle waves-float position-fixed right-15 bottom-15 padding-top-0">
+        <i class="mdi mdi-plus"></i>
+    </button>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script>
+
+    $('.meal-details').on('click', function () {
+        window.location.href = '/dashboard/meal_details/' + $(this).find('th:first').text();
+    });
+
+    $('#add_meal').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = '/dashboard/add_new_meal';
+
+    });
+
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                add_csrf();
+               $.ajax({
+                    url: '{% url 'dashboard:get_menu_items' %}',
+                    type: 'POST',
+                    data: JSON.stringify({
+                                'menu_date': $('#menu_date').val(),
+                                'menu_type': 'standart'
+                            }),
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'error'
+                        });
+                    },
+                    success:function (data) {
+                        var data_json = $.parseJSON(data);
+                        var response = data_json['response'];
+                        if (response == 'no_data'){
+                            swal({
+                                title: 'Данные отсутствуют',
+                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                                type: 'warning'
+                            });
+
+                        }
+
+{#                        swal({#}
+{#                            {% if user_profile.role.role_name != 'Клиент' %}#}
+{#                            title: 'Информация сохранена',#}
+{#                            text: 'Заявке успешно присвоено юридическое лицо',#}
+{#                            {% else %}#}
+{#                            title: 'Информация сохранена',#}
+{#                            text: 'Информация о плательщике успешно сохранена. В ближайшее время на Вашу электронную почту будет выслан счет на оплату. Спасибо за оказанное доверие нашей компании!',#}
+{#                            {% endif %}#}
+{#                            type: 'success',#}
+{#                            confirmButtonText: 'Ok',#}
+{#                            closeOnConfirm: true#}
+{#                        });#}
+
+{#                        $('#company_div_content').html('<p class="form-control display-inline" id="company_from_client" name="company_from_client">'+ name + '<i class="mdi mdi-close f_s_20 float-right pointer-pure"  id="delete_company" data-company-id="' + company_id + '" title="Удалить"></i><i class="mdi mdi-pencil f_s_20 float-right pointer-pure"  id="change_company" data-toggle="modal" data-target="#companies_list_modal" title="Изменить"></i></p>');#}
+{#                        $('#company_div').fadeIn('slow');#}
+{#                        $('#payment_methods').fadeOut('slow');#}
+{#                        $('#close_modal_select_company_btn').click();#}
+                    }
+                });
+
+
+
+
+                console.log('дата изменена')
+            }
+        })
+
+
+
+    </script>
+
+
+{% endblock %}

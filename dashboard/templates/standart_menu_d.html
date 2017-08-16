@@ -1,0 +1,616 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+                        <div class="body" style="margin-bottom: 10px">
+                            <h3 class="card-inside-title mrg-bottom-33">Выберите дату</h3>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+
+                                    <div class="form-line">
+
+                                        <input type='text' class="padding-5" data-position="right top" id="menu_date" value="{{ date }}"/>
+                                    </div>
+{#                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" id="add_new_date">Добавить дату</button>#}
+                                </div>
+                            </div>
+                        </div>
+
+                                    <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading" role="tab" id="headingOne_1">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1">
+                                                       Активные даты
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_1">
+                                                <div class="panel-body">
+                                                    <div class="body">
+                                                        <ul class="list-group">
+                                                            {% for active_date in active_dates %}
+                                                            <li class="list-group-item">{{ active_date.date|date:"d.m.Y" }} {% if active_date.active %}<i class="mdi mdi-check"></i>{% endif %}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Стандартное меню
+                                <small>Add quick, dynamic tab functionality to transition through panes of local content</small>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                <li role="presentation" class="active"><a href="#first_meals" data-toggle="tab">Первые блюда</a></li>
+                                <li role="presentation"><a href="#second_meals" data-toggle="tab">Вторые блюда</a></li>
+                                <li role="presentation"><a href="#salads" data-toggle="tab">Салаты</a></li>
+                                <li role="presentation"><a href="#drinks" data-toggle="tab">Напитки</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="first_meals">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Изображение</th>
+                                                <th>Название</th>
+                                                <th>Вес</th>
+                                                <th>Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table_meal">
+                                        {% for meal in meals %}
+                                            {% if meal.meal.meal_type.name == 'Первые блюда' %}
+                                            <tr class="" id="meal_{{ meal.id }}">
+                                                <td id="{{ meal.id }}"><i class="mdi mdi-close pointer-pure del-meal font-size-20"></i></td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.meal.image_name }}" alt=""></td>
+                                                <td>{{ meal.meal.name }}</td>
+                                                <td>{{ meal.meal.weight }}</td>
+                                                <td>{{ meal.meal.price }}</td>
+
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                    {% if date %}
+                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" data-toggle="modal" data-target="#modal_first_meal">ДОБАВИТЬ</button>
+                                    {% endif %}
+{#                                    <b>Home Content</b>#}
+                                </div>
+
+
+                            <!-- модальное окно выбора первого блюда -->
+                                    <div class="modal fade margin-top-100" id="modal_first_meal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content modal-col-light-blue">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="defaultModalLabel">Выбор первого блюда</h4>
+                                                </div>
+                                                <div class="modal-body">
+                        {#                            {% for client in clients %}#}
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Изображение</th>
+                                                                <th>Название</th>
+                                                                <th>Вес</th>
+                                                                <th>Цена</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for first_meal in first_meals %}
+
+                                                            <tr class="meal_choice pointer-pure" id="meal_{{ first_meal.id }}">
+                                                                <td>{{ first_meal.id }}</td>
+
+                                                                <td><img src="{% static 'images/meals' %}/{{ first_meal.image_name }}" alt=""></td>
+                                                                <td>{{ first_meal.name }}</td>
+                                                                <td>{{ first_meal.weight }}</td>
+                                                                <td>{{ first_meal.price }}</td>
+
+                                                            </tr>
+
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_modal_select_company_btn">ЗАКРЫТЬ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- modal end-->
+
+
+
+                                <div role="tabpanel" class="tab-pane fade" id="second_meals">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Изображение</th>
+                                                <th>Название</th>
+                                                <th>Вес</th>
+                                                <th>Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table_meal">
+                                        {% for meal in meals %}
+                                            {% if meal.meal.meal_type.name == 'Вторые блюда' %}
+                                            <tr class="" id="meal_{{ meal.id }}">
+                                                <td id="{{ meal.id }}"><i class="mdi mdi-close pointer-pure del-meal font-size-20"></i></td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.meal.image_name }}" alt=""></td>
+                                                <td>{{ meal.meal.name }}</td>
+                                                <td>{{ meal.meal.weight }}</td>
+                                                <td>{{ meal.meal.price }}</td>
+
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                    {% if date %}
+                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" data-toggle="modal" data-target="#modal_second_meal">ДОБАВИТЬ</button>
+                                    {% endif %}
+{#                                    <b>Home Content</b>#}
+                                </div>
+
+
+                            <!-- модальное окно выбора второго блюда -->
+                                    <div class="modal fade margin-top-100" id="modal_second_meal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content modal-col-light-blue">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="defaultModalLabel">Выбор второго блюда</h4>
+                                                </div>
+                                                <div class="modal-body">
+                        {#                            {% for client in clients %}#}
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Изображение</th>
+                                                                <th>Название</th>
+                                                                <th>Вес</th>
+                                                                <th>Цена</th>
+                                                            </tr>
+                                                        </thead>
+                {#                                                    <tfoot>#}
+                {#                                                            <th>ID</th>#}
+                {#                                                            <th>Имя</th>#}
+                {#                                                            <th>Телефон</th>#}
+                {#                                                            <th>Email</th>#}
+                {##}
+                {#                                                    </tfoot>#}
+                                                        <tbody>
+                                                        {% for second_meal in second_meals %}
+
+                                                            <tr class="meal_choice pointer-pure" id="meal_{{ second_meal.id }}">
+                                                                <td>{{ second_meal.id }}</td>
+
+                                                                <td><img src="{% static 'images/meals' %}/{{ second_meal.image_name }}" alt=""></td>
+                                                                <td>{{ second_meal.name }}</td>
+                                                                <td>{{ second_meal.weight }}</td>
+                                                                <td>{{ second_meal.price }}</td>
+
+                                                            </tr>
+
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+
+
+
+
+                        {#                                {{ client.name }}#}
+                        {#                            {% endfor %}#}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_modal_select_company_btn">ЗАКРЫТЬ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- modal end-->
+
+
+                                <div role="tabpanel" class="tab-pane fade" id="salads">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Изображение</th>
+                                                <th>Название</th>
+                                                <th>Вес</th>
+                                                <th>Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table_meal">
+                                        {% for meal in meals %}
+                                            {% if meal.meal.meal_type.name == 'Салаты' %}
+                                            <tr class="" id="meal_{{ meal.id }}">
+                                                <td id="{{ meal.id }}"><i class="mdi mdi-close pointer-pure del-meal font-size-20"></i></td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.meal.image_name }}" alt=""></td>
+                                                <td>{{ meal.meal.name }}</td>
+                                                <td>{{ meal.meal.weight }}</td>
+                                                <td>{{ meal.meal.price }}</td>
+
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                    {% if date %}
+                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" data-toggle="modal" data-target="#modal_salads">ДОБАВИТЬ</button>
+                                    {% endif %}
+{#                                    <b>Home Content</b>#}
+                                </div>
+
+
+                            <!-- модальное окно выбора салатов -->
+                                    <div class="modal fade margin-top-100" id="modal_salads" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content modal-col-light-blue">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="defaultModalLabel">Выбор салатов</h4>
+                                                </div>
+                                                <div class="modal-body">
+                        {#                            {% for client in clients %}#}
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Изображение</th>
+                                                                <th>Название</th>
+                                                                <th>Вес</th>
+                                                                <th>Цена</th>
+                                                            </tr>
+                                                        </thead>
+                {#                                                    <tfoot>#}
+                {#                                                            <th>ID</th>#}
+                {#                                                            <th>Имя</th>#}
+                {#                                                            <th>Телефон</th>#}
+                {#                                                            <th>Email</th>#}
+                {##}
+                {#                                                    </tfoot>#}
+                                                        <tbody>
+                                                        {% for salad in salads %}
+
+                                                            <tr class="meal_choice pointer-pure" id="meal_{{ salad.id }}">
+                                                                <td>{{ salad.id }}</td>
+
+                                                                <td><img src="{% static 'images/meals' %}/{{ salad.image_name }}" alt=""></td>
+                                                                <td>{{ salad.name }}</td>
+                                                                <td>{{ salad.weight }}</td>
+                                                                <td>{{ salad.price }}</td>
+
+                                                            </tr>
+
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+
+
+
+
+                        {#                                {{ client.name }}#}
+                        {#                            {% endfor %}#}
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_modal_select_company_btn">ЗАКРЫТЬ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- modal end-->
+
+
+
+                                <div role="tabpanel" class="tab-pane fade" id="drinks">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Изображение</th>
+                                                <th>Название</th>
+                                                <th>Вес</th>
+                                                <th>Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table_meal">
+                                        {% for meal in meals %}
+                                            {% if meal.meal.meal_type.name == 'Напитки' %}
+                                            <tr class="" id="meal_{{ meal.id }}">
+                                                <td id="{{ meal.id }}"><i class="mdi mdi-close pointer-pure del-meal font-size-20"></i></td>
+                                                <td><img src="{% static 'images/meals' %}/{{ meal.meal.image_name }}" alt=""></td>
+                                                <td>{{ meal.meal.name }}</td>
+                                                <td>{{ meal.meal.weight }}</td>
+                                                <td>{{ meal.meal.price }}</td>
+
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                    {% if date %}
+                                    <button type="button" class="btn btn-block btn-lg btn-primary waves-effect" data-toggle="modal" data-target="#modal_drinks">ДОБАВИТЬ</button>
+                                    {% endif %}
+{#                                    <b>Home Content</b>#}
+                                </div>
+
+
+                            <!-- модальное окно выбора салатов -->
+                                    <div class="modal fade margin-top-100" id="modal_drinks" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content modal-col-light-blue">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="defaultModalLabel">Выбор напитков</h4>
+                                                </div>
+                                                <div class="modal-body">
+                        {#                            {% for client in clients %}#}
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Изображение</th>
+                                                                <th>Название</th>
+                                                                <th>Вес</th>
+                                                                <th>Цена</th>
+                                                            </tr>
+                                                        </thead>
+                {#                                                    <tfoot>#}
+                {#                                                            <th>ID</th>#}
+                {#                                                            <th>Имя</th>#}
+                {#                                                            <th>Телефон</th>#}
+                {#                                                            <th>Email</th>#}
+                {##}
+                {#                                                    </tfoot>#}
+                                                        <tbody>
+                                                        {% for drink in drinks %}
+
+                                                            <tr class="meal_choice pointer-pure" id="meal_{{ drink.id }}">
+                                                                <td>{{ drink.id }}</td>
+
+                                                                <td><img src="{% static 'images/meals' %}/{{ drink.image_name }}" alt=""></td>
+                                                                <td>{{ drink.name }}</td>
+                                                                <td>{{ drink.weight }}</td>
+                                                                <td>{{ drink.price }}</td>
+
+                                                            </tr>
+
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+
+
+
+
+                        {#                                {{ client.name }}#}
+                        {#                            {% endfor %}#}
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" id="close_modal_select_company_btn">ЗАКРЫТЬ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- modal end-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
+    <script src="{% static 'js/add_csrf.js' %}"></script>
+
+    <script>
+
+        var disabledDays = [0, 6];
+
+        $('#menu_date').datepicker({
+            minDate: new Date(),
+            onRenderCell: function (date, cellType) {
+                if (cellType == 'day') {
+                    var day = date.getDay(),
+                        isDisabled = disabledDays.indexOf(day) != -1;
+
+                    return {
+                        disabled: isDisabled
+                    }
+                }
+            },
+            onSelect: function (fd, d, picker) {
+                if (!d){
+                    return
+                }
+                add_csrf();
+               $.ajax({
+                    url: "{% url 'dashboard:menu_standart' %}",
+                    type: 'POST',
+                    data: JSON.stringify({
+                                'menu_date': $('#menu_date').val(),
+                                'menu_type': 'standart'
+                            }),
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'error'
+                        });
+                    },
+                    success:function (data) {
+                        if (data != 'no'){
+                            window.location.href = '/dashboard/standart_menu_by_date/' + data;
+                        }else {
+                            swal({
+                                title: 'Данные отсутствуют',
+                                text: 'Блюд для выбранной даты нет. Добавить данные?',
+                                type: 'warning',
+                                showCancelButton: true,
+                                cancelButtonText: 'Нет',
+                                confirmButtonText: 'Да',
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                $('.table_meal').html('');
+                                var date = convert_date_to_db($('#menu_date').val());
+                                window.location.href = '/dashboard/standart_menu_by_date/' + date;
+                            });
+
+                        }
+{#                        var data_json = $.parseJSON(data);#}
+{#                        var response = data_json['response'];#}
+{#                        if (response == 'no_data'){#}
+{#                            swal({#}
+{#                                title: 'Данные отсутствуют',#}
+{#                                text: 'Возникла ошибка при сохранении. Попробуйте позже.',#}
+{#                                type: 'warning'#}
+{#                            });#}
+{##}
+{#                        }#}
+
+                    }
+                });
+                console.log($('#menu_date').val());
+            }
+        });
+
+{#выбор блюда#}
+    $('.meal_choice').on('click', function () {
+
+        add_csrf();
+       $.ajax({
+            url: '{% url 'dashboard:add_new_meal_by_date' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'menu_date': $('#menu_date').val(),
+                        'menu_type': 'standart',
+                        'menu_level': 'single',
+                        'meal_id': $(this).attr('id')
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                if (data == 'ok'){
+                    location.reload();
+                }
+                var data_json = $.parseJSON(data);
+                var response = data_json['response'];
+                if (response == 'no_data'){
+                    swal({
+                        title: 'Данные отсутствуют',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+
+                }
+
+            }
+        });
+
+
+    })
+
+{#    удаление блюда из списка#}
+    $('.del-meal').on('click', function () {
+        add_csrf();
+                    console.log($(this).parents().attr('id'))
+        var cur = $(this);
+
+        $.ajax({
+            url: '{% url 'dashboard:del_meal_by_date' %}',
+            type: 'POST',
+            data: JSON.stringify({
+                        'meal_id': $(this).parents().attr('id')
+                    }),
+            processData: false,
+            contentType: false,
+            error: function(data){
+                swal({
+                    title: 'Ошибка сервера',
+                    text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                    type: 'error'
+                });
+            },
+            success:function (data) {
+                if (data != 'error'){
+                    var m_id = data;
+                    $('#' + m_id).parent().fadeOut('slow');
+                    console.log('oki')
+                    console.log(cur.parent().attr('id'))
+                }else {
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении.',
+                        type: 'warning'
+                    });
+
+                }
+
+            }
+        });
+
+    })
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,488 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block links %}
+
+{#    <link rel="stylesheet" href="css/lightgallery.css">#}
+    <link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- SECTION BLOG -->
+    <section class="section-blog section margin-top-20">
+
+        <div class="container">
+            <div class="row">
+                <!-- BLOG LIST -->
+                <div class="col-md-9">
+                    <div class="blog-single">
+                        <!-- BREADCRUMB -->
+                        <ul class="breadcrumb">
+{#                            <li><a href="#">Blog</a></li>#}
+                            <li><a href="{% url 'places_list_main' %}">Список мест</a></li>
+                            <li><span>{{ place.name }}</span></li>
+                        </ul>
+                        <!-- END / BREADCRUMB -->
+
+                        <!-- POST -->
+                        <div class="post post-single">
+                            <div class="post-media">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/places/' %}{{ place.main_image }}" alt="">
+                                </div>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-title">
+                                    <h3 class="xmd">{{ place.name }}</h3>
+                                </div>
+                                <div class="meta-info">
+                                    {% for grey_option in grey_options %}
+                                    <span><i class="mdi {{ grey_option.icon.name }}"></i> {{ grey_option.name }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="post-content">
+
+                                    <div class="block-right fr">
+                                        <div class="ingredients item">
+                                            <div class="item-heading">
+                                                <h5>Характеристики</h5>
+                                            </div>
+                                            <table class="ingre-table width-100-prct">
+                                                {% for option in options %}
+                                                <tr>
+                                                    <td class="roboto-500">{{ option.name }}</td>
+                                                    <td class="roboto-500">{{ option.value }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+
+                                        <div class="tips item">
+                                            <div class="item-heading">
+                                                <h5>Инфраструктура</h5>
+                                            </div>
+                                            <table class="ingre-table width-100-prct">
+                                                {% for infrastructure in infrastructures %}
+                                                <tr>
+                                                    <td class="roboto-500 text-align-left" align="left">{{ infrastructure.name }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <p class="roboto-300">
+                                        {{ place.description|safe }}
+                                    </p>
+
+                                    <div class="block-image" >
+                                        <h3 class="xmd">Галерея</h3>
+
+                                        <div id="lightgallery" class="list-unstyled justified-gallery">
+{#                                            <img src="images/blog/img-2.jpg" alt="">#}
+{#                                                <a href="{% static 'images/portfolio/IMG_1308.JPG' %}" data-srcset="{% static 'images/portfolio/IMG_1307.JPG' %} 375w, {% static 'images/portfolio/IMG_1309.JPG' %} 375w, {% static 'images/portfolio/IMG_1310.JPG' %} 375w" data-sizes="(min-width: 40em) 80vw, 100vw">#}
+                                                {% for image in images %}
+
+                                                <a href="{% static 'images/places/watermark/' %}{{ image.name_watermark }}">
+                                                    <img src="{% static 'images/places/watermark/' %}{{ image.name_watermark }}" class="max-width-100-px max-heihgt-67-px margin-bottom-5">
+                                                </a>
+                                                {% endfor %}
+{#                                            <img src="{% static 'images/portfolio/IMG_1307.JPG' %}" alt="">#}
+
+{#                                                <ul id="lightgallery" class="list-unstyled row">#}
+{#                                                    <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="img/1-1600.jpg" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">#}
+{#                                                        <a href="">#}
+{#                                                            <img class="img-responsive" src="{% static 'images/portfolio/IMG_1308.JPG' %}" alt="Thumb-1">#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+                                        </div>
+                                    </div>
+
+{#                                    <blockquote class="blockquote q-left">#}
+{#                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales.</p>#}
+{#                                        <span class="blockquote-footer">Anonymous</span>#}
+{#                                    </blockquote>#}
+
+{#                                    <div class="image-wrap">#}
+{#                                        <img src="images/background/img-5.jpg" alt="">#}
+{#                                    </div>#}
+
+{#                                    <div class="block-image">#}
+{#                                        <div class="image-wrap fr">#}
+{#                                            <img src="images/blog/img-3.jpg" alt="">#}
+{#                                        </div>#}
+{#                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo. <br><br>#}
+{#                                        Aenean sollicitudin elit ut egestas viverra.  Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.Donec vitae diam eu magna tincidunt rutrum. Nullam interdum lacinia lobortis. Duis eget lobortis augue, id sollicitudin justo. Aenean sollicitudin elit ut egestas viverra. </p>#}
+{#                                    </div>#}
+
+
+                                </div>
+                            </div>
+
+                            <!-- SHARE AND TAG -->
+                            <div class="share-tags">
+{#                                <div class="share-box">#}
+{#                                    <h5 class="sm">Share</h5>#}
+{#                                    <div class="share">#}
+{#                                        <a onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')"><i class="fa fa-facebook"></i></a>#}
+{#                                        <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                        <a href="#"><i class="fa fa-google-plus"></i></a>#}
+{#                                        <a href="#"><i class="fa fa-linkedin"></i></a>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="tag-box fr">
+                                    <i class="mdi mdi-tag font-size-20 margin-right-10 opacity-0-8"></i>
+                                    <div class="tag">
+                                        {% for place_tag in place_tags %}
+                                        <a href="{% url 'places_list_main_by_tag' place_tag.id %}" class="roboto-300">{{ place_tag.tag.name }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / SHARE AND TAG -->
+
+{#                            <div class="about-author">#}
+{#                                <div class="image-thumb fl">#}
+{#                                    <img src="images/shop/img-4.jpg" alt="">#}
+{#                                </div>#}
+{#                                <div class="author-info">#}
+{#                                    <div class="author-name">#}
+{#                                        <h4 class="xmd text-capitalize">Maecenas Eu Metus</h4>#}
+{#                                    </div>#}
+{#                                    <div class="author-content">#}
+{#                                        <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="author-social">#}
+{#                                    <a href="#"><i class="fa fa-facebook"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-twitter"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-google-plus"></i></a>#}
+{#                                    <a href="#"><i class="fa fa-linkedin"></i></a>#}
+{#                                </div>#}
+{#                            </div>#}
+
+                            <!-- COMMENTS -->
+{#                            <div id="comments">#}
+{#                                <div class="comments-inner-wrap">#}
+{#                                    <h3 id="comments-title" class="xmd text-capitalize">4 Comments</h3>#}
+{#                                    <ul class="commentlist">#}
+{#                                        <li class="comment">#}
+{#                                            <div class="comment-box">#}
+{#                                                <div class="comment-author">#}
+{#                                                    <a href="#"><img src="images/blog/img-6.jpg" alt=""></a>#}
+{#                                                </div>#}
+{#                                                <div class="comment-body">#}
+{#                                                    <cite class="fn"><a href="#">David</a></cite>#}
+{#                                                    <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis.</p>#}
+{#                                                    <div class="comment-meta">#}
+{#                                                        <span>sep 18,2014 at 9:00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="comment-abs">#}
+{#                                                    <a href="#" class="comment-reply-link">Reply</a>#}
+{#                                                    <a href="#" class="comment-edit-link">Edit</a>#}
+{#                                                    <a href="#">Approve</a>#}
+{#                                                    <a href="#">Delete</a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </li>#}
+{##}
+{#                                        <li class="comment">#}
+{#                                            <div class="comment-box">#}
+{#                                                <div class="comment-author">#}
+{#                                                    <a href="#"><img src="images/blog/img-8.jpg" alt=""></a>#}
+{#                                                </div>#}
+{#                                                <div class="comment-body">#}
+{#                                                    <cite class="fn"><a href="#">Karrot</a></cite>#}
+{#                                                    <p>Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>#}
+{#                                                    <div class="comment-meta">#}
+{#                                                        <span>sep 18,2014 at 9:00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="comment-abs">#}
+{#                                                    <a href="#" class="comment-edit-link">Edit</a>#}
+{#                                                    <a href="#" class="comment-reply-link">Reply</a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <ul class="children">#}
+{#                                                <li class="comment">#}
+{#                                                    <div class="comment-box">#}
+{#                                                        <div class="comment-author">#}
+{#                                                            <a href="#"><img src="images/blog/img-6.jpg" alt=""></a>#}
+{#                                                        </div>#}
+{#                                                        <div class="comment-body">#}
+{#                                                            <cite class="fn"><a href="#">Tanuki</a></cite>#}
+{#                                                            <p>Maecenas eu metus sit amet nunc rhoncus dictum vitae non felis. Praesent consequat placerat velit nec vehicula. Aliquam nec varius nisi. In sollicitudin ac velit ac sodales. Nulla interdum lacus quis placerat semper. Suspendisse at sollicitudin lacus.</p>#}
+{#                                                            <div class="comment-meta">#}
+{#                                                                <span>sep 18,2014 at 9:00</span>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="comment-abs">#}
+{#                                                            <a href="#" class="comment-edit-link">Edit</a>#}
+{#                                                            <a href="#" class="comment-reply-link">Reply</a>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
+{#                                            </ul>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </div>#}
+{#                            </div>#}
+                            <!-- END / COMMENTS -->
+
+                            <!-- LEAVER YOUR COMMENT -->
+                            <div id="respond">
+                                <div class="reply-title">
+                                    <h3 class="xmd">Хотите узнать больше?</h3>
+                                    <p class="roboto-300">
+                                        Отправьте свой вопрос и мы непременно Вам перезвоним и ответим на него
+                                    </p>
+                                </div>
+                                <!-- COMMENT FORM -->
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-item form-textarea">
+                                                <textarea id="message" placeholder="Сообщение..."  class="roboto-300"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-item form-name">
+                                                <input class="roboto-300" type="text" placeholder="Ваше имя" id="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-item form-email">
+                                                <input class="roboto-300" type="text" placeholder="Номер телефона" id="phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-actions">
+                                                <input type="submit" value="ОТПРАВИТЬ" class="awe-btn awe-btn-2 awe-btn-default text-uppercase" id="send_request">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END / COMMENT FORM -->
+
+                            </div>
+                            <!-- END / LEAVER YOUR COMMENT -->
+                        </div>
+                        <!-- END / POST -->
+
+                    </div>
+
+                </div>
+                <!-- END / BLOG LIST -->
+
+                <!-- SIDEBAR -->
+                <div class="col-md-3">
+                    <aside class="sidebar">
+                        <!-- WIDGET SEARCH -->
+{#                        <div class="widget widget_search">#}
+{#                            <h4 class="sm text-uppercase">Search</h4>#}
+{#                            <form>#}
+{#                                <input type="text" name="search" placeholder="Type keyword">#}
+{#                            </form>#}
+{#                        </div>#}
+                        <!-- END / WIDGET SEARCH -->
+
+                        <!-- WIDGET RECENT POST -->
+{#                        <div class="widget widget_recent_post">#}
+{#                            <h4 class="sm text-uppercase">Recent posts</h4>#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#">Aliquam nibh sapien</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#">Nunc pellentesque dolor</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                        <!-- END / WIDGET RECENT POST -->
+
+
+                        <!-- WIDGET INSTAGRAM -->
+{#                        <div class="widget widget_instagram">#}
+{#                            <h4 class="sm text-uppercase">Instagram</h4>#}
+{#                            <div class="instagram">#}
+{#                                <a href="#"><img src="images/blog/img-5.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-10.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-5.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-9.jpg" alt=""></a>#}
+{#                                <a href="#"><img src="images/blog/img-11.jpg" alt=""></a>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <!-- END / WIDGET INSTAGRAM -->
+
+                        <!-- LATEST COMMENTS -->
+                        <div class="widget widget_latest_comments">
+                            <h4 class="sm text-uppercase">Другие площадки</h4>
+                            <ul>
+                            {% for place in places %}
+
+                                <li>
+                                    <div class="image-wrap">
+                                        <img class="max-width-75" src="{% static 'images/places/' %}{{ place.main_image }}">
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="author">{{ place.name }}</span>
+                                        <a href="{% url 'place_details' place.id %}">{{ place.description|truncatechars_html:20|safe }}</a>
+{#                                        <div class="meta">#}
+{#                                            <span>sep 18,2014 at 9:00</span>#}
+{#                                        </div>#}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        <input type="submit" value="посмотреть все" class="awe-btn awe-btn-2 awe-btn-default text-uppercase width-100-prct" id="see_all">
+                        </div>
+                        <!-- END / LATEST COMMENTS -->
+
+
+                        <!-- WIDGET CATEGORIES -->
+{#                        <div class="widget widget_categories">#}
+{#                            <h4 class="sm text-uppercase">Categories</h4>#}
+{#                            <ul>#}
+{#                                <li><a href="#">Cras condimentum</a></li>#}
+{#                                <li><a href="#">Nibh et pellentesque</a></li>#}
+{#                                <li><a href="#">Leo nibh gravida velit</a></li>#}
+{#                                <li><a href="#">Tortor augue a eros</a></li>#}
+{#                                <li><a href="#">Libero</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                        <!-- END / WIDGET CATEGORIES -->
+
+                        <!-- WIDGET ARCHIVE -->
+{#                        <div class="widget widget_archive">#}
+{#                            <h4 class="sm text-uppercase">Archives</h4>#}
+{#                            <ul>#}
+{#                                <li><a href="#">June 2013</a></li>#}
+{#                                <li><a href="#">May 2013</a></li>#}
+{#                                <li><a href="#">April 2013</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                        <!-- END / WIDGET ARCHIVE -->
+
+                        <!-- WIDGET TAG CLOUD -->
+                        <div class="widget widget_tag_cloud">
+                            <h4 class="sm text-uppercase">Теги</h4>
+                            <div class="tagcloud">
+                                {% for tag in tags %}
+                                <a id="{{ tag.id }}" href="{% url 'places_list_main_by_tag' tag.id %}" class="roboto-300 tag">{{ tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- END / WIDGET TAG CLOUD -->
+
+
+                    </aside>
+                </div>
+                <!-- END / SIDEBAR -->
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- END / SECTION BLOG -->
+
+
+{% endblock %}
+
+{% block script %}
+
+{#    <script src="js/lightgallery.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lightgallery.min.js' %}"></script>
+
+    <!-- lightgallery plugins -->
+{#    <script src="js/lg-thumbnail.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-thumbnail.min.js' %}"></script>
+{#    <script src="js/lg-fullscreen.min.js"></script>#}
+    <script src="{% static 'lightgallery/js/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'lightgallery/js/picturefill.js' %}"></script>
+
+    <script>
+
+    $('#see_all').on('click', function () {
+        window.location.href = '/places_list/';
+    })
+
+    $('#send_request').on('click', function (e) {
+        e.preventDefault();
+        var data = new FormData()
+        data.append('name', $('#name').val());
+        data.append('phone', $('#phone').val());
+        data.append('message', $('#message').val());
+        data.append('place_id', {{ place.id }});
+            $.ajax({
+                url: '{% url 'place_client_request' %}',
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'warning'
+                    });
+                },
+                success:function (data) {
+                    swal({
+                        title: 'Информация отправлена',
+                        text: 'Спасибо за проявленный к нам интерес! В ближайшее время с Вами свяжется наш менеджер.',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ок',
+                        closeOnConfirm: true,
+                    },
+                    function (isConfirm) {
+                        if (isConfirm){
+                            $('#name').val('');
+                            $('#phone').val('');
+                            $('#message').val('');
+                        }
+
+                    });
+
+                }
+            });
+
+    });
+
+{#        $('#lightgallery').on('click', function () {#}
+{#            lightGallery(document.getElementById('lightgallery'),{#}
+{#                thumbnail: false,#}
+{#                dynamic: true,#}
+{#                dynamicEl: [{#}
+{#                    "src": "{% static 'images/portfolio/IMG_1307.JPG' %}",#}
+{#                    'thumb': "{% static 'images/portfolio/IMG_1307.JPG' %}",#}
+{#                    'subHtml': '<h4 class="color-white">Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>'#}
+{#                }, {#}
+{#                    "src": "{% static 'images/portfolio/IMG_1308.JPG' %}",#}
+{#                    'thumb': "{% static 'images/portfolio/IMG_1309.JPG' %}",#}
+{#                    'subHtml': "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>"#}
+{#                }, {#}
+{#                    "src": "{% static 'images/portfolio/IMG_1309.JPG' %}",#}
+{#                    'thumb': "{% static 'images/portfolio/IMG_1309.JPG' %}",#}
+{#                    'subHtml': "<h4>Coniston Calmness</h4><p>Beautiful morning</p>"#}
+{#                }]#}
+{#            })#}
+{#        });#}
+        lightGallery(document.getElementById('lightgallery'),{
+            thumbnail:true
+
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,582 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <!-- HOME MEDIA -->
+    <section id="home-media" class="home-media section">
+        <div class="home-fullscreen tb">
+            <div class="awe-parallax bg-1"></div>
+
+            <div class="awe-overlay overlay-default"></div>
+
+            <div class="tb-cell text-center">
+                <div class="home-content">
+                    <div class="ribbon ribbon-3">
+                        <h2 class="sm">Обеды от</h2>
+                    </div>
+                    <h1 class="sbig text-uppercase font-roboto font-weight-400">220 рублей</h1>
+                    <div class="awe-hr">
+                        <i class="icon awe_certificate"></i>
+                    </div>
+                    <p class="xmd" style="font-family: Roboto; font-weight: 200">Доставка в офисы</p>
+                    <div class="row">
+                        <div class="main-screen-menu-btn float-left col-lg-5 awe-btn awe-btn-3 awe-btn-default text-uppercase "><a href="{% url 'complex_standart_menu' %}" class="color-white">Комплексное меню</a></div>
+                        <div class="main-screen-menu-btn float-right col-lg-5 awe-btn awe-btn-3 awe-btn-default text-uppercase "><a href="{% url 'standart_menu' %}" class="color-white">Подбор блюд</a></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END / HOME MEDIA -->
+
+
+
+
+
+
+    <div class="container margin-top-40 margin-bottom-40">
+            <div class="block-first">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="image-wrap">
+                            <img src="{% static 'images/about/img-1.jpg' %}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-md-offset-1">
+                        <h4 class="lg text-uppercase font-roboto font-weight-400">МЫ ЦЕНИМ ВРЕМЯ НАШИХ КЛИЕНТОВ</h4>
+                        <hr class="header-line">
+                        <p class="color-666 font-roboto font-weight-100">Вы заняты рабочими моментами или просто не хватает времени и сил на приготовление пищи? Мы придем Вам на помощь и поможем не отвлекаться от того, что действительно важно. Мы доставим Вам блюда к обеду по минимальным ценам и высочайшим качеством. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-last margin-top-20">
+                <div class="row">
+                    <div class="col-md-4 col-md-push-8">
+                        <div class="row">
+                            <div class="col-xs-6 margin-bottom-25">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/index/meat.jpg' %}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 margin-bottom-25">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/index/veg.jpg' %}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/index/water.jpg' %}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="image-wrap">
+                                    <img src="{% static 'images/about/img-5.jpg' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-md-pull-4">
+                        <h4 class="lg text-uppercase">КАЧЕСТВО - НАША РЕПУТАЦИЯ</h4>
+                        <hr class="header-line">
+                        <p class="color-666 font-roboto font-weight-100">В приготовлении мы используем только свежие продукты и подготовленную, очищенную способом <a href="https://goo.gl/7qZV3X" target="_blank">обратного осмоса</a>, воду. У нас трудятся только проверенные повара с многолетним опытом работы с соблюдением всех санитарно-эпидемиологических норм.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="block-first margin-top-40">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="image-wrap">
+                            <img src="{% static 'images/menu_delivery.jpg' %}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-md-offset-1">
+                        <h4 class="lg text-uppercase font-roboto font-weight-400">МЕНЮ И ДОСТАВКА</h4>
+                        <hr class="header-line">
+                        <p class="color-666 font-roboto font-weight-100">Для Вашего удобства наше меню позволяет производить как собственный подбор блюд, так и заказать специально созданные комплексные обеды, составленные нашими поварами. Меню составляется на всю неделю. Доставка осуществляется бесплатно пр заказе от {{ min_sum }} руб. Заказ доставляется либо в указанное Вами время, либо до 12.00 указанной в заказе даты.</p>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                               <div class="awe-btn awe-btn-2 awe-btn-default text-uppercase col-xs-12"><a href="{% url 'standart_menu' %}" class="">ПОДБОР БЛЮД</a></div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+
+                                <div class="awe-btn awe-btn-2 awe-btn-default text-uppercase col-xs-12"><a href="{% url 'complex_standart_menu' %}" class="">КОМПЛЕКСНОЕ МЕНЮ</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+    <!-- SECTION HIGHLIGHT -->
+    <section class="section-highlight section">
+        <div class="divider divider-2 divider-color"></div>
+        <div class="awe-color"></div>
+        <div class="container padding-15">
+            <div class="good-food-heading text-center">
+                <div class="good-food-title style-2">
+                    <h6 class="xmd text-uppercase">Цитата дня</h6>
+                    <hr class="header-line-white">
+                    <div>
+
+                        <h4 class="lg"><i class="icon awe_quote_left"></i>{{ quote.text }}</h4>
+
+                    </div>
+                   <hr class="header-line-white">
+
+                </div>
+                <p class="text-align-right">{{ quote.author }}</p>
+
+            </div>
+        </div>
+    </section>
+    <!-- END / SECTION HIGHLIGHT -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- GOOD FOOD -->
+{#    <section id="good-food" class="good-food section pd">#}
+{#        <div class="container">#}
+{#            <div class="good-food-heading text-center">#}
+{#                <div class="good-food-title style-2">#}
+{#                    <h6 class="xmd text-uppercase">Цитата недели</h6>#}
+{#                    <hr class="header-line">#}
+{#                    <div>#}
+{##}
+{#                        <h4 class="lg"><i class="icon awe_quote_left"></i> Кто хочет вкушать лишь сладкое, для того оно становится горьким</h4>#}
+{##}
+{#                    </div>#}
+{#                   <hr class="header-line">#}
+{##}
+{#                </div>#}
+{#                <p class="text-align-right">Роберт Вальзер </p>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </section>#}
+    <!-- END / GOOD FOOD -->
+
+    <!-- TESTIMONIAL -->
+{#    <section id="testimonial" class="testimonial testimonial-1 section">#}
+{#        <!-- BACKGROUND -->#}
+{#        <div class="awe-parallax bg-2"></div>#}
+{#        <!-- END / BACKGROUND -->#}
+{##}
+{#        <!-- OVERLAY -->#}
+{#        <div class="awe-overlay"></div>#}
+{#        <!-- END / OVERLAY -->#}
+{##}
+{#        <div class="container">#}
+{#            <div class="testimonial-content">#}
+{#                <div class="icon-head">#}
+{#                    <i class="icon awe_quote_left"></i>#}
+{#                    <span>Цитата дня</span>#}
+{##}
+{#                </div>#}
+{##}
+{#                <blockquote>#}
+{#                    <p class="roboto-300">Кто хочет вкушать лишь сладкое, </p>#}
+{#                    <p class="roboto-300">для того оно становится горьким. </p>#}
+{#                    <span>для того оно становится горьким.</span>#}
+{#                    <div class="test-footer text-right">#}
+{#                        <span class="sm">Роберт Вальзер</span>#}
+{#                    </div>#}
+{#                </blockquote>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <!-- END / TESTIMONIAL -->
+
+    <!-- FASTFOOD -->
+{#    <section id="fastfood" class="fastfood section pd70">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-md-5">#}
+{#                    <div class="fastfood-description">#}
+{#                        <div class="content-heading mt">#}
+{#                            <h4 class="lg text-uppercase">FASTFOOD OR HEALTH? WE GIVE YOU BOTH!</h4>#}
+{#                            <hr class="_hr">#}
+{#                        </div>#}
+{#                        <div class="text-wrap">#}
+{#                            <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>#}
+{#                        </div>#}
+{#                        <a href="menu.html" class="awe-btn awe-btn-2 awe-btn-ar text-uppercase">See the menu</a>#}
+{#                    </div>  #}
+{#                </div>#}
+{#                <div class="col-md-6 col-md-offset-1">#}
+{#                    <div class="fastfood-items">#}
+{#                        <div class="row">#}
+{#                            <!-- FASTFOOD ITEM -->#}
+{#                            <div class="col-xs-6">#}
+{#                                <div class="fastfood-item">#}
+{#                                    <img src="{% static 'images/fastfood/img-1.jpg' %}" alt="">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / FASTFOOD ITEM -->#}
+{##}
+{#                            <!-- FASTFOOD ITEM -->#}
+{#                            <div class="col-xs-6">#}
+{#                                <div class="fastfood-item">#}
+{#                                    <img src="{% static 'images/fastfood/img-2.jpg' %}" alt="">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / FASTFOOD ITEM -->#}
+{##}
+{#                            <!-- FASTFOOD ITEM -->#}
+{#                            <div class="col-xs-6">#}
+{#                                <div class="fastfood-item">#}
+{#                                    <img src="{% static 'images/fastfood/img-3.jpg' %}" alt="">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / FASTFOOD ITEM -->#}
+{##}
+{#                            <!-- FASTFOOD ITEM -->#}
+{#                            <div class="col-xs-6">#}
+{#                                <div class="fastfood-item">#}
+{#                                    <img src="{% static 'images/fastfood/img-4.jpg' %}" alt="">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- END / FASTFOOD ITEM -->#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <!-- END / FASTFOOD -->
+
+    <!-- SECTION HIGHLIGHT -->
+{#    <section class="section-highlight section">#}
+{#        <div class="divider divider-2 divider-color"></div>#}
+{#        <div class="awe-color"></div>#}
+{#        <div class="container">#}
+{#            <div class="highlight-content tb">#}
+{#                <div class="tb-cell">#}
+{#                    <p>Why don’t find a table and save it now? Find a table and We have discount for you!</p>#}
+{#                </div>#}
+{#                <div class="links tb-cell">#}
+{#                    <div class="reservation-link">#}
+{#                        <a href="reservation.html" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">RESERVATION</a>#}
+{#                    </div>#}
+{#                    <div class="shop-delivery-link">#}
+{#                        <a href="shop.html" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">SHOP DELIVERY</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <!-- END / SECTION HIGHLIGHT -->
+
+    <!-- SECTION BLOG -->
+    <section id="section-blog" class="section-blog section">
+        <div class="divider divider-2"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="blog-grid">
+                    <div class="grid-sizer"></div>
+                    <!-- BLOG POST -->
+                    <div class="post post-single w2"> 
+                        <div class="post-media">
+                            <img src="{% static 'images/blog/img-1.jpg' %}" alt="">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-title">
+                                <h2 class="text-uppercase"><a href="blog-single.html">AWARD WINNING CHEF</a></h2>
+                            </div>
+                            <div class="post-content">
+                                <p>Macaroon croissant pudding sweet roll. Jelly candy tootsie</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / BLOG POST -->
+
+                    <!-- BLOG POST -->
+                    <div class="post post-single">
+                        <div class="post-media">
+                            <img src="{% static 'images/blog/img-2.jpg' %}" alt="">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-title">
+                                <h2 class="text-uppercase"><a href="blog-single.html">A MULTI-POST STORY</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / BLOG POST -->
+
+                    <!-- BLOG POST -->
+                    <div class="post post-single">
+                        <div class="post-media">
+                            <img src="{% static 'images/blog/img-3.jpg' %}" alt="">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-title">
+                                <h2 class="text-uppercase"><a href="blog-single.html">HOW TO USE CHOPSTICKS</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / BLOG POST -->
+
+                    <!-- BLOG POST -->
+                    <div class="post post-single">
+                        <div class="post-media">
+                            <img src="{% static 'images/blog/img-4.jpg' %}" alt="">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-title">
+                                <h2 class="text-uppercase"><a href="blog-single.html">PHASELLUS JUSTO MAURIS, TEMPUS EGET NISL SIT</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / BLOG POST -->
+
+                    <!-- BLOG POST -->
+                    <div class="post post-single">
+                        <div class="post-media">
+                            <img src="{% static 'images/blog/img-2.jpg' %}" alt="">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-title">
+                                <h2 class="text-uppercase"><a href="blog-single.html">A MULTI-POST STORY</a></h2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- END / BLOG POST -->
+                </div>
+            </div>
+
+            <div class="loadmore text-center">
+                <a href="#" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">LOAD MORE POSTS</a>
+            </div>
+
+        </div>
+    </section>
+    <!-- END / SECTION BLOG -->
+
+    <!-- CONTACT US -->
+    <section id="contact" class="contact section">
+
+        <div class="contact-first">
+
+            <!-- OVERLAY -->
+            <div class="awe-overlay overlay-default"></div>
+            <!-- END / OVERLAY -->
+            
+            <div class="section-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="contact-body text-center">
+                                <h3 class="lg text-uppercase">CONTACT US</h3>
+                                <hr class="_hr">
+                                <address class="address-wrap">
+                                    <span class="address">Eddy Street & Gough Street, San Francisco, CA 94109</span>
+                                    <span class="phone">3792 - 7384 - 8459</span>
+                                </address>
+                            </div>
+
+                            <div class="see-map text-center">
+                                <a href="#" data-see-contact="See contact info" data-see-map="See location on map" class="awe-btn awe-btn-5 awe-btn-default text-uppercase"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MAP -->
+{#            <div id="map" data-map-zoom="14" data-map-latlng="45.738028, 21.224535" data-snazzy-map-theme="grayscale" data-map-marker="images/marker.png" data-map-marker-size="200*60"></div>#}
+            <!-- END / MAP -->
+        </div>
+
+        <div class="contact-second tb">
+            <!-- CONTACT FORM -->
+            <div class="tb-cell">
+                <div class="contact-form contact-form-1">
+                    <div class="inner wow fadeInUp" data-wow-delay=".3s">
+                        <form id="send-message-form" action="http://envato.megadrupal.com/html/ambrosia/processContact.php" method="post">
+                            <div class="form-item form-textarea">
+                                <textarea placeholder="Your Message" name="message"></textarea>
+                            </div>
+                            <div class="form-item form-type-name">
+                                <input type="text" placeholder="Your Name" name="name">
+                            </div>
+                            <div class="form-item form-type-email">
+                                <input type="text" placeholder="Your Email" name="email">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-actions text-center">
+                                <input type="submit" value="Send message" class="contact-submit awe-btn awe-btn-6 awe-btn-default text-uppercase">
+                            </div>
+                            <div id="contact-content"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END / CONTACT FORM -->
+        
+            <!-- NEWS LETTER -->
+            <div class="tb-cell">
+                <div class="news-letter text-center">
+                    <div class="inner wow fadeInUp" data-wow-delay=".6s">
+                        <div class="letter-heading">
+                            <h4 class="sm text-uppercase">GET NEWS LETTER FROM US</h4>
+                            <p>Doner filet mignon bacon corned beef rump, frankfurter sirloin</p>
+                        </div>
+                        <form>
+                            <div class="form-item">
+                                <input type="text" placeholder="Your email" class="text-uppercase" name="email">
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Subscribe" class="awe-btn awe-btn-2 awe-btn-default text-uppercase">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END / NEWS LETTER -->
+        </div>
+
+    </section>
+
+    <!-- END / CONTACT US -->
+
+
+{% endblock %}
+
+{% block script %}
+
+{#    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>#}
+
+<script>
+
+    {% include 'minicart_del_meal.html' %}
+
+{#    проверка первоначального состояния корзины#}
+    function check_cart() {
+        if ($.cookie('cart_id')){
+            var cart_id = $.cookie('cart_id');
+            add_csrf();
+            $.ajax({
+                url: '{% url 'check_cart' %}',
+                type: 'POST',
+                data: JSON.stringify({
+                            'cart_id': cart_id
+                        }),
+                processData: false,
+                contentType: false,
+                error: function(data){
+                    swal({
+                        title: 'Ошибка сервера',
+                        text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                        type: 'error'
+                    });
+                },
+                success:function (data) {
+                    var data_json = $.parseJSON(data);
+                    var cart_meals = data_json['cart_meal'];
+                        console.log(data)
+
+                    var menu_date = data_json['menu_date'];
+                    var allowed_menu = data_json['allowed_menu'];
+                    var date_redirected = data_json['date_redirected'];
+                    if (allowed_menu == 1){
+                        {% if not date_redirected %}
+                            window.location.href = '/{{ url_redirect }}/' + menu_date;
+                        {% endif %}
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                        var redirect = data_json['redirect'];
+                        console.log(data)
+                        window.location.href = '/complex_standart_menu_by_date/' + redirect;
+                    }
+                    if (cart_meals != 0){
+                        if (cart_meals.length > 0) {
+                            for (var i=0; i < cart_meals.length; i++){
+                                var meal_price = cart_meals[i]['meal_price'];
+                                var meal_qnt = cart_meals[i]['meal_qnt'];
+                                var meal_sum = cart_meals[i]['meal_sum'];
+                                var meal_img = cart_meals[i]['meal_img'];
+                                var meal_name = cart_meals[i]['meal_name'];
+                                var meal_id = cart_meals[i]['meal_id'];
+                                var meal_img_url = cart_meals[i]['meal_img_url'];
+                                var item_type = cart_meals[i]['item_type'];
+
+
+
+                                    $('.minicart-list').append('<li id="minicart_' + item_type + '_id_' + meal_id + '"><div class="product-thumb"><img class="width-40" src="' + '/static/images/' + meal_img_url + '/' + meal_img + '" alt=""></div><div class="product-name">' + meal_name + '</div><div class="qty-wrap"><span class="product-quantity"><span id="minicart_' + item_type + '_qnt_' + meal_id + '" class="quantity">' + meal_qnt + '</span> * </span><span class="amount">' + meal_price + '</span></div><div class="product-remove"><i class="icon awe_close minicart_del_meal font-size-10 pointer-pure"></i></div></li>');
+
+                            }
+
+                                var total_amount = parseFloat(data_json['cart_amount']);
+                                var cart_meals_qnt = data_json['cart_meals_qnt'];
+                                var min_sum = parseFloat(data_json['min_sum']);
+
+                                $('#cart_label_amount').text(total_amount.toFixed(2));
+                                $('#cart_sum').text(total_amount.toFixed(2));
+                                $('#cart_label_qnt').text(cart_meals_qnt).animateCss('bounceIn');
+                                if (min_sum <= total_amount){
+                                    $('#minicart-btn-div').removeClass('no-order-btn-minicart').addClass('order-btn-minicart');
+                                    $('.warn-amount').hide();
+
+                                }else {
+                                    $('#minicart-btn-div').removeClass('order-btn-minicart').addClass('no-order-btn-minicart');
+                                    $('.warn-amount').slideDown(1000);
+
+                                }
+
+                        }
+                    }else {
+                        $.removeCookie('cart_id', {path: '/'});
+                    }
+                    if ($('#minicart-ul li').length > 3){
+                        $('#minicart-ul').addClass('height-210');
+                    }
+
+                }
+            });
+
+
+        }else {
+            cart_id = 'no_cart';
+            {% if redirect %}
+            window.location.href = '/complex_standart_menu_by_date/{{ redirect }}';
+            {% endif %}
+        }
+
+    }
+
+
+    check_cart();
+
+
+</script>
+{% endblock %}

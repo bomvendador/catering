@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+{#        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">#}
+        <title>My Title</title>
+        <style type="text/css">
+
+            @font-face {
+                font-family: "awe";
+                src: url("{% static 'css/fonts/awe-fontsd5bb.ttf' %}");
+            }
+            body {
+                      font-family: 'awe';
+                      font-size: 11pt;
+                  }
+
+
+            {#            @page {#}
+{#                size: {{ pagesize }};#}
+{#                @frame footer {#}
+{#                    -pdf-frame-content: footerContent;#}
+{#                    bottom: 0cm;#}
+{#                margin: 1cm 9cm;#}
+{#                height: 1cm;#}
+{#                }#}
+{#            }#}
+        </style>
+    </head>
+    <body>
+        <div>
+        fsdfsfывавыаы
+            {% for cart_meal in cart_meals %}
+                {% if cart_meal.meal %}
+                <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif">{{ cart_meal.meal.name }}</span><br>
+                {% else %}
+                    {{ cart_meal.menu.name }}
+                {% endif %}<br>
+            {% endfor %}
+        </div>
+        <div id="footerContent">
+            {%block page_foot%}
+                Page <pdf:pagenumber></pdf:pagenumber>
+            {%endblock%}
+        </div>
+    </body>
+</html>
