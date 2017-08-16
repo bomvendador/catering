@@ -1320,7 +1320,7 @@ def add_portfolio_item(request):
                 item_image = PortfolioItemImage()
                 item_image.image = file
 
-                path = os.path.join(settings.BASE_DIR, 'main\static\images\\watermark_logo.png')
+                path = os.path.join(settings.STATIC_ROOT, 'images/watermark_logo.png')
                 watermark = Image.open(path, 'r')
                 pil_image = Image.open(file)
                 pil_image.thumbnail((600, 400), Image.ANTIALIAS)
