@@ -1274,6 +1274,9 @@ def portfolio_list(request):
 @login_required(redirect_field_name=None, login_url='/dashboard/login')
 def add_portfolio_item(request):
     context = info(request)
+    context.update({
+        'sliders': sliders
+    })
     if request.method == 'POST':
         data = request.POST
         item_id = data.get('item_id')
