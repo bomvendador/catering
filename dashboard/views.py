@@ -891,14 +891,12 @@ def add_place(request):
 
         main_name = data.get('main_name')
         description = data.get('description')
-        print('desc = ' + str(description))
         place.description = description
         place.name = main_name
         place.save()
         TagPlace.objects.filter(place=place).delete()
 
         for k in data.keys():
-            print(k)
             if 'tag' in k:
                 tag_name = data.get(k)
                 tag = Tag.objects.get(name=tag_name)
