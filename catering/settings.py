@@ -148,7 +148,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media/images')
 
 LOGFILE_NAME = os.path.join(BASE_DIR,  'logs/catering.log')
