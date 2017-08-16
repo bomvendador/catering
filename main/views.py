@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, HttpResponse, render_to_response
 from main.models import Meal, ActiveDates, MealByDate, Cart, CartType, CartMeals, MinSum, OrderStatus, Order, Client, Company, City, UserProfile, Role, MealImage, IngredientsForMeal, ComplexMenu, ComplexMenuByDate, MealForComplexMenu, Place, PlaceImage, InfrastructureItem, PlaceGreyOption, PlaceOption, ClientRequest, TagPlace, Tag, Testimonial, Quote, PortfolioItem, PortfolioItemImage, Staff
 # Create your views here.
