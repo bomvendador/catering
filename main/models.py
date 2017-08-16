@@ -68,7 +68,7 @@ class ComplexMenu(models.Model):
     added = models.DateTimeField(auto_now=False, auto_now_add=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     menu_type = models.ForeignKey(MenuType, null=True, blank=True)
-    image_246_246 = models.ImageField(upload_to=settings.STATIC_ROOT + '/images/menu', null=True, blank=True)
+    image_246_246 = models.ImageField(upload_to='menu', null=True, blank=True)
     image_name = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
 
