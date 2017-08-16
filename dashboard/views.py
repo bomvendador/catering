@@ -1346,7 +1346,7 @@ def add_portfolio_item(request):
                 item_image.name = final_file_name
                 item_image.name_watermark = final_file_name_w
                 if 'main_foto' in file_key:
-                    item.main_image = final_file_name
+                    item.main_image = final_file_name_w
                     item_image.main_image = True
                     item.save()
                 item_image.save()
