@@ -151,7 +151,7 @@ class Order(models.Model):
 # catering
 
 class Icon(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
 
 
 class Place(models.Model):
