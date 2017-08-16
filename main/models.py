@@ -53,8 +53,8 @@ class IngredientsForMeal(models.Model):
 
 class MealImage(models.Model):
     meal = models.ForeignKey(Meal)
-    image_70_70 = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/meals', null=True, blank=True)
-    image_350_350 = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/meals', null=True, blank=True)
+    image_70_70 = models.ImageField(upload_to='meals', null=True, blank=True)
+    image_350_350 = models.ImageField(upload_to='meals', null=True, blank=True)
     image_name = models.CharField(max_length=100, null=True, blank=True)
 
 
@@ -192,8 +192,8 @@ class PlaceOption(models.Model):
 class PlaceImage(models.Model):
     name = models.CharField(max_length=150)
     name_watermark = models.CharField(max_length=150, null=True, blank=True)
-    image = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/places', null=True, blank=True)
-    image_watermark = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/places/watermark/', null=True, blank=True)
+    image = models.ImageField(upload_to='places', null=True, blank=True)
+    image_watermark = models.ImageField(upload_to='places/watermark', null=True, blank=True)
     place = models.ForeignKey(Place, null=True, blank=True, on_delete=models.CASCADE)
     infrastructure_item = models.ForeignKey(InfrastructureItem, null=True, blank=True)
     main = models.BooleanField(default=False)
@@ -272,8 +272,8 @@ class PortfolioItem(models.Model):
 
 class PortfolioItemImage(models.Model):
     name = models.CharField(max_length=150)
-    image = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/portfolio', null=True, blank=True)
-    image_watermark = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/portfolio/watermark', null=True, blank=True)
+    image = models.ImageField(upload_to='portfolio', null=True, blank=True)
+    image_watermark = models.ImageField(upload_to='portfolio/watermark', null=True, blank=True)
     portfolio_item = models.ForeignKey(PortfolioItem, on_delete=models.CASCADE)
     main_image = models.BooleanField(default=False)
     name_watermark = models.CharField(max_length=150, null=True, blank=True)
@@ -284,7 +284,7 @@ class Staff(models.Model):
     position = models.CharField(max_length=100, null=True, blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(upload_to=settings.BASE_DIR + '/main/static/images/staff', null=True, blank=True)
+    image = models.ImageField(upload_to='staff', null=True, blank=True)
     image_name = models.CharField(max_length=150, null=True, blank=True)
     add_info = models.CharField(max_length=2000, null=True, blank=True)
     added = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
