@@ -86,8 +86,8 @@
 {#                                                <a href="{% static 'images/portfolio/IMG_1308.JPG' %}" data-srcset="{% static 'images/portfolio/IMG_1307.JPG' %} 375w, {% static 'images/portfolio/IMG_1309.JPG' %} 375w, {% static 'images/portfolio/IMG_1310.JPG' %} 375w" data-sizes="(min-width: 40em) 80vw, 100vw">#}
                                                 {% for image in images %}
 
-                                                <a href="{% static 'images/places/watermark/' %}{{ image.name_watermark }}">
-                                                    <img src="{% static 'images/places/watermark/' %}{{ image.name_watermark }}" class="max-width-100-px max-heihgt-67-px margin-bottom-5">
+                                                <a href="{% static 'media/images/places/watermark/' %}{{ image.name_watermark }}">
+                                                    <img src="{% static 'media/images/places/watermark/' %}{{ image.name_watermark }}" class="max-width-100-px max-heihgt-67-px margin-bottom-5">
                                                 </a>
                                                 {% endfor %}
 {#                                            <img src="{% static 'images/portfolio/IMG_1307.JPG' %}" alt="">#}
