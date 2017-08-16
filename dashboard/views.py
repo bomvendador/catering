@@ -22,7 +22,7 @@ from django_xhtml2pdf.utils import generate_pdf, generate_pdf_template_object
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
-from html import escape
+from django.utils.html import escape
 
 from django.contrib.staticfiles.templatetags.staticfiles import static
 # Create your views here.
