@@ -149,3 +149,54 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+LOGFILE_NAME = os.path.join(BASE_DIR,  'logs/catering.log')
+# Max size allowed for one file
+# This setting will be used by 'RotatingFileHandler'
+# I have kept maxBytes to low value.
+# Just for demonstration purpose.
+LOGFILE_SIZE = 1 * 1024
+# Log file count
+LOGFILE_COUNT = 2
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
+            'datefmt': "%d/%b/%Y %H:%M:%S",
+        },
+    },
+    'handlers': {
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOGFILE_NAME,
+            'maxBytes': LOGFILE_SIZE,
+            'backupCount': LOGFILE_COUNT,
+        },
+        'django-logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'verbose',
+        },
+
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django-debug': {
+            'handlers': ['django-logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+
+    },
+}
