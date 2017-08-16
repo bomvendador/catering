@@ -28,7 +28,7 @@ DEBUG = True
 PHONE_NUMBER = '+7 499 000 00 00'
 CONTACT_EMAIL = 'info@food-smile.ru'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'5.63.157.176']
 
 
 # Application definition
