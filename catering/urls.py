@@ -55,10 +55,10 @@ urlpatterns = [
 
     url(r'^gallery_portfolio/$', main_view.gallery_portfolio, name='gallery_portfolio'),
 
-    # мероприятия
+    # events
     url(r'^events_index/$', main_view.events_index, name='events_index'),
 
-    #контакты
+    # contacts
     url(r'^contacts/$', main_view.contacts, name='contacts'),
 
 
