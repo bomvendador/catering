@@ -1,6 +1,7 @@
 {% extends 'base_dashboard.html' %}
 {% load static %}
 
+
 {% block links %}
     <link href="{% static 'css/air_datetime/datepicker.css' %}" rel="stylesheet" />
     <script src="{% static 'js/air_datetime/datepicker.js' %}"></script>
@@ -108,7 +109,7 @@
                                 </div>
                                 {% if item %}
                                 <div>
-                                    <img class="max-height-100" src="{% static 'images/portfolio/' %}{{ item.main_image }}">
+                                    <img class="max-height-100" src="images/'{{ item.main_image }}">
                                     <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ main_image.id }}"></i>
 
                                 </div>
