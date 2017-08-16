@@ -1418,7 +1418,7 @@ def add_staff(request):
     context = info(request)
     if request.method == 'POST':
         data = request.POST
-        print(data)
+        # print(data)
         staff_id = data.get('staff_id')
         if staff_id:
             staff = Staff.objects.get(id=staff_id)

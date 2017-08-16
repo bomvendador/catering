@@ -284,7 +284,7 @@ class Staff(models.Model):
     position = models.CharField(max_length=100, null=True, blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(upload_to='staff', null=True, blank=True)
+    image = models.ImageField(upload_to='staff/', null=True, blank=True)
     image_name = models.CharField(max_length=150, null=True, blank=True)
     add_info = models.CharField(max_length=2000, null=True, blank=True)
     added = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
