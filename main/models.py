@@ -272,8 +272,8 @@ class PortfolioItem(models.Model):
 
 class PortfolioItemImage(models.Model):
     name = models.CharField(max_length=150)
-    image = models.ImageField(upload_to=settings.STATIC_ROOT + 'portfolio/', null=True, blank=True)
-    image_watermark = models.ImageField(upload_to=settings.STATIC_ROOT + 'portfolio/watermark/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/portfolio/', null=True, blank=True)
+    image_watermark = models.ImageField(upload_to='images/portfolio/watermark/', null=True, blank=True)
     portfolio_item = models.ForeignKey(PortfolioItem, on_delete=models.CASCADE)
     main_image = models.BooleanField(default=False)
     name_watermark = models.CharField(max_length=150, null=True, blank=True)
