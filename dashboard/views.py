@@ -4,7 +4,7 @@ import json
 
 import base64
 import os, re
-from django.shortcuts import render, redirect, HttpResponse, render_to_response, RequestContext
+from django.shortcuts import render, redirect, HttpResponse, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
