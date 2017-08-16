@@ -1401,7 +1401,7 @@
                         <div class="event-pager-scroll">
                             <div class="event-pager">
                                 {% for item in portfolio_items %}
-                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
+                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'media/images/portfolio' %}/{{ item.main_image }}" alt=""></a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -1707,7 +1707,7 @@
 {#                    lg.addEventListener('lgOnBeforeOpen', function(e){#}
                     $('#aniimated-thumbnials').html('');
                       for (var img in response){
-                          $('#aniimated-thumbnials').append('<a href="static/images/portfolio/watermark/' + response[img] + '"><img id="slide_' + img + '"  src="static/images/portfolio/watermark/' + response[img] + '" /></a>');
+                          $('#aniimated-thumbnials').append('<a href="static/media/images/portfolio/watermark/' + response[img] + '"><img id="slide_' + img + '"  src="static/images/portfolio/watermark/' + response[img] + '" /></a>');
                       }
 {#                    }, false);#}
 {#                    $('#aniimated-thumbnials'))#}
