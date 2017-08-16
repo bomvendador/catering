@@ -389,6 +389,7 @@
         var data = new FormData();
         data.append('item_id', id);
         data.append('slide_id', $(this).attr('id'));
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
 
             $.ajax({
                 url: '{% url 'gallery_portfolio' %}',
