@@ -1359,7 +1359,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="image-wrap">
-                                        <img id="id_{{ item.id }}" data-item-id="id_{{ item.id }}" class="gallery pointer-pure" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt="">
+                                        <img id="id_{{ item.id }}" data-item-id="id_{{ item.id }}" class="gallery pointer-pure" src="{% static 'media/images/portfolio' %}/{{ item.main_image }}" alt="">
 
                                     </div>
                                 </div>
@@ -1401,7 +1401,7 @@
                         <div class="event-pager-scroll">
                             <div class="event-pager">
                                 {% for item in portfolio_items %}
-                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'images/portfolio/' %}{{ item.main_image }}" alt=""></a>
+                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
                                 {% endfor %}
                             </div>
                         </div>
