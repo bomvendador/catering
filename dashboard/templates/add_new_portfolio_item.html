@@ -109,7 +109,7 @@
                                 </div>
                                 {% if item %}
                                 <div>
-                                    <img class="max-height-100" src="/media/images/{{ item.main_image }}">
+                                    <img class="max-height-100" src="/media/images/portfolio/{{ item.main_image }}">
                                     <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ main_image.id }}"></i>
 
                                 </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="margin-bottom-25">
                                     {% for image in images %}
-                                    <img class="max-height-100 margin-bottom-10" src="{% static 'images/portfolio/watermark/' %}{{ image.name_watermark }}">
+                                    <img class="max-height-100 margin-bottom-10" src="/media/images/portfolio/{{ image.name_watermark }}">
                                     <i class="mdi mdi-close del-img-gal pointer-pure" id="img_{{ image.id }}"></i>
                                     {% endfor %}
                                 </div>
