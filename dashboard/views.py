@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-from idlelib.rpc import request_queue
 
 import base64
 import os, re
