@@ -10,7 +10,7 @@ from django.db.models import Sum
 from datetime import date, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from dashboard import views as dash_view
+# from dashboard import views as dash_view
 
 @property
 def is_past(self):
