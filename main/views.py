@@ -31,7 +31,6 @@ def send_email(request, template, from_, to, context):
     return HttpResponse()
 
 
-
 @property
 def is_past(self):
     return date.today() > self.date
@@ -654,8 +653,7 @@ def place_client_request(request):
         client_request.message = message
         client_request.status = OrderStatus.objects.get(name=u'Новый')
         client_request.save()
-        email_context = {'client': name, 'email': email, 'type': u'Сайт - футер', 'message': data[
-            'message_contact_form_footer'], 'prolingva_tel': settings.PHONE_NUMBER}
+        email_context = {'client': name, 'email': email, 'type': u'Сайт - футер', 'message': u'сообщение', 'prolingva_tel': settings.PHONE_NUMBER}
         send_email(request, 'calculation.html', 'info@food-smile.ru', ['bomvendador@yandex.ru'], email_context)
         return HttpResponse()
 
