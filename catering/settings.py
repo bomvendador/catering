@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'imagekit',
     'watermarker',
-    'templated_email'
+    'templated_email',
     'main'
 ]
 
