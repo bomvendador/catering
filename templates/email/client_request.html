@@ -27,7 +27,7 @@
     </tr>
     <tr>
         <td colspan="2" style="text-align: center; font-size: 15px; padding-top: 10px">
-            Клиент разместил запрос,
+            Клиент разместил запрос
         </td>
     </tr>
     <tr>
@@ -55,7 +55,9 @@
                        Имя:
                    </td>
                    <td align="left" valign="center" style="font-size: 13px; padding: 5px">
+                       {% if client %}
                        {{ client }}
+                       {% endif %}
                    </td>
                </tr>
                <tr style="font-size: 13px">
@@ -63,7 +65,9 @@
                        Телефон:
                    </td>
                    <td align="left" valign="center" style="padding: 5px">
+                       {% if phone %}
                        {{ phone }}
+                       {% endif %}
                    </td>
                </tr>
                <tr style="font-size: 13px">
@@ -71,7 +75,9 @@
                        Email:
                    </td>
                    <td align="left" valign="center" style="padding: 5px">
+                       {% if email %}
                        {{ email }}
+                       {% endif %}
                    </td>
                </tr>
                 <tr style="font-size: 13px">
