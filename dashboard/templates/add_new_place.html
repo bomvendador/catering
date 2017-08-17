@@ -613,7 +613,7 @@ $(document).ready(function () {
                 var phones = response['phones'];
                 var emails = response['emails'];
                 var payment_details = response['payment_details'];
-                console.log(response)
+{#                console.log(response)#}
                 $('#contact_person_name').val(name);
                 $('#contact_person_position').val(position);
                 $('#contact_person_add_info').val(add_info);
@@ -728,7 +728,7 @@ $(document).ready(function () {
             var name = $(this).find('.new_grey_desc_name').prop('name');
             var val = $(this).find('.new_grey_desc_name').val();
             data.append(name, val);
-            console.log(name + ' - ' + val);
+{#            console.log(name + ' - ' + val);#}
         });
 {#        характеристики#}
         $('#option_tbody .new_option_tr').each(function () {
@@ -737,7 +737,7 @@ $(document).ready(function () {
             var val = $(this).find('.option_val').val();
             var merge_option = name + '_' + val;
             data.append('option_' + i, merge_option);
-            console.log('option_' + i + ' - ' + merge_option);
+{#            console.log('option_' + i + ' - ' + merge_option);#}
 
         });
         {#инфраструктура#}
@@ -745,7 +745,7 @@ $(document).ready(function () {
             var name = $(this).find('.new_infra_name').prop('name');
             var val = $(this).find('.new_infra_name').val();
             data.append(name, val);
-            console.log(name + ' - ' + val);
+{#            console.log(name + ' - ' + val);#}
         });
 
         data.append('main_name', $('#place_main_name').val());
@@ -755,7 +755,7 @@ $(document).ready(function () {
         data.append('place_id', {{ place.id }});
         {% endif %}
 
-        console.log(editor.getData());
+{#        console.log(editor.getData());#}
 
         if ($('#main_foto').get(0).files.length > 0){
             data.append('main_foto', $('#main_foto')[0].files[0])
@@ -855,11 +855,11 @@ $(document).ready(function () {
         $('#icon_modal').click();
         var tr_num = $(this).parent().parent().prop('class').split(' ')[0];
         $('#tr_num').val(tr_num);
-        console.log($(this).parent().parent().prop('class'));
+{#        console.log($(this).parent().parent().prop('class'));#}
     });
 
     $('.icon_item').on('click', function () {
-        console.log('wwww')
+{#        console.log('wwww')#}
         var icon_id = $(this).prop('id');
         var tr_num_cur = $('#tr_num').val();
         var icon_class = $(this).prop('class').split(' ')[1];
@@ -966,7 +966,7 @@ $(document).ready(function () {
 
             },
             successmultiple: function (file, data) {
-                console.log(data.code);
+{#                console.log(data.code);#}
 {#                window.location.href = '/dashboard/meals_menu/';#}
 
 
@@ -1081,7 +1081,7 @@ $(document).ready(function () {
 
 
 
-                console.log('дата изменена')
+{#                console.log('дата изменена')#}
             }
         });
 
