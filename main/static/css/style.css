@@ -1829,7 +1829,7 @@ html.ie9 .owl-carousel .owl-controls .owl-buttons>div:hover.owl-prev {
 header.header {
 	width: 100%;
     position: fixed;
-    z-index: 999;
+    z-index: 1000;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
