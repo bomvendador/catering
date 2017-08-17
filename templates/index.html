@@ -1647,6 +1647,8 @@
         data.append('phone', $('#contact_form_phone').val());
         data.append('email', $('#contact_form_email').val());
         data.append('message', $('#contact_form_message').val());
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
             $.ajax({
                 url: '{% url 'place_client_request' %}',
                 type: 'POST',
@@ -1687,6 +1689,8 @@
         var id = $(this).data('itemId');
         var data = new FormData();
         data.append('item_id', id);
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
             $.ajax({
                 url: '{% url 'gallery_portfolio' %}',
                 type: 'POST',
