@@ -202,10 +202,10 @@ LOGGING = {
     },
 }
 
-EMAIL_HOST = 'mail.prolingva.ru'
+EMAIL_HOST = 'mail.food-smile.ru'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'info@prolingva.ru'
-EMAIL_HOST_PASSWORD = 'L1i6C6b5'
+EMAIL_HOST_USER = 'info@food-smile.ru'
+EMAIL_HOST_PASSWORD = '7O5s6H2e'
 
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
 TEMPLATED_EMAIL_TEMPLATE_DIR = 'email/'
