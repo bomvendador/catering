@@ -78,6 +78,28 @@
                                         {{ place.description|safe }}
                                     </p>
 
+                                    <!-- SHARE AND TAG -->
+                                    <div class="share-tags">
+        {#                                <div class="share-box">#}
+        {#                                    <h5 class="sm">Share</h5>#}
+        {#                                    <div class="share">#}
+        {#                                        <a onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')"><i class="fa fa-facebook"></i></a>#}
+        {#                                        <a href="#"><i class="fa fa-twitter"></i></a>#}
+        {#                                        <a href="#"><i class="fa fa-google-plus"></i></a>#}
+        {#                                        <a href="#"><i class="fa fa-linkedin"></i></a>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+                                        <div class="tag-box fr">
+                                            <i class="mdi mdi-tag font-size-20 margin-right-10 opacity-0-8"></i>
+                                            <div class="tag">
+                                                {% for place_tag in place_tags %}
+                                                <a href="{% url 'places_list_main_by_tag' place_tag.id %}" class="roboto-300">{{ place_tag.tag.name }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END / SHARE AND TAG -->
+
                                     <div class="block-image" >
                                         <h3 class="xmd">Галерея</h3>
 
@@ -123,27 +145,6 @@
                                 </div>
                             </div>
 
-                            <!-- SHARE AND TAG -->
-                            <div class="share-tags">
-{#                                <div class="share-box">#}
-{#                                    <h5 class="sm">Share</h5>#}
-{#                                    <div class="share">#}
-{#                                        <a onclick="Share.vkontakte('URL','TITLE','IMG_PATH','DESC')"><i class="fa fa-facebook"></i></a>#}
-{#                                        <a href="#"><i class="fa fa-twitter"></i></a>#}
-{#                                        <a href="#"><i class="fa fa-google-plus"></i></a>#}
-{#                                        <a href="#"><i class="fa fa-linkedin"></i></a>#}
-{#                                    </div>#}
-{#                                </div>#}
-                                <div class="tag-box fr">
-                                    <i class="mdi mdi-tag font-size-20 margin-right-10 opacity-0-8"></i>
-                                    <div class="tag">
-                                        {% for place_tag in place_tags %}
-                                        <a href="{% url 'places_list_main_by_tag' place_tag.id %}" class="roboto-300">{{ place_tag.tag.name }}</a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END / SHARE AND TAG -->
 
 {#                            <div class="about-author">#}
 {#                                <div class="image-thumb fl">#}
