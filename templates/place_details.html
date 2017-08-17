@@ -424,6 +424,8 @@
         data.append('phone', $('#phone').val());
         data.append('message', $('#message').val());
         data.append('place_id', {{ place.id }});
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
             $.ajax({
                 url: '{% url 'place_client_request' %}',
                 type: 'POST',
