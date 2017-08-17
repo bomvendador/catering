@@ -735,7 +735,7 @@ console.log('sn');
         var t = e(".event-pager a"),
             i = t.length,
             s = i * a;
-        t.css("width", 180), e(".event-pager").css({
+        t.css("width", a), e(".event-pager").css({
             width: s
         })
     }
