@@ -158,7 +158,7 @@ class Place(models.Model):
     name = models.CharField(max_length=150, null = True, blank = True)
     added = models.DateTimeField(auto_now=False, auto_now_add=True)
     changed = models.DateTimeField(auto_now=True, auto_now_add=False)
-    description = models.CharField(max_length=1000, null=True, blank=True)
+    description = models.CharField(max_length=2000, null=True, blank=True)
     main_image = models.CharField(max_length=150, null=True, blank=True)
 
 
