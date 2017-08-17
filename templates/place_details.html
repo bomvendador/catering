@@ -336,8 +336,9 @@
                                         <img class="max-width-75" src="{% static 'media/images/places/watermark/' %}{{ place.main_image }}">
                                     </div>
                                     <div class="comment-info">
-                                        <span class="author">{{ place.name }}</span>
-                                        <a href="{% url 'place_details' place.id %}">{{ place.description|truncatechars_html:20|safe }}</a>
+                                        <a href="{% url 'place_details' place.id %}">{{ place.name }}</a>
+                                        <span class="author">{{ place.description|truncatechars_html:20|safe }}</span>
+
 {#                                        <div class="meta">#}
 {#                                            <span>sep 18,2014 at 9:00</span>#}
 {#                                        </div>#}
