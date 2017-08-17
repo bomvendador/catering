@@ -2,7 +2,7 @@
 from django.shortcuts import render, HttpResponse, render_to_response
 from main.models import Meal, ActiveDates, MealByDate, Cart, CartType, CartMeals, MinSum, OrderStatus, Order, Client, Company, City, UserProfile, Role, MealImage, IngredientsForMeal, ComplexMenu, ComplexMenuByDate, MealForComplexMenu, Place, PlaceImage, InfrastructureItem, PlaceGreyOption, PlaceOption, ClientRequest, TagPlace, Tag, Testimonial, Quote, PortfolioItem, PortfolioItemImage, Staff
 # Create your views here.
-import json
+import json, os
 from django.core.serializers.json import DjangoJSONEncoder
 
 from catering import settings
@@ -11,6 +11,26 @@ from datetime import date, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from dashboard import views as dash_view
+
+from templated_email import send_templated_mail, InlineImage
+
+
+def send_email(request, template, from_, to, context):
+    curr_path = os.path.dirname(__file__)
+    file_path = os.path.join(os.path.join(curr_path, '..'), 'static/imgages/full_logo_100.png')
+    with open(file_path, 'rb') as logo:
+        logo_img = logo.read()
+    logo = InlineImage(filename='logo', content=logo_img)
+    context.update({'logo': logo})
+    # logger.debug(template + ' ' + from_ + ' ' + context)
+    send_templated_mail(template_name=template,
+                        from_email=from_,
+                        recipient_list=to,
+                        context=context,
+                        )
+    return HttpResponse()
+
+
 
 @property
 def is_past(self):
@@ -636,7 +656,7 @@ def place_client_request(request):
         client_request.save()
         email_context = {'client': name, 'email': email, 'type': u'Сайт - футер', 'message': data[
             'message_contact_form_footer'], 'prolingva_tel': settings.PHONE_NUMBER}
-        dash_view.send_email(request, 'calculation.html', 'info@food-smile.ru', ['bomvendador@yandex.ru'], email_context)
+        send_email(request, 'calculation.html', 'info@food-smile.ru', ['bomvendador@yandex.ru'], email_context)
         return HttpResponse()
 
 
