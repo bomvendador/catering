@@ -844,7 +844,7 @@ $(document).ready(function () {
 
 
     function del_added_element(tbody_name) {
-        $(tbody_name).on('click', 'del-added-element', function () {
+        $(tbody_name).on('click', '.del-added-element', function () {
             $(this).parent().parent().remove();
         })
     }
