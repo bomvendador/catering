@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'imagekit',
     'watermarker',
-
+    'templated_email'
     'main'
 ]
 
@@ -201,3 +201,12 @@ LOGGING = {
 
     },
 }
+
+EMAIL_HOST = 'mail.prolingva.ru'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'info@prolingva.ru'
+EMAIL_HOST_PASSWORD = 'L1i6C6b5'
+
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+TEMPLATED_EMAIL_TEMPLATE_DIR = 'email/'
+TEMPLATED_EMAIL_FILE_EXTENSION = 'html'

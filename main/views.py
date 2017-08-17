@@ -10,6 +10,7 @@ from django.db.models import Sum
 from datetime import date, timedelta
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from dashboard import views as dash_views
 
 @property
 def is_past(self):
@@ -633,6 +634,10 @@ def place_client_request(request):
         client_request.message = message
         client_request.status = OrderStatus.objects.get(name=u'Новый')
         client_request.save()
+        email_context = {'client': name, 'email': email, 'type': u'Сайт - футер', 'message': data[
+            'message_contact_form_footer'], 'prolingva_tel': settings.PHONE_NUMBER}
+        dash_views.send_email(request, 'calculation.html', 'info@food-smile.ru', ['bomvendador@yandex.ru'], email_context)
+
         return HttpResponse()
 
 
