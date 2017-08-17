@@ -50,11 +50,15 @@ urlpatterns = [
     url(r'^icons/$', views.icons, name='icons'),
 
 # кейтеринг
+# площадки
     url(r'^places_list/$', views.places_list, name='places_list'),
     url(r'^add_place/$', views.add_place, name='add_place'),
     url(r'^delete_image_from_gallery/$', views.delete_image_from_gallery, name='delete_image_from_gallery'),
+    url(r'^del_existing_element_from_place/$', views.del_existing_element_from_place, name='del_existing_element_from_place'),
     url(r'^delete_place/$', views.delete_place, name='delete_place'),
     url(r'^place_details/(?P<place_id>\d+)/$', views.place_details, name='place_details'),
+
+# запросы клиентов
     url(r'^client_requests/$', views.client_requests, name='client_requests'),
     url(r'^new_client_requests/$', views.new_client_requests, name='new_client_requests'),
     url(r'^client_request_details/(?P<request_id>\d+)/$', views.client_request_details, name='client_request_details'),

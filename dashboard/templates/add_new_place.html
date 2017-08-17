@@ -142,7 +142,7 @@
                                         <tr>
                                             <td>{{ grey_option.name }}</td>
                                             <td><i class="mdi {{ grey_option.icon.name }} font-size-26"></i></td>
-                                            <td><i class="mdi mdi-close" id="grey_{{ grey_option.id }}"></i></td>
+                                            <td><i class="mdi mdi-close del-existing-element" id="grey_{{ grey_option.id }}"></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -849,11 +849,52 @@ $(document).ready(function () {
         })
     }
 
+    function del_existing_element(tbody_name) {
+        $(tbody_name).on('click', '.del-existing-element', function () {
+                var data = new FormData();
+                data.append('name_id', $(this).attr('id'));
+                var element_to_del = $(this).parent().parent();
+                $.ajax({
+                    url: '{% url 'dashboard:del_existing_element_from_place' %}',
+                    type: 'POST',
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    error: function(data){
+                        swal({
+                            title: 'Ошибка сервера',
+                            text: 'Возникла ошибка при сохранении. Попробуйте позже.',
+                            type: 'warning'
+                        });
+                    },
+                    success:function (data) {
+                        swal({
+                            title: 'Информация сохранена',
+                            text: 'Информация на сервере успешно сохранена',
+                            type: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ок',
+                            closeOnConfirm: true,
+                        },
+                        function (isConfirm) {
+                            if (isConfirm){
+                                element_to_del.remove();
+                            }
+
+                        });
+
+                    }
+                });
+
+        })
+    }
+
     $('#add_grey_description').on('click', function () {
         var tr_qnt = $('#grey_desc_tbody tr').length + 1;
         $('#grey_desc_tbody').append('<tr class="tr_' + tr_qnt + ' new_grey_desc_tr"><td><div class="form-line"><input type="text" class="form-control new_grey_desc_name" name ="grey_desc_tr_' + tr_qnt + '"/></div></td><td class="td_tr_' + tr_qnt + '"><button type="button" class="btn bg-cyan btn-block btn-lg waves-effect add-icon">+</button></td><td><i class="mdi mdi-close pointer-pure del-added-element"></i></td></tr>')
     });
     del_added_element('#grey_desc_tbody');
+    del_existing_element('#grey_desc_tbody');
     $('#grey_desc_tbody').on('click', '.del-grey-option', function () {
 
     })

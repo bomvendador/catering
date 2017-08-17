@@ -43,7 +43,6 @@ from django.core.files.images import get_image_dimensions
 sliders = [u'Блюда на странице кейтеринга', u'Главная страница']
 
 
-
 def add_watermark(image, watermark, opacity=1, wm_interval=0):
     assert 0 <= opacity <= 1
     image_size = get_image_dimensions(image)
@@ -1002,6 +1001,19 @@ def delete_place(request):
         place_id = request.POST.get('place_id')
         place = Place.objects.get(id=place_id).delete()
         return HttpResponse()
+
+
+@login_required(redirect_field_name=None, login_url='/dashboard/login')
+def del_existing_element_from_place(request):
+    if request.method == 'POST':
+        data = request.POST
+        name_id = data.get('name_id').split('_')
+        name = name_id[0]
+        id_ = name_id[1]
+        if 'grey' in name:
+            grey_option = PlaceGreyOption.objects.get(id=id_)
+            grey_option.delete()
+            return HttpResponse()
 
 
 #контактные лица
