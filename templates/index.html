@@ -1401,7 +1401,7 @@
                         <div class="event-pager-scroll">
                             <div class="event-pager">
                                 {% for item in portfolio_items %}
-                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#" style="width: 180px"><img style="height: 100px;" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
+                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#" style="width: 180px!important;"><img style="height: 100px;" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
                                 {% endfor %}
                             </div>
                         </div>
