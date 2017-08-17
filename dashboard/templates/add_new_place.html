@@ -142,7 +142,7 @@
                                         <tr>
                                             <td>{{ grey_option.name }}</td>
                                             <td><i class="mdi {{ grey_option.icon.name }} font-size-26"></i></td>
-                                            <td><i class="mdi mdi-close"></i></td>
+                                            <td><i class="mdi mdi-close" id="grey_{{ grey_option.id }}"></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -843,12 +843,20 @@ $(document).ready(function () {
         });
 
 
-
+    function del_added_element(tbody_name) {
+        $(tbody_name).on('click', 'del-added-element', function () {
+            $(this).parent().parent().remove();
+        })
+    }
 
     $('#add_grey_description').on('click', function () {
         var tr_qnt = $('#grey_desc_tbody tr').length + 1;
-        $('#grey_desc_tbody').append('<tr class="tr_' + tr_qnt + ' new_grey_desc_tr"><td><div class="form-line"><input type="text" class="form-control new_grey_desc_name" name ="grey_desc_tr_' + tr_qnt + '"/></div></td><td class="td_tr_' + tr_qnt + '"><button type="button" class="btn bg-cyan btn-block btn-lg waves-effect add-icon">+</button></td><td><i class="mdi mdi-close pointer-pure del-icon"></i></td></tr>')
+        $('#grey_desc_tbody').append('<tr class="tr_' + tr_qnt + ' new_grey_desc_tr"><td><div class="form-line"><input type="text" class="form-control new_grey_desc_name" name ="grey_desc_tr_' + tr_qnt + '"/></div></td><td class="td_tr_' + tr_qnt + '"><button type="button" class="btn bg-cyan btn-block btn-lg waves-effect add-icon">+</button></td><td><i class="mdi mdi-close pointer-pure del-added-element"></i></td></tr>')
     });
+    del_added_element('#grey_desc_tbody');
+    $('#grey_desc_tbody').on('click', '.del-grey-option', function () {
+
+    })
 
 {#    добавление иконки#}
     $('#grey_desc_tbody').on('click', '.add-icon', function () {
