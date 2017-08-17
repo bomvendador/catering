@@ -71,7 +71,7 @@ def lunches_index(request):
     except Quote.DoesNotExist:
         quote = ''
     context.update({
-        'quote': Quote.objects.get(date=date.today())
+        'quote': quote
     })
     return render(request, 'lunches.html', context)
 
