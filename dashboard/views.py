@@ -1019,7 +1019,7 @@ def del_existing_element_from_place(request):
         if 'infrastructure' in name:
             infrastructure = InfrastructureItem.objects.get(id=id_)
             infrastructure.delete()
-            return HttpResponse()
+        return HttpResponse()
 
 
 #контактные лица
