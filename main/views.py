@@ -644,17 +644,19 @@ def place_client_request(request):
         place_id = data.get('place_id')
         message = data.get('message')
         client_request = ClientRequest()
+        email_context = {'client': name, 'email': email, 'phone': phone, 'message': message, 'prolingva_tel': settings.PHONE_NUMBER}
+
         if place_id:
             place = Place.objects.get(id=place_id)
             client_request.place = place
+            email_context.update({'place': place})
         client_request.client_name = name
         client_request.client_email = email
         client_request.client_phone = phone
         client_request.message = message
         client_request.status = OrderStatus.objects.get(name=u'Новый')
         client_request.save()
-        email_context = {'client': name, 'email': email, 'type': u'Сайт - футер', 'message': u'сообщение', 'prolingva_tel': settings.PHONE_NUMBER}
-        send_email(request, 'calculation.html', 'info@food-smile.ru', ['bomvendador@yandex.ru'], email_context)
+        send_email(request, 'client_request.html', 'info@food-smile.ru', ['food-smile@yandex.ru'], email_context)
         return HttpResponse()
 
 
