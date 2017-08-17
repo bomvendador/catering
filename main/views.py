@@ -17,7 +17,7 @@ from templated_email import send_templated_mail, InlineImage
 
 def send_email(request, template, from_, to, context):
     curr_path = os.path.dirname(__file__)
-    file_path = os.path.join(os.path.join(curr_path, '..'), 'static/imgages/full_logo_100.png')
+    file_path = os.path.join(os.path.join(curr_path), 'static/imgages/full_logo_100.png')
     with open(file_path, 'rb') as logo:
         logo_img = logo.read()
     logo = InlineImage(filename='logo', content=logo_img)
