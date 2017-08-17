@@ -1013,6 +1013,12 @@ def del_existing_element_from_place(request):
         if 'grey' in name:
             grey_option = PlaceGreyOption.objects.get(id=id_)
             grey_option.delete()
+        if 'option' in name:
+            option = PlaceOption.objects.get(id=id_)
+            option.delete()
+        if 'infrastructure' in name:
+            infrastructure = InfrastructureItem.objects.get(id=id_)
+            infrastructure.delete()
             return HttpResponse()
 
 

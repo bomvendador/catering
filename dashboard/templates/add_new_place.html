@@ -171,7 +171,7 @@
                                         <tr>
                                             <td>{{ option.name }}</td>
                                             <td>{{ option.value }}</td>
-                                            <td><i class="mdi mdi-close"></i></td>
+                                            <td><i class="mdi mdi-close  del-existing-element"  id="option_{{ option.id }}></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -198,7 +198,7 @@
                                     {% for infrastructure in infrastructures %}
                                         <tr>
                                             <td>{{ infrastructure.name }}</td>
-                                            <td><i class="mdi mdi-close"></i></td>
+                                            <td><i class="mdi mdi-close del-existing-element"  id="infrastructure_{{ infrastructure.id }}></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -920,6 +920,7 @@ $(document).ready(function () {
 
 
     {#    удаление иконки#}
+
     $('#grey_desc_tbody').on('click', '.del-icon', function () {
         $(this).parent().parent().fadeOut('slow', function () {
             $(this).remove();
@@ -930,10 +931,13 @@ $(document).ready(function () {
     {#    добавление характеристики#}
     $('#add_option').on('click', function () {
         var tr_qnt_option = $('#option_tbody tr').length + 1;
-        $('#option_tbody').append('<tr class="tr_option_' + tr_qnt_option + ' new_option_tr"><td><div class="form-line"><input type="text" class="form-control option_name" name ="option_name_' + tr_qnt_option + '"/></div></td><td class=""><div class="form-line"><input type="text" class="form-control option_val" name ="option_val' + tr_qnt_option + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-option"></i></td></tr>')
+        $('#option_tbody').append('<tr class="tr_option_' + tr_qnt_option + ' new_option_tr"><td><div class="form-line"><input type="text" class="form-control option_name" name ="option_name_' + tr_qnt_option + '"/></div></td><td class=""><div class="form-line"><input type="text" class="form-control option_val" name ="option_val' + tr_qnt_option + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-added-element"></i></td></tr>')
     });
 
     {#    удаление характеристики#}
+    del_added_element('#option_tbody');
+    del_existing_element('#option_tbody');
+
     $('#option_tbody').on('click', '.del-option', function () {
         $(this).parent().parent().fadeOut('slow', function () {
             $(this).remove();
@@ -943,7 +947,7 @@ $(document).ready(function () {
     {#    добавление инфраструктуры#}
     $('#add_infrastructure').on('click', function () {
         var tr_qnt_infrastructure = $('#infrastructure_tbody tr').length + 1;
-        $('#infrastructure_tbody').append('<tr class="tr_infrastucture_' + tr_qnt_infrastructure + ' new_infra"><td><div class="form-line"><input type="text" class="form-control new_infra_name" name ="infrastructure_name_' + tr_qnt_infrastructure + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-infrastructure"></i></td></tr>')
+        $('#infrastructure_tbody').append('<tr class="tr_infrastucture_' + tr_qnt_infrastructure + ' new_infra"><td><div class="form-line"><input type="text" class="form-control new_infra_name" name ="infrastructure_name_' + tr_qnt_infrastructure + '"/></div></td><td><i class="mdi mdi-close pointer-pure del-added-element"></i></td></tr>')
     });
 
     {#    удаление инфраструктуры#}
