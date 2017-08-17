@@ -66,15 +66,16 @@ console.log('sn');
             slideMargin: 0,
             pager: !0,
             controls: !1,
-            pagerCustom: ".event-pager",
-            slideWidth: 180
+            pagerCustom: ".event-pager"
+
         }), r());
         var i = e(".event-pager-scroll");
         i.perfectScrollbar({
             maxScrollbarLength: 150,
             suppressScrollY: !0,
             useBothWheelAxes: !0,
-            includePadding: !0
+            includePadding: !0,
+            slideWidth: 180
         });
         var l = e(".see-map a").data("see-contact"),
             n = e(".see-map a").data("see-map");
