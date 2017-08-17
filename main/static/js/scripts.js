@@ -66,7 +66,8 @@ console.log('sn');
             slideMargin: 0,
             pager: !0,
             controls: !1,
-            pagerCustom: ".event-pager"
+            pagerCustom: ".event-pager",
+            slideWidth: 180
         }), r());
         var i = e(".event-pager-scroll");
         i.perfectScrollbar({
