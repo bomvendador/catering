@@ -1401,7 +1401,7 @@
                         <div class="event-pager-scroll">
                             <div class="event-pager">
                                 {% for item in portfolio_items %}
-                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px;" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
+                                <a data-slide-index="{{ forloop.counter|add:'-1' }}" href="#"><img style="height: 100px; width: 180px" src="{% static 'media/images/portfolio/watermark' %}/{{ item.main_image }}" alt=""></a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -1689,7 +1689,7 @@
         var id = $(this).data('itemId');
         var data = new FormData();
         data.append('item_id', id);
-        data.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
             $.ajax({
                 url: '{% url 'gallery_portfolio' %}',
