@@ -667,7 +667,7 @@ def places_list_main(request):
         places_list_ = Place.objects.filter(id=TagPlace.objects.get(tag_id=tag_id))
     else:
         places_list_ = Place.objects.all()
-    paginator = Paginator(places_list_, 3)
+    paginator = Paginator(places_list_, 5)
     page = request.POST.get('page')
     if not page:
         places = paginator.page(1)
