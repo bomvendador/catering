@@ -356,6 +356,7 @@
         var page_num = $(this).prop('id');
         var data = new FormData();
         data.append('page', page_num);
+        data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 
         $.ajax({
             url: '{% if tag %}{% url 'places_list_main_by_tag' tag.id %}{% else %}{% url 'places_list_main' %}{% endif %}',
