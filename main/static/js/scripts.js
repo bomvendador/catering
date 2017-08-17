@@ -789,7 +789,7 @@ console.log('sn');
             // e('.preloader').addClass("load-anim");
             n(), l(), i(), m(), e(".preloader").addClass("load-anim");
             var a = e(".event-pager-scroll").outerHeight();
-            e(".event-pager-scroll").css("margin-top", -a + 50)
+            e(".event-pager-scroll").css("margin-top", -a + 120)
         }), e(window).on("resize", function() {
             i(), r()
         })
