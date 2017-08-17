@@ -142,7 +142,7 @@
                                         <tr>
                                             <td>{{ grey_option.name }}</td>
                                             <td><i class="mdi {{ grey_option.icon.name }} font-size-26"></i></td>
-                                            <td><i class="mdi mdi-close del-existing-element" id="grey_{{ grey_option.id }}"></i></td>
+                                            <td><i class="mdi mdi-close del-existing-element pointer-pure" id="grey_{{ grey_option.id }}"></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -171,7 +171,7 @@
                                         <tr>
                                             <td>{{ option.name }}</td>
                                             <td>{{ option.value }}</td>
-                                            <td><i class="mdi mdi-close  del-existing-element"  id="option_{{ option.id }}"></i></td>
+                                            <td><i class="mdi mdi-close  del-existing-element pointer-pure"  id="option_{{ option.id }}"></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -198,7 +198,7 @@
                                     {% for infrastructure in infrastructures %}
                                         <tr>
                                             <td>{{ infrastructure.name }}</td>
-                                            <td><i class="mdi mdi-close del-existing-element"  id="infrastructure_{{ infrastructure.id }}"></i></td>
+                                            <td><i class="mdi mdi-close del-existing-element pointer-pure"  id="infrastructure_{{ infrastructure.id }}"></i></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -951,6 +951,9 @@ $(document).ready(function () {
     });
 
     {#    удаление инфраструктуры#}
+    del_added_element('#infrastructure_tbody');
+    del_existing_element('#infrastructure_tbody');
+
     $('#infrastructure_tbody').on('click', '.del-infrastructure', function () {
         $(this).parent().parent().fadeOut('slow', function () {
             $(this).remove();
