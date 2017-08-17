@@ -75,7 +75,6 @@ console.log('sn');
             suppressScrollY: !0,
             useBothWheelAxes: !0,
             includePadding: !0,
-            slideWidth: 180
         });
         var l = e(".see-map a").data("see-contact"),
             n = e(".see-map a").data("see-map");
@@ -737,7 +736,7 @@ console.log('sn');
             i = t.length,
             s = i * a;
         t.css("width", a), e(".event-pager").css({
-            width: s
+            width: 180
         })
     }
 
