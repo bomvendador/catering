@@ -304,6 +304,8 @@
             var place_id = $(this).prop('id').split('_')[1];
             var data = new FormData();
             data.append('place_id', place_id);
+            data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
             $.ajax({
                 url: '{% url 'get_place_tags' %}',
                 type: 'POST',
@@ -354,6 +356,7 @@
         var page_num = $(this).prop('id');
         var data = new FormData();
         data.append('page', page_num);
+
         $.ajax({
             url: '{% if tag %}{% url 'places_list_main_by_tag' tag.id %}{% else %}{% url 'places_list_main' %}{% endif %}',
             type: 'POST',
