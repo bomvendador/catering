@@ -5871,6 +5871,10 @@ header.header .container>.minicart-wrap .minicart-body {
         float: none;
     }
 
+    .margin-top-15-992{
+        margin-top: 15px;
+    }
+
     .home-media .home-fixheight {
         height: 400px
     }
