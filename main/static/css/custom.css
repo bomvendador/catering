@@ -598,3 +598,7 @@
 .top-0{
     top: 0px!important;
 }
+
+.display-inline-block{
+    display: inline-block;
+}
