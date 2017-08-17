@@ -602,3 +602,7 @@
 .display-inline-block{
     display: inline-block;
 }
+
+.width-65-px-imp{
+    width: 65px!important;
+}
