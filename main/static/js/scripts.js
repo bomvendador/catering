@@ -730,12 +730,12 @@ console.log('sn');
     }
 
     function r() {
-        var a = e(".event-pager-scroll").width() / 4;
+        var a = e(".event-pager-scroll").width() / 3;
         if (window.innerWidth <= 480) var a = e(".event-pager-scroll").width() / 2;
         var t = e(".event-pager a"),
             i = t.length,
             s = i * a;
-        t.css("width", a), e(".event-pager").css({
+        t.css("width", 180), e(".event-pager").css({
             width: s
         })
     }
