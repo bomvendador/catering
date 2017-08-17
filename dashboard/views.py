@@ -972,7 +972,7 @@ def add_place(request):
                 place_image.name = final_file_name
                 if 'main_foto' in file_key:
                     place_image.main = True
-                    place.main_image = final_file_name
+                    place.main_image = final_file_name_w
                     place.save()
                 place_image.save()
             # main_foto = request.FILES.getlist('main_foto')
