@@ -56,6 +56,8 @@ class MealImage(models.Model):
     image_70_70 = models.ImageField(upload_to='meals', null=True, blank=True)
     image_350_350 = models.ImageField(upload_to='meals', null=True, blank=True)
     image_name = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
 
 
 class MealByDate(models.Model):
@@ -160,6 +162,8 @@ class Place(models.Model):
     changed = models.DateTimeField(auto_now=True, auto_now_add=False)
     description = models.CharField(max_length=2000, null=True, blank=True)
     main_image = models.CharField(max_length=150, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
 
 
 class PlaceGreyOption(models.Model):
@@ -277,6 +281,8 @@ class PortfolioItemImage(models.Model):
     portfolio_item = models.ForeignKey(PortfolioItem, on_delete=models.CASCADE)
     main_image = models.BooleanField(default=False)
     name_watermark = models.CharField(max_length=150, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
 
 
 class Staff(models.Model):
@@ -290,5 +296,7 @@ class Staff(models.Model):
     added = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
     changed = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, blank=True)
     index = models.BooleanField(default=False)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
 
 
