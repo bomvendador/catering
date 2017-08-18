@@ -111,22 +111,6 @@
 
                             <div class="row clearfix">
 
-                                <div class="col-md-12">
-                                    <div class="input-group">
-{#                                        <span class="input-group-addon">#}
-{#                                            <i class="mdi mdi-account f_s_20"></i>#}
-{#                                        </span>#}
-                                        <h2 class="card-inside-title">Основное название</h2>
-
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="Основное название" id="place_main_name" name="place_main_name" value="{{ place.name }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group">
 {#                                        <span class="input-group-addon">#}
@@ -154,6 +138,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row clearfix">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+{#                                        <span class="input-group-addon">#}
+{#                                            <i class="mdi mdi-account f_s_20"></i>#}
+{#                                        </span>#}
+                                        <h2 class="card-inside-title">Основное название</h2>
+
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="Основное название" id="place_main_name" name="place_main_name" value="{{ place.name }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 {#данные под названием#}
                             <h2 class="card-inside-title">Данные под описанием (серым цветом)</h2>
                             <div class="body table-responsive">
