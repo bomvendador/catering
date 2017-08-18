@@ -132,7 +132,7 @@
                                         <h2 class="card-inside-title">Фото Alt</h2>
 
                                         <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="Фото Alt" id="alt" name="alt" value="{{ place.title }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
+                                            <input type="text" class="form-control" placeholder="Фото Alt" id="alt" name="alt" value="{{ place.alt }}" {% if user_profile.role.name != 'Суперадмин' and user_profile.role.role_name != 'Админ' %} disabled {% endif %}>
 
                                         </div>
                                     </div>
