@@ -779,6 +779,9 @@ $(document).ready(function () {
         });
 
         data.append('main_name', $('#place_main_name').val());
+        data.append('title', $('#title').val());
+        data.append('alt', $('#alt').val());
+        data.append('main_name', $('#place_main_name').val());
         data.append('description', editor.getData());
 
         {% if place %}
