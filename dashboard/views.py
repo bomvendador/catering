@@ -892,10 +892,12 @@ def add_place(request):
 
         main_name = data.get('main_name')
         description = data.get('description')
-        title = data.get('tilte')
+        title = data.get('title')
         alt = data.get('alt')
         place.description = description
         place.name = main_name
+        place.title = title
+        place.alt = alt
         place.save()
         TagPlace.objects.filter(place=place).delete()
 
@@ -955,8 +957,6 @@ def add_place(request):
                 file_to_save = ContentFile(thumb_io.getvalue())
                 print(file_to_save)
                 place_image.image_watermark.save('111.jpg', file_to_save)
-                place_image.title = title
-                place.alt = alt
                 place.save()
                 db_file_name = place_image.image
                 db_file_name_watermark = place_image.image_watermark
