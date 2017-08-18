@@ -785,7 +785,6 @@ console.log('sn');
         d();
 
         $(document).ready(function() {
-            console.log('doc loaded');
             // e('.preloader').addClass("load-anim");
             n(), l(), i(), m(), e(".preloader").addClass("load-anim");
             var a = e(".event-pager-scroll").outerHeight();
