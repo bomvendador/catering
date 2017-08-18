@@ -30,7 +30,7 @@
                         <div class="post post-single">
                             <div class="post-media">
                                 <div class="image-wrap">
-                                    <img src="{% static 'media/images/places/watermark/' %}{{ place.main_image }}" alt="">
+                                    <img src="{% static 'media/images/places/watermark/' %}{{ place.main_image }}"  alt="{{ place.alt }}" title="{{ place.title }}">
                                 </div>
                             </div>
                             <div class="post-body">
@@ -109,7 +109,7 @@
                                                 {% for image in images %}
 
                                                 <a href="{% static 'media/images/places/watermark/' %}{{ image.name_watermark }}">
-                                                    <img src="{% static 'media/images/places/watermark/' %}{{ image.name_watermark }}" class="max-width-100-px max-heihgt-67-px margin-bottom-5">
+                                                    <img src="{% static 'media/images/places/watermark/' %}{{ image.name_watermark }}" class="max-width-100-px max-heihgt-67-px margin-bottom-5" alt="{{ place.alt }}" title="{{ place.title }}">
                                                 </a>
                                                 {% endfor %}
 {#                                            <img src="{% static 'images/portfolio/IMG_1307.JPG' %}" alt="">#}
@@ -333,7 +333,7 @@
 
                                 <li>
                                     <div class="image-wrap">
-                                        <img class="max-width-75" src="{% static 'media/images/places/watermark/' %}{{ place.main_image }}">
+                                        <img class="max-width-75" src="{% static 'media/images/places/watermark/' %}{{ place.main_image }}" alt="{{ place.alt }}" title="{{ place.title }}">
                                     </div>
                                     <div class="comment-info">
                                         <a class="font-size-17" href="{% url 'place_details' place.id %}">{{ place.name }}</a>
